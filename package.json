@@ -1,0 +1,14 @@
+{
+  "name": "movie-anniversary",
+  "version": "1.0.0",
+  "description": "Static site showing movies with modulo-5 anniversaries in the current week",
+  "type": "module",
+  "scripts": {
+    "fetch-data": "node scripts/fetch-data.js",
+    "build": "node scripts/build.js",
+    "rebuild": "node scripts/fetch-data.js && node scripts/build.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}

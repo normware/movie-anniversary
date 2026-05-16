@@ -1,0 +1,6 @@
+{
+  "movies": [
+    {"tmdb_id": 550, "note": "Fight Club – cult classic manually included"},
+    {"tmdb_id": 680, "note": "Pulp Fiction – manually included"}
+  ]
+}

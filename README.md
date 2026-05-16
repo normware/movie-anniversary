@@ -1,6 +1,6 @@
 # MovieAnniversary
 
-A zero-dependency static site that shows movies celebrating a modulo-5 anniversary (5, 10, 15, 20… years) in the current ISO week. Built with vanilla Node.js and TMDB data.
+A static site that shows movies celebrating a modulo-5 anniversary (5, 10, 15, 20… years) in the current ISO week. Built with vanilla Node.js and TMDB data.
 
 **Live site: [movie-anniversary.normware.org](https://movie-anniversary.normware.org)**
 

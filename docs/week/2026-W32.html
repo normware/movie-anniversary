@@ -11,8 +11,8 @@
     <header>
       <h1>Movie Anniversaries</h1>
       <p class="subtitle">2026-W32 — Aug 3, 2026 – Aug 9, 2026</p>
-      <p class="explore-link"><a href="index.html">Browse all weeks</a></p>
-      <nav class="week-nav"><a href="2026-W31.html">&larr; 2026-W31</a><span class="current">2026-W32</span><a href="2026-W33.html">2026-W33 &rarr;</a> <button id="today-btn">Today</button></nav>
+      <p class="explore-link"><a href="index.html">Browse all weeks</a> &middot; <a href="../month/index.html">Month view</a></p>
+      <nav class="week-nav"><a href="2026-W31.html">&larr; 2026-W31</a><span class="current">2026-W32</span><a href="2026-W33.html">2026-W33 &rarr;</a> <button id="today-btn">Today</button> <button id="month-btn">Month</button></nav>
     </header>
         <div class="filter-bar">
       <div class="filter-group">
@@ -1335,7 +1335,7 @@
       </section>
     </main>
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All Weeks</a> &middot; <a href="../today/index.html">Today</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
+      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All Weeks</a> &middot; <a href="../month/index.html">Month</a> &middot; <a href="../today/index.html">Today</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
     </footer>
   </div>
   
@@ -1364,6 +1364,12 @@
 
   document.getElementById('today-btn').addEventListener('click', function(){
     location.href = '../today/index.html';
+  });
+
+  document.getElementById('month-btn').addEventListener('click', function(){
+    var d = new Date();
+    var m = String(d.getMonth()+1).padStart(2,'0');
+    location.href = '../month/' + d.getFullYear() + '-' + m + '.html';
   });
 
   function saveState(){

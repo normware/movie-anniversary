@@ -35,6 +35,7 @@ const ROOT = path.resolve(__dirname, '..');
 const SRC_DIR = path.join(ROOT, 'src');
 const DOCS_DIR = path.join(ROOT, 'docs');
 const WEEK_DIR = path.join(DOCS_DIR, 'week');
+const MONTH_DIR = path.join(DOCS_DIR, 'month');
 const ENC_FILE = path.join(SRC_DIR, 'movies.enc.json');
 const CSS_FILE = path.join(SRC_DIR, 'style.css');
 const CSS_OUT = path.join(DOCS_DIR, 'style.css');
@@ -142,6 +143,15 @@ function isoWeekLabel(year, week) {
   return `${year}-W${String(week).padStart(2, '0')}`;
 }
 
+function monthLabel(year, month) {
+  const d = new Date(year, month - 1, 1);
+  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+
+function monthKey(year, month) {
+  return `${year}-${String(month).padStart(2, '0')}`;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Anniversary logic                                                 */
 /* ------------------------------------------------------------------ */
@@ -195,6 +205,21 @@ function getAnniversaryMovies(movies, weekMonday) {
     dayMap[d].sort((a, b) => b.movie.popularity - a.movie.popularity);
   }
 
+  return dayMap;
+}
+
+function getAnniversaryMoviesForMonth(movies, year, month) {
+  const dim = new Date(year, month, 0).getDate();
+  const dayMap = [];
+  for (let d = 1; d <= dim; d++) {
+    const date = new Date(year, month - 1, d);
+    dayMap[d] = [];
+    for (const movie of movies) {
+      const anniYears = isAnniversaryOnDate(movie, date);
+      if (anniYears) dayMap[d].push({ movie, years: anniYears });
+    }
+    dayMap[d].sort((a, b) => b.movie.popularity - a.movie.popularity);
+  }
   return dayMap;
 }
 
@@ -411,6 +436,12 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
     location.href = '../today/index.html';
   });
 
+  document.getElementById('month-btn').addEventListener('click', function(){
+    var d = new Date();
+    var m = String(d.getMonth()+1).padStart(2,'0');
+    location.href = '../month/' + d.getFullYear() + '-' + m + '.html';
+  });
+
   function saveState(){
     var state = {
       rating: document.getElementById('rating-filter').value,
@@ -523,14 +554,14 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
     <header>
       <h1>Movie Anniversaries</h1>
       <p class="subtitle">${label} — ${dateRange}</p>
-      <p class="explore-link"><a href="index.html">Browse all weeks</a></p>
-      <nav class="week-nav">${prevHtml}<span class="current">${label}</span>${nextHtml} <button id="today-btn">Today</button></nav>
+      <p class="explore-link"><a href="index.html">Browse all weeks</a> &middot; <a href="../month/index.html">Month view</a></p>
+      <nav class="week-nav">${prevHtml}<span class="current">${label}</span>${nextHtml} <button id="today-btn">Today</button> <button id="month-btn">Month</button></nav>
     </header>
     ${filterHtml}
     <main>${daySections.join('\n')}
     </main>
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All Weeks</a> &middot; <a href="../today/index.html">Today</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
+      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All Weeks</a> &middot; <a href="../month/index.html">Month</a> &middot; <a href="../today/index.html">Today</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
     </footer>
   </div>
   ${filterScript}
@@ -614,13 +645,15 @@ function generateWeekIndex(allWeeks) {
       </ul>
     </main>
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
+      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="../month/index.html">Month view</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
     </footer>
   </div>
 </body>
 </html>`;
 }
 
+/* ------------------------------------------------------------------ */
+/*  Month page                                                        */
 /* ------------------------------------------------------------------ */
 /*  Today page with JS redirect                                       */
 /* ------------------------------------------------------------------ */
@@ -658,6 +691,293 @@ function generateTodayPage() {
     <p>Redirecting to today&rsquo;s movies...</p>
     <footer>
       <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="../week/index.html">Browse all weeks</a></p>
+    </footer>
+  </div>
+</body>
+</html>`;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Month page                                                        */
+/* ------------------------------------------------------------------ */
+
+function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, nextLink) {
+  const dim = new Date(year, month, 0).getDate();
+  const label = monthLabel(year, month);
+  const firstDow = (new Date(year, month - 1, 1).getDay() + 6) % 7;
+  const mkey = monthKey(year, month);
+  const dayMap = getAnniversaryMoviesForMonth(movies, year, month);
+
+  const anniSet = new Set();
+  const yearSet = new Set();
+  for (let d = 1; d <= dim; d++) {
+    for (const e of dayMap[d] || []) {
+      anniSet.add(e.years);
+      const y = e.movie.release_date ? e.movie.release_date.split('-')[0] : null;
+      if (y) yearSet.add(parseInt(y));
+    }
+  }
+  const anniversaryValues = [...anniSet].sort((a, b) => a - b);
+  const years = [...yearSet].sort((a, b) => a - b);
+  const minYear = years[0] || 0;
+  const maxYear = years[years.length - 1] || 0;
+
+  // Build JSON for client-side
+  const dataArr = [];
+  for (let d = 1; d <= dim; d++) {
+    dataArr[d] = (dayMap[d] || []).map(e => ({
+      id: e.movie.id,
+      t: e.movie.title,
+      r: e.movie.release_date,
+      p: e.movie.popularity,
+      po: e.movie.poster_path,
+      v: e.movie.vote_average,
+      im: e.movie.imdb_id || '',
+      y: e.years,
+    }));
+  }
+  const dataJson = JSON.stringify({ y: year, m: month, dim, pad: firstDow, data: dataArr });
+
+  const anniFilterHtml = anniversaryValues.map(v =>
+    `<label class="filter-chk"><input type="checkbox" class="anni-cb" value="${v}" checked>${v}y</label>`
+  ).join('');
+
+  let prevHtml = hasPrev
+    ? `<a href="${prevLink}">&larr; ${prevLink.replace('.html', '')}</a>`
+    : '<span class="disabled">&larr; Previous</span>';
+  let nextHtml = hasNext
+    ? `<a href="${nextLink}">${nextLink.replace('.html', '')} &rarr;</a>`
+    : '<span class="disabled">Next &rarr;</span>';
+
+  const filterHtml = `\
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label class="filter-label">Rating</label>
+        <select id="rating-filter" title="Filter by TMDB vote average">
+          <option value="0">All</option>
+          <option value="7">7+</option>
+          <option value="8">8+</option>
+          <option value="9">9+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Anniversary</label>
+        <div class="filter-chks">${anniFilterHtml}</div>
+        <button class="anni-all-btn" data-action="all">All</button>
+        <button class="anni-all-btn" data-action="none">None</button>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Year</label>
+        <input type="number" id="year-min" class="year-input" placeholder="${minYear}" min="${minYear}" max="${maxYear}">
+        <span class="year-sep">–</span>
+        <input type="number" id="year-max" class="year-input" placeholder="${maxYear}" min="${minYear}" max="${maxYear}">
+      </div>
+      <div class="filter-group filter-group-btn">
+        <button id="reset-filters" title="Reset all filters">&#8635; Reset</button>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Sort</label>
+        <select id="sort-select" title="Sort by TMDB popularity or vote average">
+          <option value="popularity">Popularity</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
+    </div>
+    <p id="filter-count" class="filter-count"></p>`;
+
+  const script = `
+  <script>
+(function(){
+  var STORAGE_KEY = 'movie-anni-filters';
+  var D = ${dataJson};
+  var cal = document.getElementById('cal');
+  var countEl = document.getElementById('filter-count');
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function pad2(n){ return n<10?'0'+n:''+n; }
+
+  function buildCal(){
+    var h = '';
+    ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(function(d){ h += '<div class="cal-hdr">'+d+'</div>'; });
+    for(var i=0;i<D.pad;i++) h += '<div class="cal-cell cal-emp"></div>';
+    for(var d=1;d<=D.dim;d++){
+      h += '<div class="cal-cell" id="c'+d+'"><div class="cal-num">'+d+'</div><div class="cal-mv" id="cm'+d+'"></div></div>';
+    }
+    var t = D.pad + D.dim;
+    var r = t % 7;
+    if(r>0) for(var i=0;i<7-r;i++) h += '<div class="cal-cell cal-emp"></div>';
+    cal.innerHTML = h;
+  }
+
+  function render(){
+    var ratingVal = parseFloat(document.getElementById('rating-filter').value) || 0;
+    var anniCbs = document.querySelectorAll('.anni-cb:checked');
+    var anniVals = Array.from(anniCbs).map(function(cb){ return parseInt(cb.value); });
+    var yearMin = parseInt(document.getElementById('year-min').value) || 0;
+    var yearMax = parseInt(document.getElementById('year-max').value) || 9999;
+    var sortBy = document.getElementById('sort-select').value;
+    var fld = sortBy === 'rating' ? 'v' : 'p';
+    var vis = 0;
+
+    for(var d=1;d<=D.dim;d++){
+      var arr = D.data[d] || [];
+      var f = arr.filter(function(m){
+        if((m.v||0) < ratingVal) return false;
+        if(anniVals.length && anniVals.indexOf(m.y)===-1) return false;
+        var yr = parseInt(m.r) || 0;
+        return yr >= yearMin && yr <= yearMax;
+      });
+      f.sort(function(a,b){ return (b[fld]||0) - (a[fld]||0); });
+      var top = f[0] || null;
+      var el = document.getElementById('cm'+d);
+      if(!el) continue;
+      if(top){
+        vis++;
+        var pu = top.po ? 'https://image.tmdb.org/t/p/w185'+top.po : '';
+        var tu = 'https://www.themoviedb.org/movie/'+top.id;
+        var iu = top.im ? 'https://www.imdb.com/title/'+top.im : '';
+        var lu = 'https://letterboxd.com/tmdb/'+top.id+'/';
+        el.innerHTML = (pu?'<a href="'+tu+'" target="_blank" rel="noopener"><img src="'+pu+'" alt="'+esc(top.t)+'" class="cal-poster" loading="lazy"></a>':'')
+          + '<div class="cal-ttl"><a href="'+tu+'" target="_blank" rel="noopener">'+esc(top.t)+'</a></div>'
+          + '<div class="cal-anni-badge">'+top.y+'y</div>'
+          + '<div class="cal-links">'
+          + '<a href="'+tu+'" target="_blank" rel="noopener">TMDB</a>'
+          + (iu?' <a href="'+iu+'" target="_blank" rel="noopener">IMDb</a>':'')
+          + ' <a href="'+lu+'" target="_blank" rel="noopener">LB</a>'
+          + '</div>';
+      } else {
+        el.innerHTML = '';
+      }
+    }
+    if(countEl) countEl.textContent = vis + ' day' + (vis!==1?'s':'') + ' with anniversaries';
+    saveState();
+  }
+
+  function saveState(){
+    var state = {
+      rating: document.getElementById('rating-filter').value,
+      anni: Array.from(document.querySelectorAll('.anni-cb')).map(function(cb){ return cb.checked; }),
+      yearMin: document.getElementById('year-min').value,
+      yearMax: document.getElementById('year-max').value,
+      sort: document.getElementById('sort-select').value
+    };
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  function loadState(){
+    var raw;
+    try{ raw = localStorage.getItem(STORAGE_KEY); }catch(e){}
+    if(!raw) return;
+    var state;
+    try{ state = JSON.parse(raw); }catch(e){ return; }
+    if(!state) return;
+    if(state.rating) document.getElementById('rating-filter').value = state.rating;
+    if(state.anni) document.querySelectorAll('.anni-cb').forEach(function(cb,i){
+      if(state.anni[i]!==undefined) cb.checked = state.anni[i];
+    });
+    if(state.yearMin!==undefined) document.getElementById('year-min').value = state.yearMin;
+    if(state.yearMax!==undefined) document.getElementById('year-max').value = state.yearMax;
+    if(state.sort) document.getElementById('sort-select').value = state.sort;
+  }
+
+  document.getElementById('today-btn').addEventListener('click', function(){
+    var now = new Date();
+    location.href = '../month/' + now.getFullYear() + '-' + pad2(now.getMonth()+1) + '.html';
+  });
+
+  document.getElementById('week-btn').addEventListener('click', function(){
+    location.href = '../week/index.html';
+  });
+
+  buildCal();
+  loadState();
+  document.getElementById('rating-filter').addEventListener('change', render);
+  document.querySelectorAll('.anni-cb').forEach(function(cb){ cb.addEventListener('change', render); });
+  document.querySelectorAll('.anni-all-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var checked = btn.getAttribute('data-action')==='all';
+      document.querySelectorAll('.anni-cb').forEach(function(cb){ cb.checked = checked; });
+      render();
+    });
+  });
+  document.getElementById('year-min').addEventListener('input', render);
+  document.getElementById('year-max').addEventListener('input', render);
+  document.getElementById('sort-select').addEventListener('change', render);
+  document.getElementById('reset-filters').addEventListener('click', function(){
+    document.getElementById('rating-filter').value = '0';
+    document.querySelectorAll('.anni-cb').forEach(function(cb){ cb.checked = true; });
+    document.getElementById('year-min').value = '';
+    document.getElementById('year-max').value = '';
+    document.getElementById('sort-select').value = 'popularity';
+    render();
+  });
+  render();
+
+  // scroll to today
+  var now = new Date();
+  if(now.getFullYear()===D.y && (now.getMonth()+1)===D.m){
+    var cel = document.getElementById('c'+now.getDate());
+    if(cel) setTimeout(function(){ cel.scrollIntoView({behavior:'smooth',block:'center'}); }, 200);
+  }
+})();
+  <\/script>`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Anniversaries — ${label}</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Movie Anniversaries</h1>
+      <p class="subtitle">${label}</p>
+      <p class="explore-link"><a href="index.html">Browse all months</a> &middot; <a href="../week/index.html">Week view</a></p>
+      <nav class="week-nav">${prevHtml}<span class="current">${label}</span>${nextHtml} <button id="today-btn">Today</button> <button id="week-btn">Week</button></nav>
+    </header>
+    ${filterHtml}
+    <div id="cal"></div>
+    <footer>
+      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All months</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
+    </footer>
+  </div>
+  ${script}
+</body>
+</html>`;
+}
+
+function generateMonthIndex(allMonths) {
+  const rows = allMonths.map(m => {
+    const key = monthKey(m.year, m.month);
+    const label = monthLabel(m.year, m.month);
+    return `      <li><a href="${key}.html">${label}</a></li>`;
+  }).join('\n');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Months – Movie Anniversaries</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Movie Anniversaries</h1>
+      <p class="subtitle">All available months</p>
+      <p class="explore-link"><a href="../week/index.html">Week view</a></p>
+    </header>
+    <main>
+      <ul class="week-list">${rows}
+      </ul>
+    </main>
+    <footer>
+      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
     </footer>
   </div>
 </body>
@@ -788,6 +1108,47 @@ async function main() {
   if (!fs.existsSync(TODAY_DIR)) fs.mkdirSync(TODAY_DIR, { recursive: true });
   fs.writeFileSync(path.join(TODAY_DIR, 'index.html'), generateTodayPage(), 'utf8');
   console.log('  [OK]   today/index.html written');
+
+  // ------------------------------------------------------------------
+  // Build month pages
+  // ------------------------------------------------------------------
+  if (!singleWeek) {
+    const now = new Date();
+    const startDate = new Date(now);
+    startDate.setFullYear(now.getFullYear() - RANGE_SPAN_YEARS);
+    const endDate = new Date(now);
+    endDate.setFullYear(now.getFullYear() + RANGE_SPAN_YEARS);
+
+    const monthsToBuild = [];
+    let cursor = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+    while (cursor <= endDate) {
+      monthsToBuild.push({ year: cursor.getFullYear(), month: cursor.getMonth() + 1 });
+      cursor.setMonth(cursor.getMonth() + 1);
+    }
+
+    if (!fs.existsSync(MONTH_DIR)) fs.mkdirSync(MONTH_DIR, { recursive: true });
+
+    const builtMonths = [];
+    for (const m of monthsToBuild) {
+      const label = monthKey(m.year, m.month);
+
+      const prevM = m.month > 1 ? { year: m.year, month: m.month - 1 } : { year: m.year - 1, month: 12 };
+      const nextM = m.month < 12 ? { year: m.year, month: m.month + 1 } : { year: m.year + 1, month: 1 };
+      const prevKey = monthKey(prevM.year, prevM.month);
+      const nextKey = monthKey(nextM.year, nextM.month);
+
+      const hasPrev = monthsToBuild.some(x => x.year === prevM.year && x.month === prevM.month);
+      const hasNext = monthsToBuild.some(x => x.year === nextM.year && x.month === nextM.month);
+
+      const html = generateMonthPage(m.year, m.month, movies, hasPrev, hasNext, `${prevKey}.html`, `${nextKey}.html`);
+      fs.writeFileSync(path.join(MONTH_DIR, `${label}.html`), html, 'utf8');
+      builtMonths.push(m);
+      console.log(`  [BUILD] ${label}`);
+    }
+
+    fs.writeFileSync(path.join(MONTH_DIR, 'index.html'), generateMonthIndex(builtMonths), 'utf8');
+    console.log('  [OK]   month/index.html written');
+  }
 
   console.log(`\n  [DONE] ${builtWeeks.length} weeks built. Open docs/index.html to view.`);
 }

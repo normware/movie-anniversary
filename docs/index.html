@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <script>
     (function() {
+      function pad2(n){ return n < 10 ? '0' + n : '' + n; }
       function getISOWeek(d) {
         var t = new Date(d);
         t.setHours(0,0,0,0);
@@ -18,15 +19,13 @@
       }
       var week = getISOWeek(new Date());
       var params = new URLSearchParams(location.search);
-      if(params.has('week')){
-        week = params.get('week');
-      }
+      if(params.has('week')) week = params.get('week');
       window.location.href = 'week/' + week + '.html?week=' + week;
     })();
   </script>
 </head>
 <body>
-  <div class="container" style="text-align:center;padding-top:80px">
+  <div class="container center-content">
     <h1>Movie Anniversaries</h1>
     <p>Redirecting to the current week...</p>
     <footer>

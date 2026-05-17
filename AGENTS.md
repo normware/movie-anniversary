@@ -7,20 +7,26 @@ A static site that shows which movies have a modulo-5 anniversary (5, 10, 15, 20
 ## Architecture
 
 ```
-.env.template         # Env var template (TMDB_API_KEY, DATA_ENCRYPTION_KEY)
+.env.template         # Env var template (TMDB_TOKEN, DATA_ENCRYPTION_KEY)
 scripts/
+  shared.js           # Shared utilities (crypto, env, TMDB fetch, date/ISO helpers)
   fetch-data.js       # Fetches top-500 movies/year from TMDB, stores encrypted
   build.js            # Decrypts data, finds anniversaries, generates HTML
 src/
   movies.enc.json     # Encrypted movie cache (AES-256-CBC)
   movies-manual.json  # Manual TMDB IDs to always include
-  style.css           # Shared stylesheet
 docs/                 # GitHub Pages root (committed)
+  style.css           # Single source of truth for all styling
+  CNAME               # Custom domain for GitHub Pages
   index.html          # JS redirect to current week
-  style.css
   week/
     index.html        # Browse all weeks
     YYYY-Www.html     # Individual week pages
+  month/
+    index.html        # Browse all months
+    YYYY-MM.html      # Individual month pages
+  today/
+    index.html        # JS redirect to today's day on current week page
 ```
 
 ## Key Design Decisions
@@ -28,6 +34,8 @@ docs/                 # GitHub Pages root (committed)
 - **Data encryption**: Movie metadata is AES-256-CBC encrypted so the raw dataset cannot be easily re-hosted if the repo is cloned. The passphrase lives in `.env` (local) or GitHub secrets (CI).
 - **Manual additions**: `movies-manual.json` is plain JSON (just TMDB IDs — public info). No encryption needed.
 - **IMDb IDs** are backfilled lazily during `build.js` — only fetched for anniversary movies, then saved back into the encrypted cache.
+- **Shared module**: `scripts/shared.js` holds crypto, TMDB fetch, env parsing, date/ISO helpers, and anniversary logic — used by both `fetch-data.js` and `build.js`.
+- **Single CSS source**: `docs/style.css` is the canonical stylesheet (no `src/style.css`).
 - **Dependencies**: `node-fetch` (needed for Node 16; will be removed when we drop Node 16).
 
 ## Scripts
@@ -53,7 +61,7 @@ DATA_ENCRYPTION_KEY=   # 32+ chars for AES-256 encryption
 3. Commit + push `docs/` and `src/movies.enc.json`
 
 For a quick refresh without re-fetching all data:
-- Just run `npm run build` — it reuses the encrypted cache and only fetches missing IMDb IDs.
+- Just run `npm run build` — it reuses the encrypted cache.
 
 ## GitHub Pages
 

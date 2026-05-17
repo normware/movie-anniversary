@@ -118,6 +118,21 @@ function generateFilterBarHTML(anniversaryValues, minYear, maxYear) {
 /*  HTML shell                                                         */
 /* ------------------------------------------------------------------ */
 
+function footerHTML(prefix, ...extraLinks) {
+  const links = [
+    '<a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a>',
+    `<a href="${prefix}datenschutz">Datenschutz</a>`,
+    `<a href="${prefix}impressum">Impressum</a>`,
+    ...extraLinks,
+  ];
+  return `
+    <p>${links.join(' &middot; ')}</p>
+    <p class="tmdb-attribution">
+      <img src="${prefix}tmdb-logo.svg" alt="TMDB Logo" class="tmdb-logo" width="32" height="24">
+      This product uses the TMDB API but is not endorsed or certified by TMDB.
+    </p>`;
+}
+
 function generateShell(title, subtitle, bodyHTML, extraHTML = '') {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -136,7 +151,7 @@ function generateShell(title, subtitle, bodyHTML, extraHTML = '') {
     </header>
     ${bodyHTML}
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
+      ${footerHTML('../')}
     </footer>
   </div>
 </body>
@@ -236,7 +251,7 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
     <main>${daySections.join('\n')}
     </main>
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All Weeks</a> &middot; <a href="../month/index.html">Month</a> &middot; <a href="../today/index.html">Today</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
+      ${footerHTML('../', '<a href="index.html">All Weeks</a>', '<a href="../month/index.html">Month</a>', '<a href="../today/index.html">Today</a>')}
     </footer>
   </div>
   ${filterWeekJS(label)}
@@ -400,7 +415,7 @@ function generateIndexPage() {
     <h1>Movie Anniversaries</h1>
     <p>Redirecting to the current week...</p>
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/datenschutz">Datenschutz</a> &middot; <a href="/impressum">Impressum</a> &middot; <a href="week/index.html">Browse all weeks</a></p>
+      ${footerHTML('/', '<a href="week/index.html">Browse all weeks</a>')}
     </footer>
   </div>
 </body>
@@ -443,7 +458,7 @@ function generateTodayPage() {
     <h1>Movie Anniversaries</h1>
     <p>Redirecting to today\u2019s movies...</p>
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="../week/index.html">Browse all weeks</a></p>
+      ${footerHTML('../', '<a href="../week/index.html">Browse all weeks</a>')}
     </footer>
   </div>
 </body>
@@ -596,7 +611,7 @@ function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, next
     ${filterHtml}
     <div id="cal">${calHtml}</div>
     <footer>
-      <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All months</a> &middot; Data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a></p>
+      ${footerHTML('../', '<a href="index.html">All months</a>')}
     </footer>
   </div>
   ${filterMonthJS(dataJson)}

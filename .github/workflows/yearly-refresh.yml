@@ -1,0 +1,25 @@
+name: Yearly Refresh
+
+on:
+  schedule:
+    - cron: '0 0 1 1 *'
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - run: npm ci
+      - run: npm run rebuild
+        env:
+          TMDB_TOKEN: ${{ secrets.TMDB_TOKEN }}
+          DATA_ENCRYPTION_KEY: ${{ secrets.DATA_ENCRYPTION_KEY }}
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: yearly data refresh'
+          commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'

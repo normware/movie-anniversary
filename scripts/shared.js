@@ -62,20 +62,26 @@ export function encrypt(data, passphrase) {
   return iv.toString('hex') + ':' + enc;
 }
 
-export async function tmdbFetch(pathname, params = {}) {
+export async function tmdbFetch(pathname, params = {}, retries = 3) {
   const token = getEnv('TMDB_TOKEN');
   const url = new URL(`${TMDB_BASE}${pathname}`);
   url.searchParams.set('language', 'en-US');
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v));
 
-  const res = await fetch(url.toString(), {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`TMDB ${res.status} for ${pathname}: ${text}`);
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    const res = await fetch(url.toString(), {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.ok) return res.json();
+    if (attempt < retries) {
+      const wait = Math.min(1000 * Math.pow(2, attempt), 8000);
+      console.error(`    [RETRY] TMDB ${res.status} for ${pathname} (attempt ${attempt}/${retries}, waiting ${wait}ms)`);
+      await new Promise(r => setTimeout(r, wait));
+    } else {
+      const text = await res.text();
+      throw new Error(`TMDB ${res.status} for ${pathname}: ${text}`);
+    }
   }
-  return res.json();
 }
 
 export function escapeHtml(str) {

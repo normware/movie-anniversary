@@ -23,6 +23,8 @@ async function fetchYearMovies(year, signal) {
       primary_release_year: year,
       sort_by: 'popularity.desc',
       'vote_count.gte': 10,
+      include_adult: false,
+      without_genres: '10769',
       page,
     });
 

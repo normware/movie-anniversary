@@ -37,6 +37,8 @@ docs/                 # GitHub Pages root (committed)
 - **Shared module**: `scripts/shared.js` holds crypto, TMDB fetch, env parsing, date/ISO helpers, and anniversary logic — used by both `fetch-data.js` and `build.js`.
 - **Single CSS source**: `docs/style.css` is the canonical stylesheet (no `src/style.css`).
 - **Dependencies**: `node-fetch` (needed for Node 16; will be removed when we drop Node 16).
+- **TMDB retry**: `tmdbFetch` in `shared.js` retries up to 3 times with exponential backoff on non-200 responses.
+- **GitHub Actions**: `.github/workflows/yearly-refresh.yml` runs `npm run rebuild` on Jan 1 and commits changes back. Requires `TMDB_TOKEN` and `DATA_ENCRYPTION_KEY` as repo secrets.
 
 ## Scripts
 

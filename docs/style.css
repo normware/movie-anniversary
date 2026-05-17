@@ -531,6 +531,21 @@ footer a {
   color: #777;
 }
 
+.tmdb-attribution {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  color: #555;
+}
+
+.tmdb-logo {
+  width: 32px;
+  height: auto;
+}
+
 /* Week list -------------------------------------------------------- */
 
 .week-list {

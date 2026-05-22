@@ -12,11 +12,11 @@
       <h1>Movie Anniversaries</h1>
       <p class="subtitle">2025-W41 — Oct 6, 2025 – Oct 12, 2025</p>
       <p class="explore-link"><a href="index.html">Browse all weeks</a> &middot; <a href="../month/index.html">Month view</a></p>
-      <nav class="week-nav"><a href="2025-W40.html">&larr; 2025-W40</a><span class="current">2025-W41</span><a href="2025-W42.html">2025-W42 &rarr;</a> <button id="today-btn">Today</button> <button id="month-btn">Month</button></nav>
+      <nav class="week-nav"><a href="2025-W40.html" class="btn">&larr; 2025-W40</a><span class="btn btn--current">2025-W41</span><a href="2025-W42.html" class="btn">2025-W42 &rarr;</a><span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="month-btn">Month</button></nav>
     </header>
         <div class="filter-bar">
       <div class="filter-group">
-        <label class="filter-label">Rating</label>
+        <span class="filter-label">Rating</span>
         <select id="rating-filter" title="Filter by TMDB vote average">
           <option value="0">All</option>
           <option value="7">7+</option>
@@ -25,26 +25,28 @@
         </select>
       </div>
       <div class="filter-group">
-        <label class="filter-label">Anniversary</label>
+        <span class="filter-label">Anniv.</span>
         <div class="filter-chks"><label class="filter-chk"><input type="checkbox" class="anni-cb" value="5" checked>5y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="10" checked>10y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="15" checked>15y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="20" checked>20y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="25" checked>25y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="30" checked>30y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="35" checked>35y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="40" checked>40y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="45" checked>45y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="50" checked>50y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="55" checked>55y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="60" checked>60y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="65" checked>65y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="70" checked>70y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="75" checked>75y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="80" checked>80y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="85" checked>85y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="90" checked>90y</label><label class="filter-chk"><input type="checkbox" class="anni-cb" value="95" checked>95y</label></div>
-        <button class="anni-all-btn" data-action="all">All</button>
-        <button class="anni-all-btn" data-action="none">None</button>
+        <button class="anni-all-btn btn btn--sm" data-action="all">All</button>
+        <button class="anni-all-btn btn btn--sm" data-action="none">None</button>
       </div>
       <div class="filter-group">
-        <label class="filter-label">Year</label>
-        <input type="number" id="year-min" class="year-input" placeholder="1930" min="1930" max="2020">
-        <span class="year-sep">–</span>
-        <input type="number" id="year-max" class="year-input" placeholder="2020" min="1930" max="2020">
-      </div>
-      <div class="filter-group filter-group-btn">
-        <button id="reset-filters" title="Reset all filters">&#8635; Reset</button>
+        <span class="filter-label">Year</span>
+        <span class="year-range">
+          <input type="number" id="year-min" class="year-input" placeholder="1930" min="1930" max="2020">
+          <span class="year-sep">–</span>
+          <input type="number" id="year-max" class="year-input" placeholder="2020" min="1930" max="2020">
+        </span>
       </div>
       <div class="filter-group">
-        <label class="filter-label">Sort</label>
+        <span class="filter-label">Sort</span>
         <select id="sort-select" title="Sort by TMDB popularity or vote average">
           <option value="popularity">Popularity</option>
           <option value="rating">Rating</option>
         </select>
+      </div>
+      <div class="filter-group">
+        <button class="btn btn--ghost" id="reset-filters" title="Reset all filters">&#8635; Reset</button>
       </div>
     </div>
     <p id="filter-count" class="filter-count"></p>

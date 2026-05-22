@@ -29,9 +29,9 @@ a:hover {
 /* Layout ----------------------------------------------------------- */
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 16px 12px;
+  padding: 16px 16px;
 }
 
 .center-content {
@@ -72,58 +72,96 @@ header .subtitle + .explore-link {
   color: #f5c518;
 }
 
+/* Button system ---------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  border: 1px solid #333;
+  background: #1a1a2e;
+  color: #f5c518;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn:hover {
+  background: #2a2a3e;
+  border-color: #f5c518;
+  text-decoration: none;
+}
+
+.btn--current {
+  background: #f5c518;
+  color: #111;
+  font-weight: 600;
+  border-color: #f5c518;
+}
+.btn--current:hover {
+  background: #e0b014;
+}
+
+.btn--disabled {
+  color: #444;
+  border-color: #222;
+  cursor: default;
+  pointer-events: none;
+}
+.btn--disabled:hover {
+  background: #1a1a2e;
+  border-color: #222;
+}
+
+.btn--today {
+  border-color: #2e7d32;
+  color: #4caf50;
+}
+.btn--today:hover {
+  background: #2a2a3e;
+  border-color: #4caf50;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: #888;
+}
+.btn--ghost:hover {
+  background: #1a1a2e;
+  border-color: #333;
+  color: #f5c518;
+}
+
+.btn--sm {
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+
+/* Week navigation -------------------------------------------------- */
+
 .week-nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-top: 12px;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #0d0d0d;
+  padding: 8px 0;
 }
 
-.week-nav a,
-.week-nav .current,
-.week-nav .disabled {
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-}
-
-.week-nav a {
-  background: #1a1a2e;
-  border: 1px solid #333;
-  color: #f5c518;
-  transition: background 0.2s;
-}
-.week-nav a:hover {
-  background: #2a2a3e;
-  text-decoration: none;
-}
-
-.week-nav .current {
-  background: #f5c518;
-  color: #111;
-  font-weight: 600;
-}
-
-.week-nav .disabled {
-  color: #444;
-  border: 1px solid #222;
-}
-
-#today-btn {
-  background: #1a1a2e;
-  color: #4caf50;
-  border: 1px solid #2e7d32;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-}
-#today-btn:hover {
-  background: #2a2a3e;
-  border-color: #4caf50;
+.week-nav__sep {
+  width: 1px;
+  height: 20px;
+  background: #333;
+  flex-shrink: 0;
 }
 
 /* Filter bar ------------------------------------------------------- */
@@ -131,7 +169,7 @@ header .subtitle + .explore-link {
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 16px;
+  gap: 12px;
   align-items: center;
   background: #141418;
   border: 1px solid #222;
@@ -146,6 +184,11 @@ header .subtitle + .explore-link {
   gap: 6px;
 }
 
+.filter-group + .filter-group {
+  padding-left: 12px;
+  border-left: 1px solid #2a2a2a;
+}
+
 .filter-label {
   font-size: 0.75rem;
   color: #888;
@@ -153,7 +196,7 @@ header .subtitle + .explore-link {
   letter-spacing: 0.5px;
 }
 
-#rating-filter {
+.filter-bar select {
   background: #1e1e24;
   color: #e0e0e0;
   border: 1px solid #333;
@@ -172,7 +215,7 @@ header .subtitle + .explore-link {
   font-size: 0.75rem;
   color: #bbb;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 3px;
   padding: 2px 6px;
@@ -188,37 +231,30 @@ header .subtitle + .explore-link {
   accent-color: #f5c518;
 }
 
-.year-input {
-  width: 72px;
+.year-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: #1e1e24;
-  color: #e0e0e0;
   border: 1px solid #333;
   border-radius: 4px;
-  padding: 4px 6px;
-  font-size: 0.8rem;
+  padding: 3px 6px;
 }
-.year-sep {
+
+.year-range .year-input {
+  width: 60px;
+  background: transparent;
+  color: #e0e0e0;
+  border: none;
+  padding: 1px 2px;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.year-range .year-sep {
   color: #555;
   font-size: 0.8rem;
-}
-
-.filter-group-btn button {
-  background: #1a1a2e;
-  color: #f5c518;
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-}
-.filter-group-btn button:hover {
-  background: #2a2a3e;
-  border-color: #f5c518;
-}
-
-#reset-filters {
-  color: #888;
+  flex-shrink: 0;
 }
 
 .filter-count {
@@ -233,6 +269,7 @@ header .subtitle + .explore-link {
 
 .day-section {
   margin-bottom: 24px;
+  scroll-margin-top: 80px;
 }
 
 .day-section h2 {
@@ -278,7 +315,7 @@ header .subtitle + .explore-link {
 
 .movie-card {
   flex: 0 0 auto;
-  width: 140px;
+  width: 160px;
   background: #141418;
   border-radius: 8px;
   overflow: hidden;
@@ -567,12 +604,30 @@ footer a {
 
 /* Responsive ------------------------------------------------------- */
 
+@media (max-width: 800px) {
+  .filter-group + .filter-group {
+    border-left: none;
+    padding-left: 0;
+  }
+  .filter-bar {
+    gap: 6px 12px;
+  }
+}
+
 @media (max-width: 600px) {
   .movie-card {
-    width: 120px;
+    width: 130px;
+  }
+
+  .movie-grid {
+    gap: 6px;
   }
 
   header h1 {
     font-size: 1.2rem;
+  }
+
+  .week-nav {
+    gap: 4px;
   }
 }

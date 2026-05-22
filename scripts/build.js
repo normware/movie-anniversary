@@ -80,7 +80,7 @@ function generateFilterBarHTML(anniversaryValues, minYear, maxYear) {
   return `\
     <div class="filter-bar">
       <div class="filter-group">
-        <label class="filter-label">Rating</label>
+        <span class="filter-label">Rating</span>
         <select id="rating-filter" title="Filter by TMDB vote average">
           <option value="0">All</option>
           <option value="7">7+</option>
@@ -89,26 +89,28 @@ function generateFilterBarHTML(anniversaryValues, minYear, maxYear) {
         </select>
       </div>
       <div class="filter-group">
-        <label class="filter-label">Anniversary</label>
+        <span class="filter-label">Anniv.</span>
         <div class="filter-chks">${anniFilterHtml}</div>
-        <button class="anni-all-btn" data-action="all">All</button>
-        <button class="anni-all-btn" data-action="none">None</button>
+        <button class="anni-all-btn btn btn--sm" data-action="all">All</button>
+        <button class="anni-all-btn btn btn--sm" data-action="none">None</button>
       </div>
       <div class="filter-group">
-        <label class="filter-label">Year</label>
-        <input type="number" id="year-min" class="year-input" placeholder="${minYear}" min="${minYear}" max="${maxYear}">
-        <span class="year-sep">\u2013</span>
-        <input type="number" id="year-max" class="year-input" placeholder="${maxYear}" min="${minYear}" max="${maxYear}">
-      </div>
-      <div class="filter-group filter-group-btn">
-        <button id="reset-filters" title="Reset all filters">&#8635; Reset</button>
+        <span class="filter-label">Year</span>
+        <span class="year-range">
+          <input type="number" id="year-min" class="year-input" placeholder="${minYear}" min="${minYear}" max="${maxYear}">
+          <span class="year-sep">\u2013</span>
+          <input type="number" id="year-max" class="year-input" placeholder="${maxYear}" min="${minYear}" max="${maxYear}">
+        </span>
       </div>
       <div class="filter-group">
-        <label class="filter-label">Sort</label>
+        <span class="filter-label">Sort</span>
         <select id="sort-select" title="Sort by TMDB popularity or vote average">
           <option value="popularity">Popularity</option>
           <option value="rating">Rating</option>
         </select>
+      </div>
+      <div class="filter-group">
+        <button class="btn btn--ghost" id="reset-filters" title="Reset all filters">&#8635; Reset</button>
       </div>
     </div>
     <p id="filter-count" class="filter-count"></p>`;
@@ -197,12 +199,12 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
   const { anniversaryValues, minYear, maxYear } = collectFilterValues(dayMap);
 
   let prevHtml = hasPrev
-    ? `<a href="${prevLink}">&larr; ${prevLink.replace('.html', '')}</a>`
-    : '<span class="disabled">&larr; Previous</span>';
+    ? `<a href="${prevLink}" class="btn">&larr; ${prevLink.replace('.html', '')}</a>`
+    : '<span class="btn btn--disabled">&larr; Previous</span>';
 
   let nextHtml = hasNext
-    ? `<a href="${nextLink}">${nextLink.replace('.html', '')} &rarr;</a>`
-    : '<span class="disabled">Next &rarr;</span>';
+    ? `<a href="${nextLink}" class="btn">${nextLink.replace('.html', '')} &rarr;</a>`
+    : '<span class="btn btn--disabled">Next &rarr;</span>';
 
   const daySections = [];
   for (let d = 0; d < 7; d++) {
@@ -245,7 +247,7 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
       <h1>Movie Anniversaries</h1>
       <p class="subtitle">${label} \u2014 ${dateRange}</p>
       ${exploreLinks}
-      <nav class="week-nav">${prevHtml}<span class="current">${label}</span>${nextHtml} <button id="today-btn">Today</button> <button id="month-btn">Month</button></nav>
+      <nav class="week-nav">${prevHtml}<span class="btn btn--current">${label}</span>${nextHtml}<span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="month-btn">Month</button></nav>
     </header>
     ${filterHtml}
     <main>${daySections.join('\n')}
@@ -578,17 +580,17 @@ function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, next
   }
 
   let prevHtml = hasPrev
-    ? `<a href="${prevLink}">&larr; ${prevLink.replace('.html', '')}</a>`
-    : '<span class="disabled">&larr; Previous</span>';
+    ? `<a href="${prevLink}" class="btn">&larr; ${prevLink.replace('.html', '')}</a>`
+    : '<span class="btn btn--disabled">&larr; Previous</span>';
   let nextHtml = hasNext
-    ? `<a href="${nextLink}">${nextLink.replace('.html', '')} &rarr;</a>`
-    : '<span class="disabled">Next &rarr;</span>';
+    ? `<a href="${nextLink}" class="btn">${nextLink.replace('.html', '')} &rarr;</a>`
+    : '<span class="btn btn--disabled">Next &rarr;</span>';
 
   const filterHtml = generateFilterBarHTML(anniversaryValues, minYear, maxYear);
 
   const body = `\
     <p class="explore-link"><a href="index.html">Browse all months</a> &middot; <a href="../week/index.html">Week view</a></p>
-    <nav class="week-nav">${prevHtml}<span class="current">${label}</span>${nextHtml} <button id="today-btn">Today</button> <button id="week-btn">Week</button></nav>
+    <nav class="week-nav">${prevHtml}<span class="btn btn--current">${label}</span>${nextHtml}<span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="week-btn">Week</button></nav>
     ${filterHtml}
     <div id="cal">${calHtml}</div>`;
 
@@ -606,7 +608,7 @@ function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, next
       <h1>Movie Anniversaries</h1>
       <p class="subtitle">${label}</p>
       <p class="explore-link"><a href="index.html">Browse all months</a> &middot; <a href="../week/index.html">Week view</a></p>
-      <nav class="week-nav">${prevHtml}<span class="current">${label}</span>${nextHtml} <button id="today-btn">Today</button> <button id="week-btn">Week</button></nav>
+      <nav class="week-nav">${prevHtml}<span class="btn btn--current">${label}</span>${nextHtml}<span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="week-btn">Week</button></nav>
     </header>
     ${filterHtml}
     <div id="cal">${calHtml}</div>

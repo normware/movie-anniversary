@@ -318,12 +318,17 @@ header h1 {
   border: 1px solid #f5c51833;
 }
 
-/* Poster grid (week page default, left-to-right wrapped) ----------- */
+/* Poster grid (week page, scroll per day by default) --------------- */
 .poster-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 4px;
   padding-bottom: 4px;
+}
+.poster-row.expanded {
+  flex-wrap: wrap;
+  overflow-x: visible;
 }
 
 .poster-item {

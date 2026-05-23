@@ -20,12 +20,33 @@ const ENC_FILE = path.join(SRC_DIR, 'movies.enc.json');
 /*  Anniversary helpers                                                */
 /* ------------------------------------------------------------------ */
 
-function getAnniversaryMovies(movies, weekMonday) {
+function buildMonthDayIndex(movies) {
+  const index = new Map();
+  for (const movie of movies) {
+    if (!movie.release_date) continue;
+    const parts = movie.release_date.split('-');
+    if (parts.length !== 3) continue;
+    const [ry, rm, rd] = parts.map(Number);
+    movie._ry = ry;
+    movie._rm = rm;
+    movie._rd = rd;
+    const key = `${String(rm).padStart(2, '0')}-${String(rd).padStart(2, '0')}`;
+    if (!index.has(key)) index.set(key, []);
+    index.get(key).push(movie);
+  }
+  return index;
+}
+
+function getAnniversaryMovies(movies, monthDayIndex, weekMonday) {
   return Array.from({ length: 7 }, (_, d) => {
     const date = new Date(weekMonday);
     date.setDate(weekMonday.getDate() + d);
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    const key = `${mm}-${dd}`;
+    const candidates = monthDayIndex.get(key) || [];
     const entries = [];
-    for (const movie of movies) {
+    for (const movie of candidates) {
       const years = isAnniversaryOnDate(movie, date);
       if (years) entries.push({ movie, years });
     }
@@ -34,13 +55,17 @@ function getAnniversaryMovies(movies, weekMonday) {
   });
 }
 
-function getAnniversaryMoviesForMonth(movies, year, month) {
+function getAnniversaryMoviesForMonth(movies, monthDayIndex, year, month) {
   const dim = new Date(year, month, 0).getDate();
   return Array.from({ length: dim + 1 }, (_, d) => {
     if (d === 0) return [];
     const date = new Date(year, month - 1, d);
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    const key = `${mm}-${dd}`;
+    const candidates = monthDayIndex.get(key) || [];
     const entries = [];
-    for (const movie of movies) {
+    for (const movie of candidates) {
       const anniYears = isAnniversaryOnDate(movie, date);
       if (anniYears) entries.push({ movie, years: anniYears });
     }
@@ -72,21 +97,33 @@ function collectFilterValues(dayMap) {
 /*  Filter bar HTML + JS snippets                                      */
 /* ------------------------------------------------------------------ */
 
-function generateFilterBarHTML(anniversaryValues, minYear, maxYear) {
+function ratingOptions() {
+  return [0,1,2,3,4,5,6,7,8,9,10].map(v =>
+    `<option value="${v}">${v === 0 ? 'All' : v + '+'}</option>`
+  ).join('');
+}
+
+function generateFilterBarHTML(anniversaryValues, minYear, maxYear, pageType) {
   const anniFilterHtml = anniversaryValues.map(v =>
     `<label class="filter-chk"><input type="checkbox" class="anni-cb" value="${v}" checked>${v}y</label>`
   ).join('');
 
+  const extraGroups = pageType === 'week'
+    ? ``
+    : `<div class="filter-group">
+        <label class="option-chk"><input type="checkbox" id="hide-empty">Hide empty</label>
+      </div>
+      <div class="filter-group">
+        <label class="option-chk"><input type="checkbox" id="show-3">Show 3</label>
+      </div>`;
+
   return `\
+    <span class="filter-toggle" id="filter-toggle"><span class="filter-toggle__arrow">\u25BC</span> Filters</span>
+    <div class="filter-wrap" id="filter-wrap">
     <div class="filter-bar">
       <div class="filter-group">
         <span class="filter-label">Rating</span>
-        <select id="rating-filter" title="Filter by TMDB vote average">
-          <option value="0">All</option>
-          <option value="7">7+</option>
-          <option value="8">8+</option>
-          <option value="9">9+</option>
-        </select>
+        <select id="rating-filter" title="Filter by TMDB vote average">${ratingOptions()}</select>
       </div>
       <div class="filter-group">
         <span class="filter-label">Anniv.</span>
@@ -104,14 +141,19 @@ function generateFilterBarHTML(anniversaryValues, minYear, maxYear) {
       </div>
       <div class="filter-group">
         <span class="filter-label">Sort</span>
-        <select id="sort-select" title="Sort by TMDB popularity or vote average">
+        <select id="sort-select" title="Sort movies">
           <option value="popularity">Popularity</option>
           <option value="rating">Rating</option>
+          <option value="title">Title</option>
+          <option value="year">Year</option>
+          <option value="anniversary">Anniv.</option>
         </select>
       </div>
+      ${extraGroups}
       <div class="filter-group">
-        <button class="btn btn--ghost" id="reset-filters" title="Reset all filters">&#8635; Reset</button>
+        <button class="btn" id="reset-filters" title="Reset all filters">\u21BB Reset</button>
       </div>
+    </div>
     </div>
     <p id="filter-count" class="filter-count"></p>`;
 }
@@ -148,7 +190,7 @@ function generateShell(title, subtitle, bodyHTML, extraHTML = '') {
   <div class="container">
     <header>
       <h1>Movie Anniversaries</h1>
-      <p class="subtitle">${subtitle}</p>
+      <span class="subtitle">${subtitle}</span>
       ${extraHTML}
     </header>
     ${bodyHTML}
@@ -161,14 +203,32 @@ function generateShell(title, subtitle, bodyHTML, extraHTML = '') {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Page generators                                                    */
+/*  Movie HTML snippets                                                */
 /* ------------------------------------------------------------------ */
 
-function movieCardHtml(entry, dateStr) {
+function posterItemHtml(entry) {
+  const { movie, years } = entry;
+  const tmdb = tmdbMovieUrl(movie.id);
+  const imgTag = movie.poster_path
+    ? `<img src="${posterUrl(movie.poster_path, 'w92')}" alt="${escapeHtml(movie.title)}" loading="lazy">`
+    : `<div class="poster-item__placeholder">${escapeHtml(movie.title)}</div>`;
+  const year = movie.release_date ? movie.release_date.split('-')[0] : '?';
+  const rating = movie.vote_average ? movie.vote_average.toFixed(1) : '\u2014';
+  return `<a href="${tmdb}" target="_blank" rel="noopener" class="poster-item" data-rating="${rating}" data-year="${year}" data-anniversary="${years}">
+    ${imgTag}
+    <div class="poster-item__info">
+      <span class="poster-item__title">${escapeHtml(movie.title)}</span>
+      <span class="poster-item__meta">${year} \u2605 ${rating}</span>
+      <span class="poster-item__anni">${years}y</span>
+    </div>
+  </a>`;
+}
+
+function movieRowHtml(entry, dateStr) {
   const { movie, years } = entry;
   const imgTag = movie.poster_path
-    ? `<img src="${posterUrl(movie.poster_path)}" alt="${escapeHtml(movie.title)}" loading="lazy">`
-    : `<div class="poster-placeholder">${escapeHtml(movie.title)}</div>`;
+    ? `<img src="${posterUrl(movie.poster_path, 'w92')}" alt="${escapeHtml(movie.title)}" loading="lazy">`
+    : '';
 
   const tmdb = tmdbMovieUrl(movie.id);
   const imdb = imdbUrl(movie.imdb_id);
@@ -176,22 +236,26 @@ function movieCardHtml(entry, dateStr) {
 
   let linksHtml = `<a href="${tmdb}" target="_blank" rel="noopener">TMDB</a>`;
   if (imdb) linksHtml += `<a href="${imdb}" target="_blank" rel="noopener">IMDb</a>`;
-  linksHtml += `<a href="${lb}" target="_blank" rel="noopener">Letterboxd</a>`;
+  linksHtml += `<a href="${lb}" target="_blank" rel="noopener">LB</a>`;
 
   const year = movie.release_date ? movie.release_date.split('-')[0] : '?';
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : '\u2014';
 
-  return `
-        <div class="movie-card" data-rating="${rating}" data-popularity="${movie.popularity.toFixed(1)}" data-year="${year}" data-anniversary="${years}" data-date="${dateStr}" data-title="${escapeHtml(movie.title)}" data-tmdb="${movie.id}">
-          ${imgTag}
-          <div class="info">
-            <div class="title">${escapeHtml(movie.title)}</div>
-            <div class="meta">${year} &#9733; ${rating}</div>
-            <div class="anniversary">${years} years</div>
-            <div class="links">${linksHtml}</div>
-          </div>
-        </div>`;
+  return `<div class="movie-row" data-rating="${rating}" data-popularity="${movie.popularity.toFixed(1)}" data-year="${year}" data-anniversary="${years}" data-date="${dateStr}" data-title="${escapeHtml(movie.title).toLowerCase()}" data-tmdb="${movie.id}">
+      <a href="${tmdb}" target="_blank" rel="noopener" class="movie-row__poster">${imgTag}</a>
+      <div class="movie-row__info">
+        <span class="movie-row__title"><a href="${tmdb}" target="_blank" rel="noopener">${escapeHtml(movie.title)}</a></span>
+        <span class="movie-row__year">(${year})</span>
+        <span class="movie-row__rating">\u2605 ${rating}</span>
+        <span class="movie-row__anni">${years}y</span>
+        <span class="movie-row__links">${linksHtml}</span>
+      </div>
+    </div>`;
 }
+
+/* ------------------------------------------------------------------ */
+/*  Week page                                                          */
+/* ------------------------------------------------------------------ */
 
 function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, hasPrev, hasNext, prevLink, nextLink) {
   const label = isoWeekLabel(weekYear, weekNum);
@@ -207,11 +271,15 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
     : '<span class="btn btn--disabled">Next &rarr;</span>';
 
   const daySections = [];
+  const summaryLinks = [];
   for (let d = 0; d < 7; d++) {
     const date = new Date(weekMonday);
     date.setDate(weekMonday.getDate() + d);
     const dateStr = formatDateISO(date);
     const dayEntries = dayMap[d];
+    const dayShort = DAYS_SHORT[d];
+
+    summaryLinks.push(`<a href="#${dateStr}">${dayShort}<span class="week-summary__count">${dayEntries.length}</span></a>`);
 
     if (dayEntries.length === 0) {
       daySections.push(`
@@ -220,18 +288,18 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
         <p class="empty-day">No movie anniversaries today.</p>
       </section>`);
     } else {
-      const cards = dayEntries.map(e => movieCardHtml(e, dateStr)).join('\n');
+      const posterItems = dayEntries.map(e => posterItemHtml(e)).join('\n');
       daySections.push(`
       <section class="day-section" id="${dateStr}">
-        <h2>${formatDayHeader(date)}</h2>
-        <div class="movie-grid">${cards}
+        <h2>${formatDayHeader(date)} <span class="badge">${dayEntries.length}</span></h2>
+        <div class="poster-row">${posterItems}
         </div>
       </section>`);
     }
   }
 
   const exploreLinks = `<p class="explore-link"><a href="index.html">Browse all weeks</a> &middot; <a href="../month/index.html">Month view</a></p>`;
-  const filterHtml = generateFilterBarHTML(anniversaryValues, minYear, maxYear);
+  const filterHtml = generateFilterBarHTML(anniversaryValues, minYear, maxYear, 'week');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -245,9 +313,10 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
   <div class="container">
     <header>
       <h1>Movie Anniversaries</h1>
-      <p class="subtitle">${label} \u2014 ${dateRange}</p>
+      <span class="subtitle">${label} \u2014 ${dateRange}</span>
       ${exploreLinks}
       <nav class="week-nav">${prevHtml}<span class="btn btn--current">${label}</span>${nextHtml}<span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="month-btn">Month</button></nav>
+      <div class="week-summary">${summaryLinks.join('')}</div>
     </header>
     ${filterHtml}
     <main>${daySections.join('\n')}
@@ -267,7 +336,6 @@ function filterWeekJS(label) {
 (function(){
   var STORAGE_KEY = 'movie-anni-filters';
   var PAGE_LABEL = '${label}';
-  var cards = document.querySelectorAll('.movie-card');
   var sections = document.querySelectorAll('.day-section');
   var countEl = document.getElementById('filter-count');
 
@@ -280,6 +348,19 @@ function filterWeekJS(label) {
     var m = String(d.getMonth()+1).padStart(2,'0');
     location.href = '../month/' + d.getFullYear() + '-' + m + '.html';
   });
+
+  // Filter toggle
+  var toggle = document.getElementById('filter-toggle');
+  var wrap = document.getElementById('filter-wrap');
+  if(toggle && wrap){
+    var filterCollapsed = localStorage.getItem(STORAGE_KEY+'-collapsed') === '1';
+    if(filterCollapsed){ toggle.classList.add('collapsed'); wrap.classList.add('collapsed'); }
+    toggle.addEventListener('click', function(){
+      wrap.classList.toggle('collapsed');
+      toggle.classList.toggle('collapsed');
+      try { localStorage.setItem(STORAGE_KEY+'-collapsed', wrap.classList.contains('collapsed') ? '1' : '0'); } catch(e){}
+    });
+  }
 
   function saveState(){
     var state = {
@@ -317,31 +398,38 @@ function filterWeekJS(label) {
     var sortBy = document.getElementById('sort-select').value;
     var visible = 0;
 
-    cards.forEach(function(card){
-      var r = parseFloat(card.getAttribute('data-rating')) || 0;
-      var y = parseInt(card.getAttribute('data-year')) || 0;
-      var a = parseInt(card.getAttribute('data-anniversary')) || 0;
-      var show = r >= ratingVal;
-      if(show && anniVals.length) show = anniVals.indexOf(a) !== -1;
-      if(show) show = y >= yearMin && y <= yearMax;
-      card.style.display = show ? '' : 'none';
-      if(show) visible++;
-    });
-
     sections.forEach(function(s){
-      var vis = Array.from(s.querySelectorAll('.movie-card')).some(function(c){ return c.style.display !== 'none'; });
-      s.style.display = vis ? '' : 'none';
-    });
-
-    sections.forEach(function(s){
-      var grid = s.querySelector('.movie-grid');
-      if(!grid) return;
-      var sorted = Array.from(grid.querySelectorAll('.movie-card')).sort(function(a,b){
-        var av = parseFloat(a.getAttribute('data-'+sortBy)) || 0;
-        var bv = parseFloat(b.getAttribute('data-'+sortBy)) || 0;
-        return bv - av;
+      var vis = 0;
+      var items = s.querySelectorAll('.poster-item');
+      items.forEach(function(item){
+        var r = parseFloat(item.getAttribute('data-rating')) || 0;
+        var y = parseInt(item.getAttribute('data-year')) || 0;
+        var a = parseInt(item.getAttribute('data-anniversary')) || 0;
+        var show = r >= ratingVal;
+        if(show && anniVals.length) show = anniVals.indexOf(a) !== -1;
+        if(show) show = y >= yearMin && y <= yearMax;
+        item.style.display = show ? '' : 'none';
+        if(show) vis++;
       });
-      sorted.forEach(function(el){ grid.appendChild(el); });
+
+      // sort poster items within this section
+      var row = s.querySelector('.poster-row');
+      if(row){
+        var sorted = Array.from(items).filter(function(el){ return el.style.display !== 'none'; }).sort(function(a,b){
+          if(sortBy === 'title'){
+            var av = (a.querySelector('.poster-item__title').textContent || '').toLowerCase();
+            var bv = (b.querySelector('.poster-item__title').textContent || '').toLowerCase();
+            return av < bv ? -1 : av > bv ? 1 : 0;
+          }
+          var attr = sortBy === 'anniversary' ? 'anniversary' : sortBy === 'year' ? 'year' : 'rating';
+          var av = parseFloat(a.getAttribute('data-' + attr)) || 0;
+          var bv = parseFloat(b.getAttribute('data-' + attr)) || 0;
+          return bv - av;
+        });
+        sorted.forEach(function(el){ row.appendChild(el); });
+      }
+
+      visible += vis;
     });
 
     if(countEl) countEl.textContent = visible + ' movie' + (visible!==1?'s':'') + ' shown';
@@ -371,14 +459,66 @@ function filterWeekJS(label) {
   });
 
   applyFilters();
-
-  // Scroll to today if URL has hash
-  if(location.hash){
-    var el = document.getElementById(location.hash.substring(1));
-    if(el) setTimeout(function(){ el.scrollIntoView({behavior:'smooth'}); }, 200);
-  }
 })();
   <\/script>`;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Today page                                                         */
+/* ------------------------------------------------------------------ */
+
+function generateTodayPage(movies, monthDayIndex, today, weekLabel, weekMonday, weekSunday) {
+  const todayDate = new Date(today);
+  const todayStr = formatDateISO(todayDate);
+  const mm = String(todayDate.getMonth() + 1).padStart(2, '0');
+  const dd = String(todayDate.getDate()).padStart(2, '0');
+  const key = `${mm}-${dd}`;
+  const candidates = monthDayIndex.get(key) || [];
+  const dayEntries = [];
+  for (const movie of candidates) {
+    const years = isAnniversaryOnDate(movie, todayDate);
+    if (years) dayEntries.push({ movie, years });
+  }
+  dayEntries.sort((a, b) => b.movie.popularity - a.movie.popularity);
+
+  const headerDate = formatDayHeader(todayDate);
+  let moviesHtml;
+  if (dayEntries.length === 0) {
+    moviesHtml = '<p class="today-empty">No movie anniversaries today.</p>';
+  } else {
+    const posters = dayEntries.slice(0, 30).map(e => posterItemHtml(e)).join('\n');
+    moviesHtml = `<div class="today-grid">${posters}</div>`;
+  }
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today \u2013 Movie Anniversaries</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container today-page">
+    <header>
+      <h1>Movie Anniversaries</h1>
+    </header>
+    <h2>${headerDate}</h2>
+    <p class="today-date">${formatDate(todayDate)}</p>
+    <div class="today-movies">${moviesHtml}</div>
+    <p>${dayEntries.length} movie${dayEntries.length !== 1 ? 's' : ''} with anniversaries today</p>
+    <div class="today-links">
+      <a href="../week/${weekLabel}.html" class="btn">View this week</a>
+      <a href="../month/${todayDate.getFullYear()}-${String(todayDate.getMonth()+1).padStart(2,'0')}.html" class="btn">View this month</a>
+      <a href="../week/index.html" class="btn">Browse all weeks</a>
+      <a href="../month/index.html" class="btn">Browse all months</a>
+    </div>
+    <footer>
+      ${footerHTML('../', '<a href="../week/index.html">Weeks</a>', '<a href="../month/index.html">Months</a>')}
+    </footer>
+  </div>
+</body>
+</html>`;
 }
 
 /* ------------------------------------------------------------------ */
@@ -394,74 +534,13 @@ function generateIndexPage() {
   <title>Movie Anniversaries</title>
   <link rel="stylesheet" href="style.css">
   <script>
-    (function() {
-      function pad2(n){ return n < 10 ? '0' + n : '' + n; }
-      function getISOWeek(d) {
-        var t = new Date(d);
-        t.setHours(0,0,0,0);
-        var day = (t.getDay() + 6) % 7;
-        t.setDate(t.getDate() - day + 3);
-        var jan4 = new Date(t.getFullYear(), 0, 4);
-        var week = 1 + Math.round(((t - jan4) / 86400000 - 3 + (jan4.getDay() + 6) % 7) / 7);
-        return t.getFullYear() + '-W' + String(week).padStart(2, '0');
-      }
-      var week = getISOWeek(new Date());
-      var params = new URLSearchParams(location.search);
-      if(params.has('week')) week = params.get('week');
-      window.location.href = 'week/' + week + '.html?week=' + week;
-    })();
-  </script>
+    location.href = 'today/index.html';
+  <\/script>
 </head>
 <body>
   <div class="container center-content">
     <h1>Movie Anniversaries</h1>
-    <p>Redirecting to the current week...</p>
-    <footer>
-      ${footerHTML('/', '<a href="week/index.html">Browse all weeks</a>')}
-    </footer>
-  </div>
-</body>
-</html>`;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Today page with JS redirect                                       */
-/* ------------------------------------------------------------------ */
-
-function generateTodayPage() {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Today \u2013 Movie Anniversaries</title>
-  <link rel="stylesheet" href="../style.css">
-  <script>
-    (function() {
-      function pad2(n){ return n < 10 ? '0' + n : '' + n; }
-      function getISOWeek(d) {
-        var t = new Date(d);
-        t.setHours(0,0,0,0);
-        var day = (t.getDay() + 6) % 7;
-        t.setDate(t.getDate() - day + 3);
-        var jan4 = new Date(t.getFullYear(), 0, 4);
-        var week = 1 + Math.round(((t - jan4) / 86400000 - 3 + (jan4.getDay() + 6) % 7) / 7);
-        return t.getFullYear() + '-W' + String(week).padStart(2, '0');
-      }
-      var d = new Date();
-      var week = getISOWeek(d);
-      var today = d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate());
-      window.location.href = '../week/' + week + '.html#' + today;
-    })();
-  </script>
-</head>
-<body>
-  <div class="container center-content">
-    <h1>Movie Anniversaries</h1>
-    <p>Redirecting to today\u2019s movies...</p>
-    <footer>
-      ${footerHTML('../', '<a href="../week/index.html">Browse all weeks</a>')}
-    </footer>
+    <p>Redirecting to today...</p>
   </div>
 </body>
 </html>`;
@@ -485,7 +564,7 @@ function generateWeekIndex(allWeeks) {
       </ul>
     </main>`;
 
-  const extra = `<p class="explore-link"><a href="../month/index.html">Month view</a></p>`;
+  const extra = `<p class="explore-link"><a href="../month/index.html">Month view</a> &middot; <a href="../today/index.html">Today</a></p>`;
 
   return generateShell(
     'All Weeks \u2013 Movie Anniversaries',
@@ -499,12 +578,12 @@ function generateWeekIndex(allWeeks) {
 /*  Month page                                                         */
 /* ------------------------------------------------------------------ */
 
-function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, nextLink) {
+function generateMonthPage(year, month, movies, monthDayIndex, hasPrev, hasNext, prevLink, nextLink) {
   const dim = new Date(year, month, 0).getDate();
   const label = monthLabel(year, month);
   const firstDow = (new Date(year, month - 1, 1).getDay() + 6) % 7;
   const mkey = monthKey(year, month);
-  const dayMap = getAnniversaryMoviesForMonth(movies, year, month);
+  const dayMap = getAnniversaryMoviesForMonth(movies, monthDayIndex, year, month);
   const { anniversaryValues, minYear, maxYear } = collectFilterValues(dayMap);
 
   const dataArr = [];
@@ -538,36 +617,35 @@ function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, next
   for (let d = 1; d <= dim; d++) {
     const isToday = isCurrentMonth && d === todayDay;
     const entries = dayMap[d] || [];
-    let cardHtml = '';
+    let moviesHtml = '';
 
     if (entries.length > 0) {
       const top = entries[0];
-      const m = top.movie;
-      const pu = m.poster_path ? `${IMAGE_BASE}/w92${m.poster_path}` : '';
-      const tu = tmdbMovieUrl(m.id);
-      const iu = imdbUrl(m.imdb_id);
-      const lu = letterboxdUrl(m.id);
+      const topM = top.movie;
+      const topTu = tmdbMovieUrl(topM.id);
+      const topPu = topM.poster_path ? `${IMAGE_BASE}/w92${topM.poster_path}` : '';
+      const topThumb = topPu
+        ? `<img src="${topPu}" alt="" class="cal-movie__thumb" loading="lazy">`
+        : '';
 
-      let links = `<a href="${tu}" target="_blank" rel="noopener">TMDB</a>`;
-      if (iu) links += ` <a href="${iu}" target="_blank" rel="noopener">IMDb</a>`;
-      links += ` <a href="${lu}" target="_blank" rel="noopener">LB</a>`;
+      let subHtml = '';
+      for (let si = 1; si < Math.min(entries.length, 3); si++) {
+        const sub = entries[si];
+        const subM = sub.movie;
+        const subTu = tmdbMovieUrl(subM.id);
+        subHtml += `<div class="cal-movie cal-movie--sub"><div class="cal-movie__info"><div class="cal-movie__title"><a href="${subTu}" target="_blank" rel="noopener">${escapeHtml(subM.title)}</a></div><div class="cal-movie__anni">${sub.years}y</div></div></div>`;
+      }
 
-      const thumbHtml = pu
-        ? `<img src="${pu}" alt="${escapeHtml(m.title)}" class="cal-thumb" loading="lazy">`
-        : `<div class="cal-thumb cal-thumb--missing"></div>`;
+      const extra = entries.length > 3 ? `<div class="cal-movie__title" style="color:#555;font-size:7px;padding-top:1px">+${entries.length-3} more</div>` : '';
 
-      cardHtml = `<div class="cal-card" id="cc${d}">`
-        + `<a href="${tu}" target="_blank" rel="noopener" class="cal-thumb-link">${thumbHtml}</a>`
-        + `<div class="cal-info">`
-        + `<div class="cal-title"><a href="${tu}" target="_blank" rel="noopener">${escapeHtml(m.title)}</a></div>`
-        + `<div class="cal-anni">${top.years} years</div>`
-        + `<div class="cal-links">${links}</div>`
-        + `</div></div>`;
+      moviesHtml = `<div class="cal-movie cal-movie--top">${topThumb}<div class="cal-movie__info"><div class="cal-movie__title"><a href="${topTu}" target="_blank" rel="noopener">${escapeHtml(topM.title)}</a></div><div class="cal-movie__anni">${top.years}y</div></div></div>`
+        + `<div class="cal-movie__subs">${subHtml}</div>`
+        + extra;
     }
 
     calHtml += `<div class="cal-cell${isToday ? ' today' : ''}" id="c${d}">`
       + `<div class="cal-num">${d}</div>`
-      + cardHtml
+      + moviesHtml
       + `</div>`;
   }
 
@@ -586,7 +664,7 @@ function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, next
     ? `<a href="${nextLink}" class="btn">${nextLink.replace('.html', '')} &rarr;</a>`
     : '<span class="btn btn--disabled">Next &rarr;</span>';
 
-  const filterHtml = generateFilterBarHTML(anniversaryValues, minYear, maxYear);
+  const filterHtml = generateFilterBarHTML(anniversaryValues, minYear, maxYear, 'month');
 
   const body = `\
     <p class="explore-link"><a href="index.html">Browse all months</a> &middot; <a href="../week/index.html">Week view</a></p>
@@ -606,7 +684,7 @@ function generateMonthPage(year, month, movies, hasPrev, hasNext, prevLink, next
   <div class="container">
     <header>
       <h1>Movie Anniversaries</h1>
-      <p class="subtitle">${label}</p>
+      <span class="subtitle">${label}</span>
       <p class="explore-link"><a href="index.html">Browse all months</a> &middot; <a href="../week/index.html">Week view</a></p>
       <nav class="week-nav">${prevHtml}<span class="btn btn--current">${label}</span>${nextHtml}<span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="week-btn">Week</button></nav>
     </header>
@@ -631,23 +709,16 @@ function filterMonthJS(dataJson) {
 
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-  function cardHtml(m){
-    var pu = m.po ? 'https://image.tmdb.org/t/p/w92'+m.po : '';
+  function topHtml(m){
     var tu = 'https://www.themoviedb.org/movie/'+m.id;
-    var iu = m.im ? 'https://www.imdb.com/title/'+m.im : '';
-    var lu = 'https://letterboxd.com/tmdb/'+m.id+'/';
-    var links = '<a href="'+tu+'" target="_blank" rel="noopener">TMDB</a>'
-      + (iu?' <a href="'+iu+'" target="_blank" rel="noopener">IMDb</a>':'')
-      + ' <a href="'+lu+'" target="_blank" rel="noopener">LB</a>';
-    var thumb = pu
-      ? '<img src="'+pu+'" alt="'+esc(m.t)+'" class="cal-thumb" loading="lazy">'
-      : '<div class="cal-thumb cal-thumb--missing"></div>';
-    return '<a href="'+tu+'" target="_blank" rel="noopener" class="cal-thumb-link">'+thumb+'</a>'
-      + '<div class="cal-info">'
-      + '<div class="cal-title"><a href="'+tu+'" target="_blank" rel="noopener">'+esc(m.t)+'</a></div>'
-      + '<div class="cal-anni">'+m.y+' years</div>'
-      + '<div class="cal-links">'+links+'</div>'
-      + '</div>';
+    var pu = m.po ? 'https://image.tmdb.org/t/p/w92'+m.po : '';
+    var thumb = pu ? '<img src="'+pu+'" alt="" class="cal-movie__thumb" loading="lazy">' : '';
+    return '<div class="cal-movie cal-movie--top">'+thumb+'<div class="cal-movie__info"><div class="cal-movie__title"><a href="'+tu+'" target="_blank" rel="noopener">'+esc(m.t)+'</a></div><div class="cal-movie__anni">'+m.y+'y</div></div></div>';
+  }
+
+  function subHtml(m){
+    var tu = 'https://www.themoviedb.org/movie/'+m.id;
+    return '<div class="cal-movie cal-movie--sub"><div class="cal-movie__info"><div class="cal-movie__title"><a href="'+tu+'" target="_blank" rel="noopener">'+esc(m.t)+'</a></div><div class="cal-movie__anni">'+m.y+'y</div></div></div>';
   }
 
   function render(){
@@ -657,7 +728,9 @@ function filterMonthJS(dataJson) {
     var yearMin = parseInt(document.getElementById('year-min').value) || 0;
     var yearMax = parseInt(document.getElementById('year-max').value) || 9999;
     var sortBy = document.getElementById('sort-select').value;
-    var fld = sortBy === 'rating' ? 'v' : 'p';
+    var hideEmpty = document.getElementById('hide-empty').checked;
+    var show3 = document.getElementById('show-3').checked;
+    var fld = sortBy === 'rating' ? 'v' : sortBy === 'popularity' ? 'p' : sortBy === 'title' ? 't' : sortBy === 'year' ? 'r' : 'y';
     var vis = 0;
 
     for(var d=1; d<=D.dim; d++){
@@ -668,17 +741,36 @@ function filterMonthJS(dataJson) {
         var yr = parseInt(m.r) || 0;
         return yr >= yearMin && yr <= yearMax;
       });
-      f.sort(function(a,b){ return (b[fld]||0) - (a[fld]||0); });
-      var top = f[0] || null;
-      var el = document.getElementById('cc'+d);
-      if(!el) continue;
-      if(top){
-        vis++;
-        el.innerHTML = cardHtml(top);
-        el.style.display = 'flex';
+      if(fld === 't'){
+        f.sort(function(a,b){ return (a.t||'').localeCompare(b.t||''); });
+      } else if(fld === 'r'){
+        f.sort(function(a,b){ return (parseInt(b.r)||0) - (parseInt(a.r)||0); });
+      } else if(fld === 'y'){
+        f.sort(function(a,b){ return (b.y||0) - (a.y||0); });
       } else {
-        el.innerHTML = '';
-        el.style.display = 'none';
+        f.sort(function(a,b){ return (b[fld]||0) - (a[fld]||0); });
+      }
+      var el = document.getElementById('c'+d);
+      if(!el) continue;
+      var numEl = el.querySelector('.cal-num');
+      el.innerHTML = '';
+      if(numEl) el.appendChild(numEl);
+
+      if(f.length > 0){
+        var h = topHtml(f[0]);
+        if(show3){
+          for(var si=1; si<Math.min(f.length, 3); si++){
+            h += subHtml(f[si]);
+          }
+          if(f.length > 3) h += '<div class="cal-movie__title" style="color:#555;font-size:7px;padding-top:1px">+'+(f.length-3)+' more</div>';
+        } else {
+          if(f.length > 1) h += '<div class="cal-movie__title" style="color:#555;font-size:7px;padding-top:1px">+'+(f.length-1)+' more</div>';
+        }
+        el.insertAdjacentHTML('beforeend', h);
+        el.style.display = 'flex';
+        vis++;
+      } else {
+        el.style.display = hideEmpty ? 'none' : 'flex';
       }
     }
     if(countEl) countEl.textContent = vis + ' day' + (vis!==1?'s':'') + ' with anniversaries';
@@ -694,13 +786,28 @@ function filterMonthJS(dataJson) {
     location.href = '../week/index.html';
   });
 
+  // Filter toggle
+  var toggle = document.getElementById('filter-toggle');
+  var wrap = document.getElementById('filter-wrap');
+  if(toggle && wrap){
+    var filterCollapsed = localStorage.getItem(STORAGE_KEY+'-collapsed') === '1';
+    if(filterCollapsed){ toggle.classList.add('collapsed'); wrap.classList.add('collapsed'); }
+    toggle.addEventListener('click', function(){
+      wrap.classList.toggle('collapsed');
+      toggle.classList.toggle('collapsed');
+      try { localStorage.setItem(STORAGE_KEY+'-collapsed', wrap.classList.contains('collapsed') ? '1' : '0'); } catch(e){}
+    });
+  }
+
   function saveState(){
     var state = {
       rating: document.getElementById('rating-filter').value,
       anni: Array.from(document.querySelectorAll('.anni-cb')).map(function(cb){ return cb.checked; }),
       yearMin: document.getElementById('year-min').value,
       yearMax: document.getElementById('year-max').value,
-      sort: document.getElementById('sort-select').value
+      sort: document.getElementById('sort-select').value,
+      hideEmpty: document.getElementById('hide-empty').checked,
+      show3: document.getElementById('show-3').checked
     };
     try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
   }
@@ -719,6 +826,8 @@ function filterMonthJS(dataJson) {
     if(state.yearMin!==undefined) document.getElementById('year-min').value = state.yearMin;
     if(state.yearMax!==undefined) document.getElementById('year-max').value = state.yearMax;
     if(state.sort) document.getElementById('sort-select').value = state.sort;
+    if(state.hideEmpty!==undefined) document.getElementById('hide-empty').checked = state.hideEmpty;
+    if(state.show3!==undefined) document.getElementById('show-3').checked = state.show3;
   }
 
   loadState();
@@ -734,12 +843,16 @@ function filterMonthJS(dataJson) {
   document.getElementById('year-min').addEventListener('input', render);
   document.getElementById('year-max').addEventListener('input', render);
   document.getElementById('sort-select').addEventListener('change', render);
+  document.getElementById('hide-empty').addEventListener('change', render);
+  document.getElementById('show-3').addEventListener('change', render);
   document.getElementById('reset-filters').addEventListener('click', function(){
     document.getElementById('rating-filter').value = '0';
     document.querySelectorAll('.anni-cb').forEach(function(cb){ cb.checked = true; });
     document.getElementById('year-min').value = '';
     document.getElementById('year-max').value = '';
     document.getElementById('sort-select').value = 'popularity';
+    document.getElementById('hide-empty').checked = false;
+    document.getElementById('show-3').checked = false;
     render();
   });
   render();
@@ -759,7 +872,7 @@ function generateMonthIndex(allMonths) {
       </ul>
     </main>`;
 
-  const extra = `<p class="explore-link"><a href="../week/index.html">Week view</a></p>`;
+  const extra = `<p class="explore-link"><a href="../week/index.html">Week view</a> &middot; <a href="../today/index.html">Today</a></p>`;
 
   return generateShell(
     'All Months \u2013 Movie Anniversaries',
@@ -796,7 +909,10 @@ async function main() {
   const encData = fs.readFileSync(ENC_FILE, 'utf8');
   const payload = decrypt(encData, encKey);
   const movies = payload.movies;
-  console.log(`  [INFO] Loaded ${movies.length} movies (fetched ${payload.fetchedAt})\n`);
+  console.log(`  [INFO] Loaded ${movies.length} movies (fetched ${payload.fetchedAt})`);
+
+  const monthDayIndex = buildMonthDayIndex(movies);
+  console.log(`  [INFO] Built month-day index (${monthDayIndex.size} unique dates)\n`);
 
   const weeksToBuild = [];
 
@@ -836,13 +952,19 @@ async function main() {
   if (!fs.existsSync(DOCS_DIR)) fs.mkdirSync(DOCS_DIR, { recursive: true });
   if (!fs.existsSync(WEEK_DIR)) fs.mkdirSync(WEEK_DIR, { recursive: true });
 
+  // Determine today/week for the today page
+  const now = new Date();
+  const todayISO = getISOWeek(now);
+  const todayMonday = mondayOfISOWeek(todayISO.year, todayISO.week);
+  const todayLabel = isoWeekLabel(todayISO.year, todayISO.week);
+
   const builtWeeks = [];
   for (const w of weeksToBuild) {
     const monday = mondayOfISOWeek(w.year, w.week);
     const sunday = new Date(monday);
     sunday.setDate(monday.getDate() + 6);
 
-    const dayMap = getAnniversaryMovies(movies, monday);
+    const dayMap = getAnniversaryMovies(movies, monthDayIndex, monday);
     const label = isoWeekLabel(w.year, w.week);
 
     const prevWeek = getPrevWeek(w.year, w.week);
@@ -871,14 +993,15 @@ async function main() {
   fs.writeFileSync(path.join(WEEK_DIR, 'index.html'), generateWeekIndex(builtWeeks), 'utf8');
   console.log('  [OK]   week/index.html written');
 
+  // Build today page (uses current week's movie data)
   const TODAY_DIR = path.join(DOCS_DIR, 'today');
   if (!fs.existsSync(TODAY_DIR)) fs.mkdirSync(TODAY_DIR, { recursive: true });
-  fs.writeFileSync(path.join(TODAY_DIR, 'index.html'), generateTodayPage(), 'utf8');
-  console.log('  [OK]   today/index.html written');
+  const todayHtml = generateTodayPage(movies, monthDayIndex, now, todayLabel, todayMonday, new Date(todayMonday.getTime() + 6*86400000));
+  fs.writeFileSync(path.join(TODAY_DIR, 'index.html'), todayHtml, 'utf8');
+  console.log('  [OK]   today/index.html written (with today\'s movies)');
 
   // Build month pages
   if (!singleWeek) {
-    const now = new Date();
     const startDate = new Date(now);
     startDate.setFullYear(now.getFullYear() - RANGE_SPAN_YEARS);
     const endDate = new Date(now);
@@ -905,7 +1028,7 @@ async function main() {
       const hasPrev = monthsToBuild.some(x => x.year === prevM.year && x.month === prevM.month);
       const hasNext = monthsToBuild.some(x => x.year === nextM.year && x.month === nextM.month);
 
-      const html = generateMonthPage(m.year, m.month, movies, hasPrev, hasNext, `${prevKey}.html`, `${nextKey}.html`);
+      const html = generateMonthPage(m.year, m.month, movies, monthDayIndex, hasPrev, hasNext, `${prevKey}.html`, `${nextKey}.html`);
       fs.writeFileSync(path.join(MONTH_DIR, `${label}.html`), html, 'utf8');
       builtMonths.push(m);
       console.log(`  [BUILD] ${label}`);

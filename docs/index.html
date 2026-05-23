@@ -6,36 +6,13 @@
   <title>Movie Anniversaries</title>
   <link rel="stylesheet" href="style.css">
   <script>
-    (function() {
-      function pad2(n){ return n < 10 ? '0' + n : '' + n; }
-      function getISOWeek(d) {
-        var t = new Date(d);
-        t.setHours(0,0,0,0);
-        var day = (t.getDay() + 6) % 7;
-        t.setDate(t.getDate() - day + 3);
-        var jan4 = new Date(t.getFullYear(), 0, 4);
-        var week = 1 + Math.round(((t - jan4) / 86400000 - 3 + (jan4.getDay() + 6) % 7) / 7);
-        return t.getFullYear() + '-W' + String(week).padStart(2, '0');
-      }
-      var week = getISOWeek(new Date());
-      var params = new URLSearchParams(location.search);
-      if(params.has('week')) week = params.get('week');
-      window.location.href = 'week/' + week + '.html?week=' + week;
-    })();
+    location.href = 'today/index.html';
   </script>
 </head>
 <body>
   <div class="container center-content">
     <h1>Movie Anniversaries</h1>
-    <p>Redirecting to the current week...</p>
-    <footer>
-      
-    <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/datenschutz">Datenschutz</a> &middot; <a href="/impressum">Impressum</a> &middot; <a href="week/index.html">Browse all weeks</a></p>
-    <p class="tmdb-attribution">
-      <img src="/tmdb-logo.svg" alt="TMDB Logo" class="tmdb-logo" width="32" height="24">
-      This product uses the TMDB API but is not endorsed or certified by TMDB.
-    </p>
-    </footer>
+    <p>Redirecting to today...</p>
   </div>
 </body>
 </html>

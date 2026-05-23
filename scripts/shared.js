@@ -92,9 +92,9 @@ export function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-export function posterUrl(posterPath) {
+export function posterUrl(posterPath, size) {
   if (!posterPath) return '';
-  return `${IMAGE_BASE}/${POSTER_SIZE}${posterPath}`;
+  return `${IMAGE_BASE}/${size || POSTER_SIZE}${posterPath}`;
 }
 
 export function getISOWeek(date) {
@@ -165,10 +165,10 @@ export function getNextWeek(year, week) {
 }
 
 export function isAnniversaryOnDate(movie, date) {
-  if (!movie.release_date) return null;
-  const parts = movie.release_date.split('-');
-  if (parts.length !== 3) return null;
-  const [releaseYear, releaseMonth, releaseDay] = parts.map(Number);
+  const releaseYear = movie._ry;
+  const releaseMonth = movie._rm;
+  const releaseDay = movie._rd;
+  if (releaseYear == null) return null;
 
   const dateYear = date.getFullYear();
   const dateMonth = date.getMonth();

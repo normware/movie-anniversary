@@ -10,19 +10,17 @@
   <div class="container">
     <header>
       <h1>Movie Anniversaries</h1>
-      <p class="subtitle">2027-W14 — Apr 5, 2027 – Apr 11, 2027</p>
+      <span class="subtitle">2027-W14 — Apr 5, 2027 – Apr 11, 2027</span>
       <p class="explore-link"><a href="index.html">Browse all weeks</a> &middot; <a href="../month/index.html">Month view</a></p>
       <nav class="week-nav"><a href="2027-W13.html" class="btn">&larr; 2027-W13</a><span class="btn btn--current">2027-W14</span><a href="2027-W15.html" class="btn">2027-W15 &rarr;</a><span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="month-btn">Month</button></nav>
+      <div class="week-summary"><a href="#2027-04-05">Mon<span class="week-summary__count">16</span></a><a href="#2027-04-06">Tue<span class="week-summary__count">14</span></a><a href="#2027-04-07">Wed<span class="week-summary__count">19</span></a><a href="#2027-04-08">Thu<span class="week-summary__count">13</span></a><a href="#2027-04-09">Fri<span class="week-summary__count">10</span></a><a href="#2027-04-10">Sat<span class="week-summary__count">25</span></a><a href="#2027-04-11">Sun<span class="week-summary__count">21</span></a></div>
     </header>
-        <div class="filter-bar">
+        <span class="filter-toggle" id="filter-toggle"><span class="filter-toggle__arrow">▼</span> Filters</span>
+    <div class="filter-wrap" id="filter-wrap">
+    <div class="filter-bar">
       <div class="filter-group">
         <span class="filter-label">Rating</span>
-        <select id="rating-filter" title="Filter by TMDB vote average">
-          <option value="0">All</option>
-          <option value="7">7+</option>
-          <option value="8">8+</option>
-          <option value="9">9+</option>
-        </select>
+        <select id="rating-filter" title="Filter by TMDB vote average"><option value="0">All</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option><option value="6">6+</option><option value="7">7+</option><option value="8">8+</option><option value="9">9+</option><option value="10">10+</option></select>
       </div>
       <div class="filter-group">
         <span class="filter-label">Anniv.</span>
@@ -40,1229 +38,998 @@
       </div>
       <div class="filter-group">
         <span class="filter-label">Sort</span>
-        <select id="sort-select" title="Sort by TMDB popularity or vote average">
+        <select id="sort-select" title="Sort movies">
           <option value="popularity">Popularity</option>
           <option value="rating">Rating</option>
+          <option value="title">Title</option>
+          <option value="year">Year</option>
+          <option value="anniversary">Anniv.</option>
         </select>
       </div>
+      
       <div class="filter-group">
-        <button class="btn btn--ghost" id="reset-filters" title="Reset all filters">&#8635; Reset</button>
+        <button class="btn" id="reset-filters" title="Reset all filters">↻ Reset</button>
       </div>
+    </div>
     </div>
     <p id="filter-count" class="filter-count"></p>
     <main>
       <section class="day-section" id="2027-04-05">
-        <h2>Monday, April 5</h2>
-        <div class="movie-grid">
-        <div class="movie-card" data-rating="7.0" data-popularity="6.6" data-year="2007" data-anniversary="20" data-date="2027-04-05" data-title="Sunshine" data-tmdb="1272">
-          <img src="https://image.tmdb.org/t/p/w342/oKGGeJ8qvm0UmClz43VJ31fzPP7.jpg" alt="Sunshine" loading="lazy">
-          <div class="info">
-            <div class="title">Sunshine</div>
-            <div class="meta">2007 &#9733; 7.0</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/1272" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/1272/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="3.3" data-year="2002" data-anniversary="25" data-date="2027-04-05" data-title="High Crimes" data-tmdb="11560">
-          <img src="https://image.tmdb.org/t/p/w342/9sj9rUr7Vu5IfOQHnYKnJuVEw0B.jpg" alt="High Crimes" loading="lazy">
-          <div class="info">
-            <div class="title">High Crimes</div>
-            <div class="meta">2002 &#9733; 6.3</div>
-            <div class="anniversary">25 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/11560" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/11560/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.1" data-popularity="2.0" data-year="2002" data-anniversary="25" data-date="2027-04-05" data-title="Big Trouble" data-tmdb="2185">
-          <img src="https://image.tmdb.org/t/p/w342/h844gBztdYMLrroUen6qbsomrGx.jpg" alt="Big Trouble" loading="lazy">
-          <div class="info">
-            <div class="title">Big Trouble</div>
-            <div class="meta">2002 &#9733; 6.1</div>
-            <div class="anniversary">25 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/2185" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/2185/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.4" data-popularity="1.6" data-year="2017" data-anniversary="10" data-date="2027-04-05" data-title="Monopoly (The Bank of Luck)" data-tmdb="463752">
-          <img src="https://image.tmdb.org/t/p/w342/prR2GMScKZaMJkQ2J4yv2YEorDY.jpg" alt="Monopoly (The Bank of Luck)" loading="lazy">
-          <div class="info">
-            <div class="title">Monopoly (The Bank of Luck)</div>
-            <div class="meta">2017 &#9733; 6.4</div>
-            <div class="anniversary">10 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/463752" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/463752/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="8.0" data-popularity="1.4" data-year="2002" data-anniversary="25" data-date="2027-04-05" data-title="The Way Home" data-tmdb="33251">
-          <img src="https://image.tmdb.org/t/p/w342/rydddngVZNdOFEvdYpIxiY3A6om.jpg" alt="The Way Home" loading="lazy">
-          <div class="info">
-            <div class="title">The Way Home</div>
-            <div class="meta">2002 &#9733; 8.0</div>
-            <div class="anniversary">25 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/33251" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/33251/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="1.0" data-year="2007" data-anniversary="20" data-date="2027-04-05" data-title="The Show Must Go On" data-tmdb="55771">
-          <img src="https://image.tmdb.org/t/p/w342/r32KWFc2jRItbAzHypGu9yHSfNs.jpg" alt="The Show Must Go On" loading="lazy">
-          <div class="info">
-            <div class="title">The Show Must Go On</div>
-            <div class="meta">2007 &#9733; 6.5</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/55771" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/55771/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.7" data-popularity="0.7" data-year="1967" data-anniversary="60" data-date="2027-04-05" data-title="Shock Troops" data-tmdb="365414">
-          <img src="https://image.tmdb.org/t/p/w342/zWYX0uluAvWJFHlRUF4hapENYtq.jpg" alt="Shock Troops" loading="lazy">
-          <div class="info">
-            <div class="title">Shock Troops</div>
-            <div class="meta">1967 &#9733; 6.7</div>
-            <div class="anniversary">60 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/365414" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/365414/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.5" data-popularity="0.6" data-year="1962" data-anniversary="65" data-date="2027-04-05" data-title="Moon Pilot" data-tmdb="64870">
-          <img src="https://image.tmdb.org/t/p/w342/flIGxUmpJ2jT0uZwc7gaFiVBuWV.jpg" alt="Moon Pilot" loading="lazy">
-          <div class="info">
-            <div class="title">Moon Pilot</div>
-            <div class="meta">1962 &#9733; 5.5</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/64870" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/64870/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.0" data-popularity="0.5" data-year="1967" data-anniversary="60" data-date="2027-04-05" data-title="Double Trouble" data-tmdb="45335">
-          <img src="https://image.tmdb.org/t/p/w342/16arir1nxX0CgoS9KpNwNGob4Y6.jpg" alt="Double Trouble" loading="lazy">
-          <div class="info">
-            <div class="title">Double Trouble</div>
-            <div class="meta">1967 &#9733; 5.0</div>
-            <div class="anniversary">60 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/45335" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/45335/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="3.7" data-popularity="0.5" data-year="1987" data-anniversary="40" data-date="2027-04-05" data-title="Programmed to Kill" data-tmdb="258157">
-          <img src="https://image.tmdb.org/t/p/w342/wjqgwl9PktkzQPTPNKdHafsoVTg.jpg" alt="Programmed to Kill" loading="lazy">
-          <div class="info">
-            <div class="title">Programmed to Kill</div>
-            <div class="meta">1987 &#9733; 3.7</div>
-            <div class="anniversary">40 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/258157" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/258157/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.3" data-popularity="0.4" data-year="1972" data-anniversary="55" data-date="2027-04-05" data-title="Requiem for a Vampire" data-tmdb="29111">
-          <img src="https://image.tmdb.org/t/p/w342/zzVCXhUDqWld6LxkRwzdWaBX9Hv.jpg" alt="Requiem for a Vampire" loading="lazy">
-          <div class="info">
-            <div class="title">Requiem for a Vampire</div>
-            <div class="meta">1972 &#9733; 5.3</div>
-            <div class="anniversary">55 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/29111" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/29111/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.6" data-popularity="0.3" data-year="1982" data-anniversary="45" data-date="2027-04-05" data-title="Todo es posible en Granada" data-tmdb="129425">
-          <img src="https://image.tmdb.org/t/p/w342/xIEeFXxMocWoPsIw3KCGqOj8EUr.jpg" alt="Todo es posible en Granada" loading="lazy">
-          <div class="info">
-            <div class="title">Todo es posible en Granada</div>
-            <div class="meta">1982 &#9733; 5.6</div>
-            <div class="anniversary">45 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/129425" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/129425/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="0.3" data-year="1957" data-anniversary="70" data-date="2027-04-05" data-title="Lust of the Vampire" data-tmdb="28061">
-          <img src="https://image.tmdb.org/t/p/w342/1erlBZP5BKOvZJQ7yv0eDpKrY47.jpg" alt="Lust of the Vampire" loading="lazy">
-          <div class="info">
-            <div class="title">Lust of the Vampire</div>
-            <div class="meta">1957 &#9733; 6.3</div>
-            <div class="anniversary">70 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/28061" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/28061/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.7" data-popularity="0.3" data-year="1947" data-anniversary="80" data-date="2027-04-05" data-title="Tarzan and the Huntress" data-tmdb="82053">
-          <img src="https://image.tmdb.org/t/p/w342/ldOLFlbk6ecRnANiozgh4nX4GrD.jpg" alt="Tarzan and the Huntress" loading="lazy">
-          <div class="info">
-            <div class="title">Tarzan and the Huntress</div>
-            <div class="meta">1947 &#9733; 5.7</div>
-            <div class="anniversary">80 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/82053" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/82053/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.1" data-popularity="0.2" data-year="1962" data-anniversary="65" data-date="2027-04-05" data-title="His Days Are Numbered" data-tmdb="62243">
-          <img src="https://image.tmdb.org/t/p/w342/6C97icuaWa5tnRAOzTJtMhCuarh.jpg" alt="His Days Are Numbered" loading="lazy">
-          <div class="info">
-            <div class="title">His Days Are Numbered</div>
-            <div class="meta">1962 &#9733; 7.1</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/62243" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/62243/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="0.2" data-year="1952" data-anniversary="75" data-date="2027-04-05" data-title="Kiddin' the Kitten" data-tmdb="159102">
-          <img src="https://image.tmdb.org/t/p/w342/tMg7bhSrTiGbVtE56QEwbv0fL24.jpg" alt="Kiddin' the Kitten" loading="lazy">
-          <div class="info">
-            <div class="title">Kiddin' the Kitten</div>
-            <div class="meta">1952 &#9733; 6.5</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/159102" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/159102/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
+        <h2>Monday, April 5 <span class="badge">16</span></h2>
+        <div class="poster-row"><a href="https://www.themoviedb.org/movie/1272" target="_blank" rel="noopener" class="poster-item" data-rating="7.0" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/oKGGeJ8qvm0UmClz43VJ31fzPP7.jpg" alt="Sunshine" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Sunshine</span>
+      <span class="poster-item__meta">2007 ★ 7.0</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/11560" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="2002" data-anniversary="25">
+    <img src="https://image.tmdb.org/t/p/w92/9sj9rUr7Vu5IfOQHnYKnJuVEw0B.jpg" alt="High Crimes" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">High Crimes</span>
+      <span class="poster-item__meta">2002 ★ 6.3</span>
+      <span class="poster-item__anni">25y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/2185" target="_blank" rel="noopener" class="poster-item" data-rating="6.1" data-year="2002" data-anniversary="25">
+    <img src="https://image.tmdb.org/t/p/w92/h844gBztdYMLrroUen6qbsomrGx.jpg" alt="Big Trouble" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Big Trouble</span>
+      <span class="poster-item__meta">2002 ★ 6.1</span>
+      <span class="poster-item__anni">25y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/463752" target="_blank" rel="noopener" class="poster-item" data-rating="6.4" data-year="2017" data-anniversary="10">
+    <img src="https://image.tmdb.org/t/p/w92/prR2GMScKZaMJkQ2J4yv2YEorDY.jpg" alt="Monopoly (The Bank of Luck)" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Monopoly (The Bank of Luck)</span>
+      <span class="poster-item__meta">2017 ★ 6.4</span>
+      <span class="poster-item__anni">10y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/33251" target="_blank" rel="noopener" class="poster-item" data-rating="8.0" data-year="2002" data-anniversary="25">
+    <img src="https://image.tmdb.org/t/p/w92/rydddngVZNdOFEvdYpIxiY3A6om.jpg" alt="The Way Home" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Way Home</span>
+      <span class="poster-item__meta">2002 ★ 8.0</span>
+      <span class="poster-item__anni">25y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/55771" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/r32KWFc2jRItbAzHypGu9yHSfNs.jpg" alt="The Show Must Go On" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Show Must Go On</span>
+      <span class="poster-item__meta">2007 ★ 6.5</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/365414" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="1967" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/zWYX0uluAvWJFHlRUF4hapENYtq.jpg" alt="Shock Troops" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Shock Troops</span>
+      <span class="poster-item__meta">1967 ★ 6.7</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/64870" target="_blank" rel="noopener" class="poster-item" data-rating="5.5" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/flIGxUmpJ2jT0uZwc7gaFiVBuWV.jpg" alt="Moon Pilot" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Moon Pilot</span>
+      <span class="poster-item__meta">1962 ★ 5.5</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/45335" target="_blank" rel="noopener" class="poster-item" data-rating="5.0" data-year="1967" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/16arir1nxX0CgoS9KpNwNGob4Y6.jpg" alt="Double Trouble" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Double Trouble</span>
+      <span class="poster-item__meta">1967 ★ 5.0</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/258157" target="_blank" rel="noopener" class="poster-item" data-rating="3.7" data-year="1987" data-anniversary="40">
+    <img src="https://image.tmdb.org/t/p/w92/wjqgwl9PktkzQPTPNKdHafsoVTg.jpg" alt="Programmed to Kill" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Programmed to Kill</span>
+      <span class="poster-item__meta">1987 ★ 3.7</span>
+      <span class="poster-item__anni">40y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/29111" target="_blank" rel="noopener" class="poster-item" data-rating="5.3" data-year="1972" data-anniversary="55">
+    <img src="https://image.tmdb.org/t/p/w92/zzVCXhUDqWld6LxkRwzdWaBX9Hv.jpg" alt="Requiem for a Vampire" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Requiem for a Vampire</span>
+      <span class="poster-item__meta">1972 ★ 5.3</span>
+      <span class="poster-item__anni">55y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/129425" target="_blank" rel="noopener" class="poster-item" data-rating="5.6" data-year="1982" data-anniversary="45">
+    <img src="https://image.tmdb.org/t/p/w92/xIEeFXxMocWoPsIw3KCGqOj8EUr.jpg" alt="Todo es posible en Granada" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Todo es posible en Granada</span>
+      <span class="poster-item__meta">1982 ★ 5.6</span>
+      <span class="poster-item__anni">45y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/28061" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1957" data-anniversary="70">
+    <img src="https://image.tmdb.org/t/p/w92/1erlBZP5BKOvZJQ7yv0eDpKrY47.jpg" alt="Lust of the Vampire" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Lust of the Vampire</span>
+      <span class="poster-item__meta">1957 ★ 6.3</span>
+      <span class="poster-item__anni">70y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/82053" target="_blank" rel="noopener" class="poster-item" data-rating="5.7" data-year="1947" data-anniversary="80">
+    <img src="https://image.tmdb.org/t/p/w92/ldOLFlbk6ecRnANiozgh4nX4GrD.jpg" alt="Tarzan and the Huntress" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Tarzan and the Huntress</span>
+      <span class="poster-item__meta">1947 ★ 5.7</span>
+      <span class="poster-item__anni">80y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/62243" target="_blank" rel="noopener" class="poster-item" data-rating="7.1" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/6C97icuaWa5tnRAOzTJtMhCuarh.jpg" alt="His Days Are Numbered" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">His Days Are Numbered</span>
+      <span class="poster-item__meta">1962 ★ 7.1</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/159102" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/tMg7bhSrTiGbVtE56QEwbv0fL24.jpg" alt="Kiddin' the Kitten" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Kiddin' the Kitten</span>
+      <span class="poster-item__meta">1952 ★ 6.5</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
         </div>
       </section>
 
       <section class="day-section" id="2027-04-06">
-        <h2>Tuesday, April 6</h2>
-        <div class="movie-grid">
-        <div class="movie-card" data-rating="6.6" data-popularity="8.4" data-year="2022" data-anniversary="5" data-date="2027-04-06" data-title="Fantastic Beasts: The Secrets of Dumbledore" data-tmdb="338953">
-          <img src="https://image.tmdb.org/t/p/w342/3c5GNLB4yRSLBby0trHoA1DSQxQ.jpg" alt="Fantastic Beasts: The Secrets of Dumbledore" loading="lazy">
-          <div class="info">
-            <div class="title">Fantastic Beasts: The Secrets of Dumbledore</div>
-            <div class="meta">2022 &#9733; 6.6</div>
-            <div class="anniversary">5 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/338953" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/338953/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.7" data-popularity="4.5" data-year="2007" data-anniversary="20" data-date="2027-04-06" data-title="Planet Terror" data-tmdb="1992">
-          <img src="https://image.tmdb.org/t/p/w342/3705GxG0RN9XDV5y9IiXKYHw1fK.jpg" alt="Planet Terror" loading="lazy">
-          <div class="info">
-            <div class="title">Planet Terror</div>
-            <div class="meta">2007 &#9733; 6.7</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/1992" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/1992/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.7" data-popularity="4.0" data-year="2017" data-anniversary="10" data-date="2027-04-06" data-title="Going in Style" data-tmdb="353070">
-          <img src="https://image.tmdb.org/t/p/w342/4nfWsdsJfO5srRZgxiWC9xHub0W.jpg" alt="Going in Style" loading="lazy">
-          <div class="info">
-            <div class="title">Going in Style</div>
-            <div class="meta">2017 &#9733; 6.7</div>
-            <div class="anniversary">10 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/353070" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/353070/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="3.6" data-year="2017" data-anniversary="10" data-date="2027-04-06" data-title="Colossal" data-tmdb="339967">
-          <img src="https://image.tmdb.org/t/p/w342/4VOyofBd1pexblxtDZYtYIk7NI4.jpg" alt="Colossal" loading="lazy">
-          <div class="info">
-            <div class="title">Colossal</div>
-            <div class="meta">2017 &#9733; 6.3</div>
-            <div class="anniversary">10 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/339967" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/339967/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.0" data-popularity="1.5" data-year="2017" data-anniversary="10" data-date="2027-04-06" data-title="The Spacewalker" data-tmdb="440642">
-          <img src="https://image.tmdb.org/t/p/w342/hDNVRmrprxI9NQ0zc2Uu03p65Fw.jpg" alt="The Spacewalker" loading="lazy">
-          <div class="info">
-            <div class="title">The Spacewalker</div>
-            <div class="meta">2017 &#9733; 7.0</div>
-            <div class="anniversary">10 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/440642" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/440642/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.0" data-popularity="1.3" data-year="2007" data-anniversary="20" data-date="2027-04-06" data-title="Flight of the Living Dead" data-tmdb="16126">
-          <img src="https://image.tmdb.org/t/p/w342/ulLuFAX6MK8QRMrhJWPJ1G9qeVH.jpg" alt="Flight of the Living Dead" loading="lazy">
-          <div class="info">
-            <div class="title">Flight of the Living Dead</div>
-            <div class="meta">2007 &#9733; 5.0</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/16126" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/16126/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.6" data-popularity="1.2" data-year="2012" data-anniversary="15" data-date="2027-04-06" data-title="Detention" data-tmdb="68684">
-          <img src="https://image.tmdb.org/t/p/w342/wLuMoe16Z27DH96B2vg4FQNiAjj.jpg" alt="Detention" loading="lazy">
-          <div class="info">
-            <div class="title">Detention</div>
-            <div class="meta">2012 &#9733; 5.6</div>
-            <div class="anniversary">15 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/68684" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/68684/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.7" data-popularity="0.9" data-year="1977" data-anniversary="50" data-date="2027-04-06" data-title="Audrey Rose" data-tmdb="49126">
-          <img src="https://image.tmdb.org/t/p/w342/omtHuaCwKRX20x5R8xnqxWYq8Xp.jpg" alt="Audrey Rose" loading="lazy">
-          <div class="info">
-            <div class="title">Audrey Rose</div>
-            <div class="meta">1977 &#9733; 5.7</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/49126" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/49126/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.8" data-popularity="0.8" data-year="1962" data-anniversary="65" data-date="2027-04-06" data-title="The Broken Commandment" data-tmdb="125372">
-          <img src="https://image.tmdb.org/t/p/w342/hOBdbzjr4r1cBk8xUZmbOIRLKjw.jpg" alt="The Broken Commandment" loading="lazy">
-          <div class="info">
-            <div class="title">The Broken Commandment</div>
-            <div class="meta">1962 &#9733; 6.8</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/125372" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/125372/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.5" data-popularity="0.7" data-year="1997" data-anniversary="30" data-date="2027-04-06" data-title="The Inheritance" data-tmdb="46200">
-          <img src="https://image.tmdb.org/t/p/w342/kQIUZCJrePvref6WC4jV5HzKaz6.jpg" alt="The Inheritance" loading="lazy">
-          <div class="info">
-            <div class="title">The Inheritance</div>
-            <div class="meta">1997 &#9733; 5.5</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/46200" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/46200/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.0" data-popularity="0.7" data-year="1962" data-anniversary="65" data-date="2027-04-06" data-title="All Fall Down" data-tmdb="86240">
-          <img src="https://image.tmdb.org/t/p/w342/kY826mLuUOc8CXEyWSXiPUAb0xv.jpg" alt="All Fall Down" loading="lazy">
-          <div class="info">
-            <div class="title">All Fall Down</div>
-            <div class="meta">1962 &#9733; 6.0</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/86240" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/86240/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.4" data-popularity="0.5" data-year="1977" data-anniversary="50" data-date="2027-04-06" data-title="The Van" data-tmdb="31919">
-          <img src="https://image.tmdb.org/t/p/w342/vfahwduYFHzO5yf4rweyaadBe6x.jpg" alt="The Van" loading="lazy">
-          <div class="info">
-            <div class="title">The Van</div>
-            <div class="meta">1977 &#9733; 4.4</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/31919" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/31919/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.8" data-popularity="0.3" data-year="1977" data-anniversary="50" data-date="2027-04-06" data-title="The Easter Bunny Is Comin' to Town" data-tmdb="24101">
-          <img src="https://image.tmdb.org/t/p/w342/3WTJhh13zm3pTImkEXUNZ1WRqBe.jpg" alt="The Easter Bunny Is Comin' to Town" loading="lazy">
-          <div class="info">
-            <div class="title">The Easter Bunny Is Comin' to Town</div>
-            <div class="meta">1977 &#9733; 5.8</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/24101" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/24101/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.0" data-popularity="0.2" data-year="1977" data-anniversary="50" data-date="2027-04-06" data-title="Kakkientruppen" data-tmdb="127629">
-          <img src="https://image.tmdb.org/t/p/w342/6ylfO7SJFODOfv7vNigXurvh6b.jpg" alt="Kakkientruppen" loading="lazy">
-          <div class="info">
-            <div class="title">Kakkientruppen</div>
-            <div class="meta">1977 &#9733; 5.0</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/127629" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/127629/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
+        <h2>Tuesday, April 6 <span class="badge">14</span></h2>
+        <div class="poster-row"><a href="https://www.themoviedb.org/movie/338953" target="_blank" rel="noopener" class="poster-item" data-rating="6.6" data-year="2022" data-anniversary="5">
+    <img src="https://image.tmdb.org/t/p/w92/3c5GNLB4yRSLBby0trHoA1DSQxQ.jpg" alt="Fantastic Beasts: The Secrets of Dumbledore" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Fantastic Beasts: The Secrets of Dumbledore</span>
+      <span class="poster-item__meta">2022 ★ 6.6</span>
+      <span class="poster-item__anni">5y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/1992" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/3705GxG0RN9XDV5y9IiXKYHw1fK.jpg" alt="Planet Terror" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Planet Terror</span>
+      <span class="poster-item__meta">2007 ★ 6.7</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/353070" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="2017" data-anniversary="10">
+    <img src="https://image.tmdb.org/t/p/w92/4nfWsdsJfO5srRZgxiWC9xHub0W.jpg" alt="Going in Style" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Going in Style</span>
+      <span class="poster-item__meta">2017 ★ 6.7</span>
+      <span class="poster-item__anni">10y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/339967" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="2017" data-anniversary="10">
+    <img src="https://image.tmdb.org/t/p/w92/4VOyofBd1pexblxtDZYtYIk7NI4.jpg" alt="Colossal" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Colossal</span>
+      <span class="poster-item__meta">2017 ★ 6.3</span>
+      <span class="poster-item__anni">10y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/440642" target="_blank" rel="noopener" class="poster-item" data-rating="7.0" data-year="2017" data-anniversary="10">
+    <img src="https://image.tmdb.org/t/p/w92/hDNVRmrprxI9NQ0zc2Uu03p65Fw.jpg" alt="The Spacewalker" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Spacewalker</span>
+      <span class="poster-item__meta">2017 ★ 7.0</span>
+      <span class="poster-item__anni">10y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/16126" target="_blank" rel="noopener" class="poster-item" data-rating="5.0" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/ulLuFAX6MK8QRMrhJWPJ1G9qeVH.jpg" alt="Flight of the Living Dead" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Flight of the Living Dead</span>
+      <span class="poster-item__meta">2007 ★ 5.0</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/68684" target="_blank" rel="noopener" class="poster-item" data-rating="5.6" data-year="2012" data-anniversary="15">
+    <img src="https://image.tmdb.org/t/p/w92/wLuMoe16Z27DH96B2vg4FQNiAjj.jpg" alt="Detention" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Detention</span>
+      <span class="poster-item__meta">2012 ★ 5.6</span>
+      <span class="poster-item__anni">15y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/49126" target="_blank" rel="noopener" class="poster-item" data-rating="5.7" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/omtHuaCwKRX20x5R8xnqxWYq8Xp.jpg" alt="Audrey Rose" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Audrey Rose</span>
+      <span class="poster-item__meta">1977 ★ 5.7</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/125372" target="_blank" rel="noopener" class="poster-item" data-rating="6.8" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/hOBdbzjr4r1cBk8xUZmbOIRLKjw.jpg" alt="The Broken Commandment" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Broken Commandment</span>
+      <span class="poster-item__meta">1962 ★ 6.8</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/46200" target="_blank" rel="noopener" class="poster-item" data-rating="5.5" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/kQIUZCJrePvref6WC4jV5HzKaz6.jpg" alt="The Inheritance" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Inheritance</span>
+      <span class="poster-item__meta">1997 ★ 5.5</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/86240" target="_blank" rel="noopener" class="poster-item" data-rating="6.0" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/kY826mLuUOc8CXEyWSXiPUAb0xv.jpg" alt="All Fall Down" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">All Fall Down</span>
+      <span class="poster-item__meta">1962 ★ 6.0</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/31919" target="_blank" rel="noopener" class="poster-item" data-rating="4.4" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/vfahwduYFHzO5yf4rweyaadBe6x.jpg" alt="The Van" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Van</span>
+      <span class="poster-item__meta">1977 ★ 4.4</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/24101" target="_blank" rel="noopener" class="poster-item" data-rating="5.8" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/3WTJhh13zm3pTImkEXUNZ1WRqBe.jpg" alt="The Easter Bunny Is Comin' to Town" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Easter Bunny Is Comin' to Town</span>
+      <span class="poster-item__meta">1977 ★ 5.8</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/127629" target="_blank" rel="noopener" class="poster-item" data-rating="5.0" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/6ylfO7SJFODOfv7vNigXurvh6b.jpg" alt="Kakkientruppen" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Kakkientruppen</span>
+      <span class="poster-item__meta">1977 ★ 5.0</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
         </div>
       </section>
 
       <section class="day-section" id="2027-04-07">
-        <h2>Wednesday, April 7</h2>
-        <div class="movie-grid">
-        <div class="movie-card" data-rating="8.0" data-popularity="9.3" data-year="2017" data-anniversary="10" data-date="2027-04-07" data-title="Gifted" data-tmdb="400928">
-          <img src="https://image.tmdb.org/t/p/w342/9Ts7Vc4wLlpI9oox9mkVUE1tBHy.jpg" alt="Gifted" loading="lazy">
-          <div class="info">
-            <div class="title">Gifted</div>
-            <div class="meta">2017 &#9733; 8.0</div>
-            <div class="anniversary">10 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/400928" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/400928/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.0" data-popularity="6.6" data-year="2022" data-anniversary="5" data-date="2027-04-07" data-title="The Northman" data-tmdb="639933">
-          <img src="https://image.tmdb.org/t/p/w342/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg" alt="The Northman" loading="lazy">
-          <div class="info">
-            <div class="title">The Northman</div>
-            <div class="meta">2022 &#9733; 7.0</div>
-            <div class="anniversary">5 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/639933" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/639933/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="2.9" data-year="2002" data-anniversary="25" data-date="2027-04-07" data-title="Changing Lanes" data-tmdb="1537">
-          <img src="https://image.tmdb.org/t/p/w342/8wh9WzTKo5pJw3EgHYWA60W7Kbl.jpg" alt="Changing Lanes" loading="lazy">
-          <div class="info">
-            <div class="title">Changing Lanes</div>
-            <div class="meta">2002 &#9733; 6.3</div>
-            <div class="anniversary">25 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/1537" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/1537/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.4" data-popularity="2.4" data-year="2017" data-anniversary="10" data-date="2027-04-07" data-title="Night Is Short, Walk On Girl" data-tmdb="430214">
-          <img src="https://image.tmdb.org/t/p/w342/cDp45WZNqgAli3u4GTnUhsqFn5K.jpg" alt="Night Is Short, Walk On Girl" loading="lazy">
-          <div class="info">
-            <div class="title">Night Is Short, Walk On Girl</div>
-            <div class="meta">2017 &#9733; 7.4</div>
-            <div class="anniversary">10 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/430214" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/430214/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.9" data-popularity="2.4" data-year="1977" data-anniversary="50" data-date="2027-04-07" data-title="Demon Seed" data-tmdb="18775">
-          <img src="https://image.tmdb.org/t/p/w342/8rAbL1cI5TYB1RmXsPPHnLwnDsi.jpg" alt="Demon Seed" loading="lazy">
-          <div class="info">
-            <div class="title">Demon Seed</div>
-            <div class="meta">1977 &#9733; 5.9</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/18775" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/18775/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.8" data-popularity="2.3" data-year="2022" data-anniversary="5" data-date="2027-04-07" data-title="The Survivor" data-tmdb="606870">
-          <img src="https://image.tmdb.org/t/p/w342/oZWJ20tGWZ5xO9CrTCVavmDRy7J.jpg" alt="The Survivor" loading="lazy">
-          <div class="info">
-            <div class="title">The Survivor</div>
-            <div class="meta">2022 &#9733; 6.8</div>
-            <div class="anniversary">5 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/606870" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/606870/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.2" data-popularity="1.3" data-year="2012" data-anniversary="15" data-date="2027-04-07" data-title="SPEC: Heaven" data-tmdb="137936">
-          <img src="https://image.tmdb.org/t/p/w342/eTVEQcDuqlKQVzKEcIq7yLBemMb.jpg" alt="SPEC: Heaven" loading="lazy">
-          <div class="info">
-            <div class="title">SPEC: Heaven</div>
-            <div class="meta">2012 &#9733; 7.2</div>
-            <div class="anniversary">15 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/137936" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/137936/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="3.9" data-popularity="1.2" data-year="1977" data-anniversary="50" data-date="2027-04-07" data-title="Tintorera: Killer Shark" data-tmdb="81471">
-          <img src="https://image.tmdb.org/t/p/w342/gjukweJ6BuhZjwXI7w6ZnNrHdaS.jpg" alt="Tintorera: Killer Shark" loading="lazy">
-          <div class="info">
-            <div class="title">Tintorera: Killer Shark</div>
-            <div class="meta">1977 &#9733; 3.9</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/81471" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/81471/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.5" data-popularity="1.1" data-year="2007" data-anniversary="20" data-date="2027-04-07" data-title="Kaw" data-tmdb="39158">
-          <img src="https://image.tmdb.org/t/p/w342/lYfWo6bS9IX8rMIkTyDb1LN3GmD.jpg" alt="Kaw" loading="lazy">
-          <div class="info">
-            <div class="title">Kaw</div>
-            <div class="meta">2007 &#9733; 4.5</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/39158" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/39158/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.8" data-popularity="0.8" data-year="2007" data-anniversary="20" data-date="2027-04-07" data-title="The Sword of Alexander" data-tmdb="36177">
-          <img src="https://image.tmdb.org/t/p/w342/wsTKW8hkC0OzZKZH3SRvpmbx1KY.jpg" alt="The Sword of Alexander" loading="lazy">
-          <div class="info">
-            <div class="title">The Sword of Alexander</div>
-            <div class="meta">2007 &#9733; 5.8</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/36177" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/36177/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.1" data-popularity="0.7" data-year="1967" data-anniversary="60" data-date="2027-04-07" data-title="The Karate Killers" data-tmdb="6319">
-          <img src="https://image.tmdb.org/t/p/w342/t5noYUlgOZ5NGKSP5dIbbm8AWoy.jpg" alt="The Karate Killers" loading="lazy">
-          <div class="info">
-            <div class="title">The Karate Killers</div>
-            <div class="meta">1967 &#9733; 5.1</div>
-            <div class="anniversary">60 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/6319" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/6319/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.1" data-popularity="0.6" data-year="1972" data-anniversary="55" data-date="2027-04-07" data-title="Bawarchi" data-tmdb="60389">
-          <img src="https://image.tmdb.org/t/p/w342/34zBSGpu8MnUlIF74PcWfrZZAG1.jpg" alt="Bawarchi" loading="lazy">
-          <div class="info">
-            <div class="title">Bawarchi</div>
-            <div class="meta">1972 &#9733; 7.1</div>
-            <div class="anniversary">55 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/60389" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/60389/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.9" data-popularity="0.6" data-year="1982" data-anniversary="45" data-date="2027-04-07" data-title="Vieni avanti cretino" data-tmdb="37501">
-          <img src="https://image.tmdb.org/t/p/w342/h29az0oBHbYlf1MpHVPnjrEB2S7.jpg" alt="Vieni avanti cretino" loading="lazy">
-          <div class="info">
-            <div class="title">Vieni avanti cretino</div>
-            <div class="meta">1982 &#9733; 6.9</div>
-            <div class="anniversary">45 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/37501" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/37501/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.8" data-popularity="0.5" data-year="1992" data-anniversary="35" data-date="2027-04-07" data-title="Return to the Lost World" data-tmdb="50808">
-          <img src="https://image.tmdb.org/t/p/w342/qwmXy2tMIX0Jq7pc1P9MD3WNEsa.jpg" alt="Return to the Lost World" loading="lazy">
-          <div class="info">
-            <div class="title">Return to the Lost World</div>
-            <div class="meta">1992 &#9733; 5.8</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/50808" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/50808/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.7" data-popularity="0.4" data-year="1952" data-anniversary="75" data-date="2027-04-07" data-title="Jack and the Beanstalk" data-tmdb="18698">
-          <img src="https://image.tmdb.org/t/p/w342/psogkzcA2yOT0Tz669i0Lm1eZXM.jpg" alt="Jack and the Beanstalk" loading="lazy">
-          <div class="info">
-            <div class="title">Jack and the Beanstalk</div>
-            <div class="meta">1952 &#9733; 5.7</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/18698" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/18698/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.0" data-popularity="0.4" data-year="1967" data-anniversary="60" data-date="2027-04-07" data-title="The Oldest Profession" data-tmdb="103613">
-          <img src="https://image.tmdb.org/t/p/w342/gD8jlp7udSKqnty7YXB4ztXQFb1.jpg" alt="The Oldest Profession" loading="lazy">
-          <div class="info">
-            <div class="title">The Oldest Profession</div>
-            <div class="meta">1967 &#9733; 5.0</div>
-            <div class="anniversary">60 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/103613" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/103613/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.1" data-popularity="0.3" data-year="1962" data-anniversary="65" data-date="2027-04-07" data-title="Totò diabolicus" data-tmdb="56920">
-          <img src="https://image.tmdb.org/t/p/w342/eMFarI2PQTXbVBPhPzC3u8ydYGP.jpg" alt="Totò diabolicus" loading="lazy">
-          <div class="info">
-            <div class="title">Totò diabolicus</div>
-            <div class="meta">1962 &#9733; 7.1</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/56920" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/56920/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.2" data-popularity="0.3" data-year="1977" data-anniversary="50" data-date="2027-04-07" data-title="Mattie the Goose-Boy" data-tmdb="41061">
-          <img src="https://image.tmdb.org/t/p/w342/AlmnfwBhlknPMW79iHonFfEXekJ.jpg" alt="Mattie the Goose-Boy" loading="lazy">
-          <div class="info">
-            <div class="title">Mattie the Goose-Boy</div>
-            <div class="meta">1977 &#9733; 7.2</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/41061" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/41061/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.9" data-popularity="0.2" data-year="1967" data-anniversary="60" data-date="2027-04-07" data-title="Rock 'n' Rodent" data-tmdb="219576">
-          <img src="https://image.tmdb.org/t/p/w342/1qglMwjum8QWUk4OK4xEuC5GS4W.jpg" alt="Rock 'n' Rodent" loading="lazy">
-          <div class="info">
-            <div class="title">Rock 'n' Rodent</div>
-            <div class="meta">1967 &#9733; 5.9</div>
-            <div class="anniversary">60 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/219576" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/219576/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
+        <h2>Wednesday, April 7 <span class="badge">19</span></h2>
+        <div class="poster-row"><a href="https://www.themoviedb.org/movie/400928" target="_blank" rel="noopener" class="poster-item" data-rating="8.0" data-year="2017" data-anniversary="10">
+    <img src="https://image.tmdb.org/t/p/w92/9Ts7Vc4wLlpI9oox9mkVUE1tBHy.jpg" alt="Gifted" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Gifted</span>
+      <span class="poster-item__meta">2017 ★ 8.0</span>
+      <span class="poster-item__anni">10y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/639933" target="_blank" rel="noopener" class="poster-item" data-rating="7.0" data-year="2022" data-anniversary="5">
+    <img src="https://image.tmdb.org/t/p/w92/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg" alt="The Northman" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Northman</span>
+      <span class="poster-item__meta">2022 ★ 7.0</span>
+      <span class="poster-item__anni">5y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/1537" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="2002" data-anniversary="25">
+    <img src="https://image.tmdb.org/t/p/w92/8wh9WzTKo5pJw3EgHYWA60W7Kbl.jpg" alt="Changing Lanes" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Changing Lanes</span>
+      <span class="poster-item__meta">2002 ★ 6.3</span>
+      <span class="poster-item__anni">25y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/430214" target="_blank" rel="noopener" class="poster-item" data-rating="7.4" data-year="2017" data-anniversary="10">
+    <img src="https://image.tmdb.org/t/p/w92/cDp45WZNqgAli3u4GTnUhsqFn5K.jpg" alt="Night Is Short, Walk On Girl" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Night Is Short, Walk On Girl</span>
+      <span class="poster-item__meta">2017 ★ 7.4</span>
+      <span class="poster-item__anni">10y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/18775" target="_blank" rel="noopener" class="poster-item" data-rating="5.9" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/8rAbL1cI5TYB1RmXsPPHnLwnDsi.jpg" alt="Demon Seed" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Demon Seed</span>
+      <span class="poster-item__meta">1977 ★ 5.9</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/606870" target="_blank" rel="noopener" class="poster-item" data-rating="6.8" data-year="2022" data-anniversary="5">
+    <img src="https://image.tmdb.org/t/p/w92/oZWJ20tGWZ5xO9CrTCVavmDRy7J.jpg" alt="The Survivor" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Survivor</span>
+      <span class="poster-item__meta">2022 ★ 6.8</span>
+      <span class="poster-item__anni">5y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/137936" target="_blank" rel="noopener" class="poster-item" data-rating="7.2" data-year="2012" data-anniversary="15">
+    <img src="https://image.tmdb.org/t/p/w92/eTVEQcDuqlKQVzKEcIq7yLBemMb.jpg" alt="SPEC: Heaven" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">SPEC: Heaven</span>
+      <span class="poster-item__meta">2012 ★ 7.2</span>
+      <span class="poster-item__anni">15y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/81471" target="_blank" rel="noopener" class="poster-item" data-rating="3.9" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/gjukweJ6BuhZjwXI7w6ZnNrHdaS.jpg" alt="Tintorera: Killer Shark" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Tintorera: Killer Shark</span>
+      <span class="poster-item__meta">1977 ★ 3.9</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/39158" target="_blank" rel="noopener" class="poster-item" data-rating="4.5" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/lYfWo6bS9IX8rMIkTyDb1LN3GmD.jpg" alt="Kaw" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Kaw</span>
+      <span class="poster-item__meta">2007 ★ 4.5</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/36177" target="_blank" rel="noopener" class="poster-item" data-rating="5.8" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/wsTKW8hkC0OzZKZH3SRvpmbx1KY.jpg" alt="The Sword of Alexander" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Sword of Alexander</span>
+      <span class="poster-item__meta">2007 ★ 5.8</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/6319" target="_blank" rel="noopener" class="poster-item" data-rating="5.1" data-year="1967" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/t5noYUlgOZ5NGKSP5dIbbm8AWoy.jpg" alt="The Karate Killers" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Karate Killers</span>
+      <span class="poster-item__meta">1967 ★ 5.1</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/60389" target="_blank" rel="noopener" class="poster-item" data-rating="7.1" data-year="1972" data-anniversary="55">
+    <img src="https://image.tmdb.org/t/p/w92/34zBSGpu8MnUlIF74PcWfrZZAG1.jpg" alt="Bawarchi" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Bawarchi</span>
+      <span class="poster-item__meta">1972 ★ 7.1</span>
+      <span class="poster-item__anni">55y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/37501" target="_blank" rel="noopener" class="poster-item" data-rating="6.9" data-year="1982" data-anniversary="45">
+    <img src="https://image.tmdb.org/t/p/w92/h29az0oBHbYlf1MpHVPnjrEB2S7.jpg" alt="Vieni avanti cretino" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Vieni avanti cretino</span>
+      <span class="poster-item__meta">1982 ★ 6.9</span>
+      <span class="poster-item__anni">45y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/50808" target="_blank" rel="noopener" class="poster-item" data-rating="5.8" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/qwmXy2tMIX0Jq7pc1P9MD3WNEsa.jpg" alt="Return to the Lost World" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Return to the Lost World</span>
+      <span class="poster-item__meta">1992 ★ 5.8</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/18698" target="_blank" rel="noopener" class="poster-item" data-rating="5.7" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/psogkzcA2yOT0Tz669i0Lm1eZXM.jpg" alt="Jack and the Beanstalk" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Jack and the Beanstalk</span>
+      <span class="poster-item__meta">1952 ★ 5.7</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/103613" target="_blank" rel="noopener" class="poster-item" data-rating="5.0" data-year="1967" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/gD8jlp7udSKqnty7YXB4ztXQFb1.jpg" alt="The Oldest Profession" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Oldest Profession</span>
+      <span class="poster-item__meta">1967 ★ 5.0</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/56920" target="_blank" rel="noopener" class="poster-item" data-rating="7.1" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/eMFarI2PQTXbVBPhPzC3u8ydYGP.jpg" alt="Totò diabolicus" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Totò diabolicus</span>
+      <span class="poster-item__meta">1962 ★ 7.1</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/41061" target="_blank" rel="noopener" class="poster-item" data-rating="7.2" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/AlmnfwBhlknPMW79iHonFfEXekJ.jpg" alt="Mattie the Goose-Boy" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Mattie the Goose-Boy</span>
+      <span class="poster-item__meta">1977 ★ 7.2</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/219576" target="_blank" rel="noopener" class="poster-item" data-rating="5.9" data-year="1967" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/1qglMwjum8QWUk4OK4xEuC5GS4W.jpg" alt="Rock 'n' Rodent" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Rock 'n' Rodent</span>
+      <span class="poster-item__meta">1967 ★ 5.9</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
         </div>
       </section>
 
       <section class="day-section" id="2027-04-08">
-        <h2>Thursday, April 8</h2>
-        <div class="movie-grid">
-        <div class="movie-card" data-rating="6.6" data-popularity="3.3" data-year="2022" data-anniversary="5" data-date="2027-04-08" data-title="Yaksha: Ruthless Operations" data-tmdb="606402">
-          <img src="https://image.tmdb.org/t/p/w342/whZ8OkI7W8cBOmtoiFyb72Ekt3U.jpg" alt="Yaksha: Ruthless Operations" loading="lazy">
-          <div class="info">
-            <div class="title">Yaksha: Ruthless Operations</div>
-            <div class="meta">2022 &#9733; 6.6</div>
-            <div class="anniversary">5 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/606402" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/606402/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.0" data-popularity="2.2" data-year="2022" data-anniversary="5" data-date="2027-04-08" data-title="All the Old Knives" data-tmdb="294793">
-          <img src="https://image.tmdb.org/t/p/w342/g4tMniKxol1TBJrHlAtiDjjlx4Q.jpg" alt="All the Old Knives" loading="lazy">
-          <div class="info">
-            <div class="title">All the Old Knives</div>
-            <div class="meta">2022 &#9733; 6.0</div>
-            <div class="anniversary">5 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/294793" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/294793/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="2.1" data-year="1977" data-anniversary="50" data-date="2027-04-08" data-title="Rabid" data-tmdb="29437">
-          <img src="https://image.tmdb.org/t/p/w342/gIsuIWnvDozlQP4ya6OZEXqDecj.jpg" alt="Rabid" loading="lazy">
-          <div class="info">
-            <div class="title">Rabid</div>
-            <div class="meta">1977 &#9733; 6.3</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/29437" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/29437/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.0" data-popularity="1.9" data-year="2022" data-anniversary="5" data-date="2027-04-08" data-title="Agent Game" data-tmdb="872542">
-          <img src="https://image.tmdb.org/t/p/w342/yG05YYiKHNtbsqFUfrmCxGQj5zc.jpg" alt="Agent Game" loading="lazy">
-          <div class="info">
-            <div class="title">Agent Game</div>
-            <div class="meta">2022 &#9733; 5.0</div>
-            <div class="anniversary">5 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/872542" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/872542/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.0" data-popularity="1.7" data-year="1977" data-anniversary="50" data-date="2027-04-08" data-title="Nuns That Bite" data-tmdb="107425">
-          <img src="https://image.tmdb.org/t/p/w342/dLIX2Tcfh4z3TVUPNjQj8y1prWe.jpg" alt="Nuns That Bite" loading="lazy">
-          <div class="info">
-            <div class="title">Nuns That Bite</div>
-            <div class="meta">1977 &#9733; 6.0</div>
-            <div class="anniversary">50 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/107425" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/107425/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.8" data-popularity="0.9" data-year="1962" data-anniversary="65" data-date="2027-04-08" data-title="Foundry Town" data-tmdb="49570">
-          <img src="https://image.tmdb.org/t/p/w342/7NJlzNwVbYU6Ro7oJIcKAPs9gHj.jpg" alt="Foundry Town" loading="lazy">
-          <div class="info">
-            <div class="title">Foundry Town</div>
-            <div class="meta">1962 &#9733; 7.8</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/49570" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/49570/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.4" data-popularity="0.6" data-year="1982" data-anniversary="45" data-date="2027-04-08" data-title="Starstruck" data-tmdb="49409">
-          <img src="https://image.tmdb.org/t/p/w342/dDDvwdJLzxCYpC7Y8tS4sdF0zMh.jpg" alt="Starstruck" loading="lazy">
-          <div class="info">
-            <div class="title">Starstruck</div>
-            <div class="meta">1982 &#9733; 5.4</div>
-            <div class="anniversary">45 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/49409" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/49409/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.2" data-popularity="0.4" data-year="1942" data-anniversary="85" data-date="2027-04-08" data-title="A Pilot Returns" data-tmdb="58532">
-          <img src="https://image.tmdb.org/t/p/w342/j9AaPmpdDq37usuoXkcPUoIcAM0.jpg" alt="A Pilot Returns" loading="lazy">
-          <div class="info">
-            <div class="title">A Pilot Returns</div>
-            <div class="meta">1942 &#9733; 5.2</div>
-            <div class="anniversary">85 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/58532" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/58532/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.4" data-popularity="0.4" data-year="1932" data-anniversary="95" data-date="2027-04-08" data-title="This Is the Night" data-tmdb="81038">
-          <img src="https://image.tmdb.org/t/p/w342/dIQchTDdKyukCVE6IxBxHtr8rRA.jpg" alt="This Is the Night" loading="lazy">
-          <div class="info">
-            <div class="title">This Is the Night</div>
-            <div class="meta">1932 &#9733; 5.4</div>
-            <div class="anniversary">95 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/81038" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/81038/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.3" data-popularity="0.4" data-year="1982" data-anniversary="45" data-date="2027-04-08" data-title="Last Days of the Victim" data-tmdb="265626">
-          <img src="https://image.tmdb.org/t/p/w342/ctRPbhNzihncgtrQpOHAwNLkLGi.jpg" alt="Last Days of the Victim" loading="lazy">
-          <div class="info">
-            <div class="title">Last Days of the Victim</div>
-            <div class="meta">1982 &#9733; 7.3</div>
-            <div class="anniversary">45 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/265626" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/265626/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.3" data-popularity="0.3" data-year="1952" data-anniversary="75" data-date="2027-04-08" data-title="Totó in color" data-tmdb="63178">
-          <img src="https://image.tmdb.org/t/p/w342/wIq9Xo3pyBR3qoHYccKDz3HERpB.jpg" alt="Totó in color" loading="lazy">
-          <div class="info">
-            <div class="title">Totó in color</div>
-            <div class="meta">1952 &#9733; 7.3</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/63178" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/63178/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.8" data-popularity="0.3" data-year="1952" data-anniversary="75" data-date="2027-04-08" data-title="My Son John" data-tmdb="52991">
-          <img src="https://image.tmdb.org/t/p/w342/ljWPm1ELgpHXxvidOFQhff0cD8O.jpg" alt="My Son John" loading="lazy">
-          <div class="info">
-            <div class="title">My Son John</div>
-            <div class="meta">1952 &#9733; 5.8</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/52991" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/52991/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.4" data-popularity="0.2" data-year="1967" data-anniversary="60" data-date="2027-04-08" data-title="Flashman" data-tmdb="106925">
-          <img src="https://image.tmdb.org/t/p/w342/8Tqvl75Bzijfesc2itiYOlqzBCt.jpg" alt="Flashman" loading="lazy">
-          <div class="info">
-            <div class="title">Flashman</div>
-            <div class="meta">1967 &#9733; 5.4</div>
-            <div class="anniversary">60 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/106925" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/106925/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
+        <h2>Thursday, April 8 <span class="badge">13</span></h2>
+        <div class="poster-row"><a href="https://www.themoviedb.org/movie/606402" target="_blank" rel="noopener" class="poster-item" data-rating="6.6" data-year="2022" data-anniversary="5">
+    <img src="https://image.tmdb.org/t/p/w92/whZ8OkI7W8cBOmtoiFyb72Ekt3U.jpg" alt="Yaksha: Ruthless Operations" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Yaksha: Ruthless Operations</span>
+      <span class="poster-item__meta">2022 ★ 6.6</span>
+      <span class="poster-item__anni">5y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/294793" target="_blank" rel="noopener" class="poster-item" data-rating="6.0" data-year="2022" data-anniversary="5">
+    <img src="https://image.tmdb.org/t/p/w92/g4tMniKxol1TBJrHlAtiDjjlx4Q.jpg" alt="All the Old Knives" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">All the Old Knives</span>
+      <span class="poster-item__meta">2022 ★ 6.0</span>
+      <span class="poster-item__anni">5y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/29437" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/gIsuIWnvDozlQP4ya6OZEXqDecj.jpg" alt="Rabid" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Rabid</span>
+      <span class="poster-item__meta">1977 ★ 6.3</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/872542" target="_blank" rel="noopener" class="poster-item" data-rating="5.0" data-year="2022" data-anniversary="5">
+    <img src="https://image.tmdb.org/t/p/w92/yG05YYiKHNtbsqFUfrmCxGQj5zc.jpg" alt="Agent Game" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Agent Game</span>
+      <span class="poster-item__meta">2022 ★ 5.0</span>
+      <span class="poster-item__anni">5y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/107425" target="_blank" rel="noopener" class="poster-item" data-rating="6.0" data-year="1977" data-anniversary="50">
+    <img src="https://image.tmdb.org/t/p/w92/dLIX2Tcfh4z3TVUPNjQj8y1prWe.jpg" alt="Nuns That Bite" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Nuns That Bite</span>
+      <span class="poster-item__meta">1977 ★ 6.0</span>
+      <span class="poster-item__anni">50y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/49570" target="_blank" rel="noopener" class="poster-item" data-rating="7.8" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/7NJlzNwVbYU6Ro7oJIcKAPs9gHj.jpg" alt="Foundry Town" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Foundry Town</span>
+      <span class="poster-item__meta">1962 ★ 7.8</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/49409" target="_blank" rel="noopener" class="poster-item" data-rating="5.4" data-year="1982" data-anniversary="45">
+    <img src="https://image.tmdb.org/t/p/w92/dDDvwdJLzxCYpC7Y8tS4sdF0zMh.jpg" alt="Starstruck" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Starstruck</span>
+      <span class="poster-item__meta">1982 ★ 5.4</span>
+      <span class="poster-item__anni">45y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/58532" target="_blank" rel="noopener" class="poster-item" data-rating="5.2" data-year="1942" data-anniversary="85">
+    <img src="https://image.tmdb.org/t/p/w92/j9AaPmpdDq37usuoXkcPUoIcAM0.jpg" alt="A Pilot Returns" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">A Pilot Returns</span>
+      <span class="poster-item__meta">1942 ★ 5.2</span>
+      <span class="poster-item__anni">85y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/81038" target="_blank" rel="noopener" class="poster-item" data-rating="5.4" data-year="1932" data-anniversary="95">
+    <img src="https://image.tmdb.org/t/p/w92/dIQchTDdKyukCVE6IxBxHtr8rRA.jpg" alt="This Is the Night" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">This Is the Night</span>
+      <span class="poster-item__meta">1932 ★ 5.4</span>
+      <span class="poster-item__anni">95y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/265626" target="_blank" rel="noopener" class="poster-item" data-rating="7.3" data-year="1982" data-anniversary="45">
+    <img src="https://image.tmdb.org/t/p/w92/ctRPbhNzihncgtrQpOHAwNLkLGi.jpg" alt="Last Days of the Victim" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Last Days of the Victim</span>
+      <span class="poster-item__meta">1982 ★ 7.3</span>
+      <span class="poster-item__anni">45y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/63178" target="_blank" rel="noopener" class="poster-item" data-rating="7.3" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/wIq9Xo3pyBR3qoHYccKDz3HERpB.jpg" alt="Totó in color" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Totó in color</span>
+      <span class="poster-item__meta">1952 ★ 7.3</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/52991" target="_blank" rel="noopener" class="poster-item" data-rating="5.8" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/ljWPm1ELgpHXxvidOFQhff0cD8O.jpg" alt="My Son John" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">My Son John</span>
+      <span class="poster-item__meta">1952 ★ 5.8</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/106925" target="_blank" rel="noopener" class="poster-item" data-rating="5.4" data-year="1967" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/8Tqvl75Bzijfesc2itiYOlqzBCt.jpg" alt="Flashman" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Flashman</span>
+      <span class="poster-item__meta">1967 ★ 5.4</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
         </div>
       </section>
 
       <section class="day-section" id="2027-04-09">
-        <h2>Friday, April 9</h2>
-        <div class="movie-grid">
-        <div class="movie-card" data-rating="6.8" data-popularity="4.7" data-year="1992" data-anniversary="35" data-date="2027-04-09" data-title="Fight Back to School 2" data-tmdb="53165">
-          <img src="https://image.tmdb.org/t/p/w342/vEszZw7fdL8Qch9TBrnEdDVtTNS.jpg" alt="Fight Back to School 2" loading="lazy">
-          <div class="info">
-            <div class="title">Fight Back to School 2</div>
-            <div class="meta">1992 &#9733; 6.8</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/53165" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/53165/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.4" data-popularity="3.1" data-year="1932" data-anniversary="95" data-date="2027-04-09" data-title="Scarface" data-tmdb="877">
-          <img src="https://image.tmdb.org/t/p/w342/y4E5oRiHMTFkEB12IIcpbKbKzDW.jpg" alt="Scarface" loading="lazy">
-          <div class="info">
-            <div class="title">Scarface</div>
-            <div class="meta">1932 &#9733; 7.4</div>
-            <div class="anniversary">95 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/877" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/877/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.4" data-popularity="1.2" data-year="1982" data-anniversary="45" data-date="2027-04-09" data-title="Burst City" data-tmdb="40110">
-          <img src="https://image.tmdb.org/t/p/w342/bZ21OljXwIo0IjXXtObeK1F7856.jpg" alt="Burst City" loading="lazy">
-          <div class="info">
-            <div class="title">Burst City</div>
-            <div class="meta">1982 &#9733; 6.4</div>
-            <div class="anniversary">45 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/40110" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/40110/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="3.5" data-popularity="0.8" data-year="1987" data-anniversary="40" data-date="2027-04-09" data-title="Thong Girls" data-tmdb="300492">
-          <img src="https://image.tmdb.org/t/p/w342/xAYlBsDm9nM4xOYKrN0eAum3JYZ.jpg" alt="Thong Girls" loading="lazy">
-          <div class="info">
-            <div class="title">Thong Girls</div>
-            <div class="meta">1987 &#9733; 3.5</div>
-            <div class="anniversary">40 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/300492" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/300492/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.6" data-popularity="0.7" data-year="1997" data-anniversary="30" data-date="2027-04-09" data-title="A Moment of Innocence" data-tmdb="43976">
-          <img src="https://image.tmdb.org/t/p/w342/jBgImBSOFUJg8voD7xbLqS1s1tf.jpg" alt="A Moment of Innocence" loading="lazy">
-          <div class="info">
-            <div class="title">A Moment of Innocence</div>
-            <div class="meta">1997 &#9733; 7.6</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/43976" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/43976/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="0.7" data-year="1982" data-anniversary="45" data-date="2027-04-09" data-title="Savannah Smiles" data-tmdb="17132">
-          <img src="https://image.tmdb.org/t/p/w342/xSR2Qss4bpcpeKq1JXov9C7mpp9.jpg" alt="Savannah Smiles" loading="lazy">
-          <div class="info">
-            <div class="title">Savannah Smiles</div>
-            <div class="meta">1982 &#9733; 6.5</div>
-            <div class="anniversary">45 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/17132" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/17132/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.4" data-popularity="0.5" data-year="1992" data-anniversary="35" data-date="2027-04-09" data-title="A Place in the World" data-tmdb="32635">
-          <img src="https://image.tmdb.org/t/p/w342/fm7OklHHGq8wYHWSZsVwtfv8CLx.jpg" alt="A Place in the World" loading="lazy">
-          <div class="info">
-            <div class="title">A Place in the World</div>
-            <div class="meta">1992 &#9733; 7.4</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/32635" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/32635/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.7" data-popularity="0.4" data-year="1957" data-anniversary="70" data-date="2027-04-09" data-title="The Smallest Show on Earth" data-tmdb="35185">
-          <img src="https://image.tmdb.org/t/p/w342/epQZGlatIZvtJPAsfLJ8jOxFBNg.jpg" alt="The Smallest Show on Earth" loading="lazy">
-          <div class="info">
-            <div class="title">The Smallest Show on Earth</div>
-            <div class="meta">1957 &#9733; 6.7</div>
-            <div class="anniversary">70 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/35185" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/35185/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.7" data-popularity="0.4" data-year="1972" data-anniversary="55" data-date="2027-04-09" data-title="Tomorrow" data-tmdb="83135">
-          <img src="https://image.tmdb.org/t/p/w342/sq43h42ZATUMaJzRiLYZQMYnfVQ.jpg" alt="Tomorrow" loading="lazy">
-          <div class="info">
-            <div class="title">Tomorrow</div>
-            <div class="meta">1972 &#9733; 6.7</div>
-            <div class="anniversary">55 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/83135" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/83135/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.6" data-popularity="0.2" data-year="1937" data-anniversary="90" data-date="2027-04-09" data-title="She Was an Acrobat's Daughter" data-tmdb="100357">
-          <img src="https://image.tmdb.org/t/p/w342/nB1zAsYmHZAH7XC43Z1rkLfrj64.jpg" alt="She Was an Acrobat's Daughter" loading="lazy">
-          <div class="info">
-            <div class="title">She Was an Acrobat's Daughter</div>
-            <div class="meta">1937 &#9733; 5.6</div>
-            <div class="anniversary">90 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/100357" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/100357/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
+        <h2>Friday, April 9 <span class="badge">10</span></h2>
+        <div class="poster-row"><a href="https://www.themoviedb.org/movie/53165" target="_blank" rel="noopener" class="poster-item" data-rating="6.8" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/vEszZw7fdL8Qch9TBrnEdDVtTNS.jpg" alt="Fight Back to School 2" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Fight Back to School 2</span>
+      <span class="poster-item__meta">1992 ★ 6.8</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/877" target="_blank" rel="noopener" class="poster-item" data-rating="7.4" data-year="1932" data-anniversary="95">
+    <img src="https://image.tmdb.org/t/p/w92/y4E5oRiHMTFkEB12IIcpbKbKzDW.jpg" alt="Scarface" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Scarface</span>
+      <span class="poster-item__meta">1932 ★ 7.4</span>
+      <span class="poster-item__anni">95y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/40110" target="_blank" rel="noopener" class="poster-item" data-rating="6.4" data-year="1982" data-anniversary="45">
+    <img src="https://image.tmdb.org/t/p/w92/bZ21OljXwIo0IjXXtObeK1F7856.jpg" alt="Burst City" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Burst City</span>
+      <span class="poster-item__meta">1982 ★ 6.4</span>
+      <span class="poster-item__anni">45y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/300492" target="_blank" rel="noopener" class="poster-item" data-rating="3.5" data-year="1987" data-anniversary="40">
+    <img src="https://image.tmdb.org/t/p/w92/xAYlBsDm9nM4xOYKrN0eAum3JYZ.jpg" alt="Thong Girls" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Thong Girls</span>
+      <span class="poster-item__meta">1987 ★ 3.5</span>
+      <span class="poster-item__anni">40y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/43976" target="_blank" rel="noopener" class="poster-item" data-rating="7.6" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/jBgImBSOFUJg8voD7xbLqS1s1tf.jpg" alt="A Moment of Innocence" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">A Moment of Innocence</span>
+      <span class="poster-item__meta">1997 ★ 7.6</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/17132" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="1982" data-anniversary="45">
+    <img src="https://image.tmdb.org/t/p/w92/xSR2Qss4bpcpeKq1JXov9C7mpp9.jpg" alt="Savannah Smiles" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Savannah Smiles</span>
+      <span class="poster-item__meta">1982 ★ 6.5</span>
+      <span class="poster-item__anni">45y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/32635" target="_blank" rel="noopener" class="poster-item" data-rating="7.4" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/fm7OklHHGq8wYHWSZsVwtfv8CLx.jpg" alt="A Place in the World" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">A Place in the World</span>
+      <span class="poster-item__meta">1992 ★ 7.4</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/35185" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="1957" data-anniversary="70">
+    <img src="https://image.tmdb.org/t/p/w92/epQZGlatIZvtJPAsfLJ8jOxFBNg.jpg" alt="The Smallest Show on Earth" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Smallest Show on Earth</span>
+      <span class="poster-item__meta">1957 ★ 6.7</span>
+      <span class="poster-item__anni">70y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/83135" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="1972" data-anniversary="55">
+    <img src="https://image.tmdb.org/t/p/w92/sq43h42ZATUMaJzRiLYZQMYnfVQ.jpg" alt="Tomorrow" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Tomorrow</span>
+      <span class="poster-item__meta">1972 ★ 6.7</span>
+      <span class="poster-item__anni">55y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/100357" target="_blank" rel="noopener" class="poster-item" data-rating="5.6" data-year="1937" data-anniversary="90">
+    <img src="https://image.tmdb.org/t/p/w92/nB1zAsYmHZAH7XC43Z1rkLfrj64.jpg" alt="She Was an Acrobat's Daughter" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">She Was an Acrobat's Daughter</span>
+      <span class="poster-item__meta">1937 ★ 5.6</span>
+      <span class="poster-item__anni">90y</span>
+    </div>
+  </a>
         </div>
       </section>
 
       <section class="day-section" id="2027-04-10">
-        <h2>Saturday, April 10</h2>
-        <div class="movie-grid">
-        <div class="movie-card" data-rating="8.6" data-popularity="24.5" data-year="1957" data-anniversary="70" data-date="2027-04-10" data-title="12 Angry Men" data-tmdb="389">
-          <img src="https://image.tmdb.org/t/p/w342/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg" alt="12 Angry Men" loading="lazy">
-          <div class="info">
-            <div class="title">12 Angry Men</div>
-            <div class="meta">1957 &#9733; 8.6</div>
-            <div class="anniversary">70 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/389" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/389/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="8.1" data-popularity="6.8" data-year="1952" data-anniversary="75" data-date="2027-04-10" data-title="Singin' in the Rain" data-tmdb="872">
-          <img src="https://image.tmdb.org/t/p/w342/w03EiJVHP8Un77boQeE7hg9DVdU.jpg" alt="Singin' in the Rain" loading="lazy">
-          <div class="info">
-            <div class="title">Singin' in the Rain</div>
-            <div class="meta">1952 &#9733; 8.1</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/872" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/872/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.1" data-popularity="4.8" data-year="1992" data-anniversary="35" data-date="2027-04-10" data-title="Sleepwalkers" data-tmdb="11428">
-          <img src="https://image.tmdb.org/t/p/w342/iiwplv5pET2HgMog6otunohIiSr.jpg" alt="Sleepwalkers" loading="lazy">
-          <div class="info">
-            <div class="title">Sleepwalkers</div>
-            <div class="meta">1992 &#9733; 6.1</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/11428" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/11428/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.4" data-popularity="3.3" data-year="1992" data-anniversary="35" data-date="2027-04-10" data-title="FernGully: The Last Rainforest" data-tmdb="13225">
-          <img src="https://image.tmdb.org/t/p/w342/Z4XMgqIY6yT6QpoBISIlHzh8ol.jpg" alt="FernGully: The Last Rainforest" loading="lazy">
-          <div class="info">
-            <div class="title">FernGully: The Last Rainforest</div>
-            <div class="meta">1992 &#9733; 6.4</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/13225" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/13225/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="2.3" data-year="1987" data-anniversary="40" data-date="2027-04-10" data-title="The Secret of My Success" data-tmdb="10021">
-          <img src="https://image.tmdb.org/t/p/w342/o657RdsSMVFNGWF8qH1gwZqLWzb.jpg" alt="The Secret of My Success" loading="lazy">
-          <div class="info">
-            <div class="title">The Secret of My Success</div>
-            <div class="meta">1987 &#9733; 6.5</div>
-            <div class="anniversary">40 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/10021" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/10021/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.4" data-popularity="2.2" data-year="2007" data-anniversary="20" data-date="2027-04-10" data-title="The Breastford Wives" data-tmdb="25493">
-          <img src="https://image.tmdb.org/t/p/w342/tEx2073cwxiN9niVVEvaZikbTMB.jpg" alt="The Breastford Wives" loading="lazy">
-          <div class="info">
-            <div class="title">The Breastford Wives</div>
-            <div class="meta">2007 &#9733; 4.4</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/25493" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/25493/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.7" data-popularity="1.8" data-year="1992" data-anniversary="35" data-date="2027-04-10" data-title="Newsies" data-tmdb="15300">
-          <img src="https://image.tmdb.org/t/p/w342/8ykmCMHzkRSuJucPYeqGA2ampbp.jpg" alt="Newsies" loading="lazy">
-          <div class="info">
-            <div class="title">Newsies</div>
-            <div class="meta">1992 &#9733; 6.7</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/15300" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/15300/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.8" data-popularity="1.0" data-year="2002" data-anniversary="25" data-date="2027-04-10" data-title="Dead Weight" data-tmdb="18457">
-          <img src="https://image.tmdb.org/t/p/w342/hlbQnAfvGJxKpDqstKsal6tuoDb.jpg" alt="Dead Weight" loading="lazy">
-          <div class="info">
-            <div class="title">Dead Weight</div>
-            <div class="meta">2002 &#9733; 5.8</div>
-            <div class="anniversary">25 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/18457" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/18457/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.6" data-popularity="1.0" data-year="1937" data-anniversary="90" data-date="2027-04-10" data-title="Marked Woman" data-tmdb="25563">
-          <img src="https://image.tmdb.org/t/p/w342/rJHNkbEnyjQUl8DXWxk127hNEhD.jpg" alt="Marked Woman" loading="lazy">
-          <div class="info">
-            <div class="title">Marked Woman</div>
-            <div class="meta">1937 &#9733; 6.6</div>
-            <div class="anniversary">90 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/25563" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/25563/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.1" data-popularity="1.0" data-year="1997" data-anniversary="30" data-date="2027-04-10" data-title="The Castle" data-tmdb="13852">
-          <img src="https://image.tmdb.org/t/p/w342/3QKTPz9gpIIt9Po091LfG0CASfk.jpg" alt="The Castle" loading="lazy">
-          <div class="info">
-            <div class="title">The Castle</div>
-            <div class="meta">1997 &#9733; 7.1</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/13852" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/13852/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.3" data-popularity="0.8" data-year="1997" data-anniversary="30" data-date="2027-04-10" data-title="Arunachalam" data-tmdb="66245">
-          <img src="https://image.tmdb.org/t/p/w342/vplqDhbUk5GMPUosMuQy91NePxv.jpg" alt="Arunachalam" loading="lazy">
-          <div class="info">
-            <div class="title">Arunachalam</div>
-            <div class="meta">1997 &#9733; 7.3</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/66245" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/66245/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="0.7" data-year="1952" data-anniversary="75" data-date="2027-04-10" data-title="Okuni and Gohei" data-tmdb="47101">
-          <img src="https://image.tmdb.org/t/p/w342/sCJd2vkp5M3BybiVfZtStO8MaSQ.jpg" alt="Okuni and Gohei" loading="lazy">
-          <div class="info">
-            <div class="title">Okuni and Gohei</div>
-            <div class="meta">1952 &#9733; 6.5</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/47101" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/47101/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.2" data-popularity="0.6" data-year="1972" data-anniversary="55" data-date="2027-04-10" data-title="Tombs of the Blind Dead" data-tmdb="37601">
-          <img src="https://image.tmdb.org/t/p/w342/8JGJojd01EHKuKvYsgZ1aPCrZfS.jpg" alt="Tombs of the Blind Dead" loading="lazy">
-          <div class="info">
-            <div class="title">Tombs of the Blind Dead</div>
-            <div class="meta">1972 &#9733; 6.2</div>
-            <div class="anniversary">55 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/37601" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/37601/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.4" data-popularity="0.6" data-year="1987" data-anniversary="40" data-date="2027-04-10" data-title="Silent Night, Deadly Night Part 2" data-tmdb="50719">
-          <img src="https://image.tmdb.org/t/p/w342/bg2wBjg5zNoVxZnt7RarVQBxUuj.jpg" alt="Silent Night, Deadly Night Part 2" loading="lazy">
-          <div class="info">
-            <div class="title">Silent Night, Deadly Night Part 2</div>
-            <div class="meta">1987 &#9733; 4.4</div>
-            <div class="anniversary">40 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/50719" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/50719/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="0.6" data-year="1952" data-anniversary="75" data-date="2027-04-10" data-title="Rancho Notorious" data-tmdb="28894">
-          <img src="https://image.tmdb.org/t/p/w342/nQnO8hMViqSriSGLnYWm14iMykb.jpg" alt="Rancho Notorious" loading="lazy">
-          <div class="info">
-            <div class="title">Rancho Notorious</div>
-            <div class="meta">1952 &#9733; 6.5</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/28894" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/28894/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.6" data-popularity="0.5" data-year="1992" data-anniversary="35" data-date="2027-04-10" data-title="The Stolen Children" data-tmdb="47714">
-          <img src="https://image.tmdb.org/t/p/w342/fkFYNR4iCz5n1j5Drf0jejKmNVb.jpg" alt="The Stolen Children" loading="lazy">
-          <div class="info">
-            <div class="title">The Stolen Children</div>
-            <div class="meta">1992 &#9733; 7.6</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/47714" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/47714/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.7" data-popularity="0.5" data-year="1992" data-anniversary="35" data-date="2027-04-10" data-title="La negra Tomasa" data-tmdb="392288">
-          <img src="https://image.tmdb.org/t/p/w342/tlSWqP2y6HhCfcXj72v4xTDOWTG.jpg" alt="La negra Tomasa" loading="lazy">
-          <div class="info">
-            <div class="title">La negra Tomasa</div>
-            <div class="meta">1992 &#9733; 6.7</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/392288" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/392288/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.9" data-popularity="0.5" data-year="1987" data-anniversary="40" data-date="2027-04-10" data-title="Three for the Road" data-tmdb="116064">
-          <img src="https://image.tmdb.org/t/p/w342/nimPeNINKgYaUtiXv7veOzoPiYL.jpg" alt="Three for the Road" loading="lazy">
-          <div class="info">
-            <div class="title">Three for the Road</div>
-            <div class="meta">1987 &#9733; 5.9</div>
-            <div class="anniversary">40 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/116064" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/116064/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.4" data-popularity="0.4" data-year="1947" data-anniversary="80" data-date="2027-04-10" data-title="Fear in the Night" data-tmdb="35401">
-          <img src="https://image.tmdb.org/t/p/w342/1aNGOSWDnIrQY2aZK1nkD87WiEt.jpg" alt="Fear in the Night" loading="lazy">
-          <div class="info">
-            <div class="title">Fear in the Night</div>
-            <div class="meta">1947 &#9733; 5.4</div>
-            <div class="anniversary">80 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/35401" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/35401/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.2" data-popularity="0.4" data-year="1942" data-anniversary="85" data-date="2027-04-10" data-title="Donald's Snow Fight" data-tmdb="55461">
-          <img src="https://image.tmdb.org/t/p/w342/x1E7g9QiFjvXCQociAxxb4vBELS.jpg" alt="Donald's Snow Fight" loading="lazy">
-          <div class="info">
-            <div class="title">Donald's Snow Fight</div>
-            <div class="meta">1942 &#9733; 7.2</div>
-            <div class="anniversary">85 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/55461" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/55461/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.1" data-popularity="0.3" data-year="1957" data-anniversary="70" data-date="2027-04-10" data-title="Three Make a Pair" data-tmdb="66440">
-          <img src="https://image.tmdb.org/t/p/w342/4kF1F7FKroVl22QUSrO7qCVPexP.jpg" alt="Three Make a Pair" loading="lazy">
-          <div class="info">
-            <div class="title">Three Make a Pair</div>
-            <div class="meta">1957 &#9733; 5.1</div>
-            <div class="anniversary">70 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/66440" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/66440/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.4" data-popularity="0.3" data-year="1952" data-anniversary="75" data-date="2027-04-10" data-title="Two Cents Worth of Hope" data-tmdb="117478">
-          <img src="https://image.tmdb.org/t/p/w342/qTDv04Y6XbCn0uB3dxynItTaXAl.jpg" alt="Two Cents Worth of Hope" loading="lazy">
-          <div class="info">
-            <div class="title">Two Cents Worth of Hope</div>
-            <div class="meta">1952 &#9733; 6.4</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/117478" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/117478/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.0" data-popularity="0.2" data-year="1957" data-anniversary="70" data-date="2027-04-10" data-title="The Astounding She-Monster" data-tmdb="44693">
-          <img src="https://image.tmdb.org/t/p/w342/xiaYRfkR7ybxmmjAoE2N629iyoR.jpg" alt="The Astounding She-Monster" loading="lazy">
-          <div class="info">
-            <div class="title">The Astounding She-Monster</div>
-            <div class="meta">1957 &#9733; 4.0</div>
-            <div class="anniversary">70 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/44693" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/44693/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.7" data-popularity="0.2" data-year="1942" data-anniversary="85" data-date="2027-04-10" data-title="Mashenka" data-tmdb="158155">
-          <img src="https://image.tmdb.org/t/p/w342/dNJqKVNAdr0IrQuhpBD7fh2Xe6.jpg" alt="Mashenka" loading="lazy">
-          <div class="info">
-            <div class="title">Mashenka</div>
-            <div class="meta">1942 &#9733; 5.7</div>
-            <div class="anniversary">85 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/158155" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/158155/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="0.2" data-year="1937" data-anniversary="90" data-date="2027-04-10" data-title="Penny Wisdom" data-tmdb="233708">
-          <img src="https://image.tmdb.org/t/p/w342/5wpqonMHzh5TxridHAwPMNC0QOy.jpg" alt="Penny Wisdom" loading="lazy">
-          <div class="info">
-            <div class="title">Penny Wisdom</div>
-            <div class="meta">1937 &#9733; 6.3</div>
-            <div class="anniversary">90 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/233708" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/233708/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
+        <h2>Saturday, April 10 <span class="badge">25</span></h2>
+        <div class="poster-row"><a href="https://www.themoviedb.org/movie/389" target="_blank" rel="noopener" class="poster-item" data-rating="8.6" data-year="1957" data-anniversary="70">
+    <img src="https://image.tmdb.org/t/p/w92/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg" alt="12 Angry Men" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">12 Angry Men</span>
+      <span class="poster-item__meta">1957 ★ 8.6</span>
+      <span class="poster-item__anni">70y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/872" target="_blank" rel="noopener" class="poster-item" data-rating="8.1" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/w03EiJVHP8Un77boQeE7hg9DVdU.jpg" alt="Singin' in the Rain" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Singin' in the Rain</span>
+      <span class="poster-item__meta">1952 ★ 8.1</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/11428" target="_blank" rel="noopener" class="poster-item" data-rating="6.1" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/iiwplv5pET2HgMog6otunohIiSr.jpg" alt="Sleepwalkers" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Sleepwalkers</span>
+      <span class="poster-item__meta">1992 ★ 6.1</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/13225" target="_blank" rel="noopener" class="poster-item" data-rating="6.4" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/Z4XMgqIY6yT6QpoBISIlHzh8ol.jpg" alt="FernGully: The Last Rainforest" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">FernGully: The Last Rainforest</span>
+      <span class="poster-item__meta">1992 ★ 6.4</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/10021" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="1987" data-anniversary="40">
+    <img src="https://image.tmdb.org/t/p/w92/o657RdsSMVFNGWF8qH1gwZqLWzb.jpg" alt="The Secret of My Success" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Secret of My Success</span>
+      <span class="poster-item__meta">1987 ★ 6.5</span>
+      <span class="poster-item__anni">40y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/25493" target="_blank" rel="noopener" class="poster-item" data-rating="4.4" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/tEx2073cwxiN9niVVEvaZikbTMB.jpg" alt="The Breastford Wives" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Breastford Wives</span>
+      <span class="poster-item__meta">2007 ★ 4.4</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/15300" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/8ykmCMHzkRSuJucPYeqGA2ampbp.jpg" alt="Newsies" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Newsies</span>
+      <span class="poster-item__meta">1992 ★ 6.7</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/18457" target="_blank" rel="noopener" class="poster-item" data-rating="5.8" data-year="2002" data-anniversary="25">
+    <img src="https://image.tmdb.org/t/p/w92/hlbQnAfvGJxKpDqstKsal6tuoDb.jpg" alt="Dead Weight" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Dead Weight</span>
+      <span class="poster-item__meta">2002 ★ 5.8</span>
+      <span class="poster-item__anni">25y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/25563" target="_blank" rel="noopener" class="poster-item" data-rating="6.6" data-year="1937" data-anniversary="90">
+    <img src="https://image.tmdb.org/t/p/w92/rJHNkbEnyjQUl8DXWxk127hNEhD.jpg" alt="Marked Woman" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Marked Woman</span>
+      <span class="poster-item__meta">1937 ★ 6.6</span>
+      <span class="poster-item__anni">90y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/13852" target="_blank" rel="noopener" class="poster-item" data-rating="7.1" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/3QKTPz9gpIIt9Po091LfG0CASfk.jpg" alt="The Castle" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Castle</span>
+      <span class="poster-item__meta">1997 ★ 7.1</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/66245" target="_blank" rel="noopener" class="poster-item" data-rating="7.3" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/vplqDhbUk5GMPUosMuQy91NePxv.jpg" alt="Arunachalam" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Arunachalam</span>
+      <span class="poster-item__meta">1997 ★ 7.3</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/47101" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/sCJd2vkp5M3BybiVfZtStO8MaSQ.jpg" alt="Okuni and Gohei" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Okuni and Gohei</span>
+      <span class="poster-item__meta">1952 ★ 6.5</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/37601" target="_blank" rel="noopener" class="poster-item" data-rating="6.2" data-year="1972" data-anniversary="55">
+    <img src="https://image.tmdb.org/t/p/w92/8JGJojd01EHKuKvYsgZ1aPCrZfS.jpg" alt="Tombs of the Blind Dead" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Tombs of the Blind Dead</span>
+      <span class="poster-item__meta">1972 ★ 6.2</span>
+      <span class="poster-item__anni">55y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/50719" target="_blank" rel="noopener" class="poster-item" data-rating="4.4" data-year="1987" data-anniversary="40">
+    <img src="https://image.tmdb.org/t/p/w92/bg2wBjg5zNoVxZnt7RarVQBxUuj.jpg" alt="Silent Night, Deadly Night Part 2" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Silent Night, Deadly Night Part 2</span>
+      <span class="poster-item__meta">1987 ★ 4.4</span>
+      <span class="poster-item__anni">40y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/28894" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/nQnO8hMViqSriSGLnYWm14iMykb.jpg" alt="Rancho Notorious" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Rancho Notorious</span>
+      <span class="poster-item__meta">1952 ★ 6.5</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/47714" target="_blank" rel="noopener" class="poster-item" data-rating="7.6" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/fkFYNR4iCz5n1j5Drf0jejKmNVb.jpg" alt="The Stolen Children" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Stolen Children</span>
+      <span class="poster-item__meta">1992 ★ 7.6</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/392288" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/tlSWqP2y6HhCfcXj72v4xTDOWTG.jpg" alt="La negra Tomasa" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">La negra Tomasa</span>
+      <span class="poster-item__meta">1992 ★ 6.7</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/116064" target="_blank" rel="noopener" class="poster-item" data-rating="5.9" data-year="1987" data-anniversary="40">
+    <img src="https://image.tmdb.org/t/p/w92/nimPeNINKgYaUtiXv7veOzoPiYL.jpg" alt="Three for the Road" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Three for the Road</span>
+      <span class="poster-item__meta">1987 ★ 5.9</span>
+      <span class="poster-item__anni">40y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/35401" target="_blank" rel="noopener" class="poster-item" data-rating="5.4" data-year="1947" data-anniversary="80">
+    <img src="https://image.tmdb.org/t/p/w92/1aNGOSWDnIrQY2aZK1nkD87WiEt.jpg" alt="Fear in the Night" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Fear in the Night</span>
+      <span class="poster-item__meta">1947 ★ 5.4</span>
+      <span class="poster-item__anni">80y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/55461" target="_blank" rel="noopener" class="poster-item" data-rating="7.2" data-year="1942" data-anniversary="85">
+    <img src="https://image.tmdb.org/t/p/w92/x1E7g9QiFjvXCQociAxxb4vBELS.jpg" alt="Donald's Snow Fight" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Donald's Snow Fight</span>
+      <span class="poster-item__meta">1942 ★ 7.2</span>
+      <span class="poster-item__anni">85y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/66440" target="_blank" rel="noopener" class="poster-item" data-rating="5.1" data-year="1957" data-anniversary="70">
+    <img src="https://image.tmdb.org/t/p/w92/4kF1F7FKroVl22QUSrO7qCVPexP.jpg" alt="Three Make a Pair" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Three Make a Pair</span>
+      <span class="poster-item__meta">1957 ★ 5.1</span>
+      <span class="poster-item__anni">70y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/117478" target="_blank" rel="noopener" class="poster-item" data-rating="6.4" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/qTDv04Y6XbCn0uB3dxynItTaXAl.jpg" alt="Two Cents Worth of Hope" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Two Cents Worth of Hope</span>
+      <span class="poster-item__meta">1952 ★ 6.4</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/44693" target="_blank" rel="noopener" class="poster-item" data-rating="4.0" data-year="1957" data-anniversary="70">
+    <img src="https://image.tmdb.org/t/p/w92/xiaYRfkR7ybxmmjAoE2N629iyoR.jpg" alt="The Astounding She-Monster" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Astounding She-Monster</span>
+      <span class="poster-item__meta">1957 ★ 4.0</span>
+      <span class="poster-item__anni">70y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/158155" target="_blank" rel="noopener" class="poster-item" data-rating="5.7" data-year="1942" data-anniversary="85">
+    <img src="https://image.tmdb.org/t/p/w92/dNJqKVNAdr0IrQuhpBD7fh2Xe6.jpg" alt="Mashenka" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Mashenka</span>
+      <span class="poster-item__meta">1942 ★ 5.7</span>
+      <span class="poster-item__anni">85y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/233708" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1937" data-anniversary="90">
+    <img src="https://image.tmdb.org/t/p/w92/5wpqonMHzh5TxridHAwPMNC0QOy.jpg" alt="Penny Wisdom" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Penny Wisdom</span>
+      <span class="poster-item__meta">1937 ★ 6.3</span>
+      <span class="poster-item__anni">90y</span>
+    </div>
+  </a>
         </div>
       </section>
 
       <section class="day-section" id="2027-04-11">
-        <h2>Sunday, April 11</h2>
-        <div class="movie-grid">
-        <div class="movie-card" data-rating="5.9" data-popularity="10.0" data-year="2012" data-anniversary="15" data-date="2027-04-11" data-title="Battleship" data-tmdb="44833">
-          <img src="https://image.tmdb.org/t/p/w342/9b0Im7SfedHiajTwzSL9zGyBI7M.jpg" alt="Battleship" loading="lazy">
-          <div class="info">
-            <div class="title">Battleship</div>
-            <div class="meta">2012 &#9733; 5.9</div>
-            <div class="anniversary">15 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/44833" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/44833/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.3" data-popularity="8.1" data-year="1997" data-anniversary="30" data-date="2027-04-11" data-title="Anaconda" data-tmdb="9360">
-          <img src="https://image.tmdb.org/t/p/w342/33NysOnLpLZY0ewHTcfpalzAsRG.jpg" alt="Anaconda" loading="lazy">
-          <div class="info">
-            <div class="title">Anaconda</div>
-            <div class="meta">1997 &#9733; 5.3</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/9360" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/9360/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.8" data-popularity="2.7" data-year="2007" data-anniversary="20" data-date="2027-04-11" data-title="Perfect Stranger" data-tmdb="7183">
-          <img src="https://image.tmdb.org/t/p/w342/i7D5QqQ0q5EXU1UuZVY9KwIxoYR.jpg" alt="Perfect Stranger" loading="lazy">
-          <div class="info">
-            <div class="title">Perfect Stranger</div>
-            <div class="meta">2007 &#9733; 5.8</div>
-            <div class="anniversary">20 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/7183" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/7183/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.7" data-popularity="2.4" data-year="1962" data-anniversary="65" data-date="2027-04-11" data-title="Cléo from 5 to 7" data-tmdb="499">
-          <img src="https://image.tmdb.org/t/p/w342/oelBStY4xpguaplRv15P3Za7Xsr.jpg" alt="Cléo from 5 to 7" loading="lazy">
-          <div class="info">
-            <div class="title">Cléo from 5 to 7</div>
-            <div class="meta">1962 &#9733; 7.7</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/499" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/499/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.0" data-popularity="2.4" data-year="1997" data-anniversary="30" data-date="2027-04-11" data-title="Grosse Pointe Blank" data-tmdb="9434">
-          <img src="https://image.tmdb.org/t/p/w342/7lQ0MSNQqBTYpXTTZL82u1n95Z3.jpg" alt="Grosse Pointe Blank" loading="lazy">
-          <div class="info">
-            <div class="title">Grosse Pointe Blank</div>
-            <div class="meta">1997 &#9733; 7.0</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/9434" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/9434/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="2.4" data-year="2002" data-anniversary="25" data-date="2027-04-11" data-title="Bend It Like Beckham" data-tmdb="455">
-          <img src="https://image.tmdb.org/t/p/w342/2dzSBmFWWqt8NbnubJKIWU21Y86.jpg" alt="Bend It Like Beckham" loading="lazy">
-          <div class="info">
-            <div class="title">Bend It Like Beckham</div>
-            <div class="meta">2002 &#9733; 6.3</div>
-            <div class="anniversary">25 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/455" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/455/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.2" data-popularity="2.1" data-year="2012" data-anniversary="15" data-date="2027-04-11" data-title="Doomsday Book" data-tmdb="118624">
-          <img src="https://image.tmdb.org/t/p/w342/1HQBqpGtsN8f65kzHoZhLKbMchr.jpg" alt="Doomsday Book" loading="lazy">
-          <div class="info">
-            <div class="title">Doomsday Book</div>
-            <div class="meta">2012 &#9733; 6.2</div>
-            <div class="anniversary">15 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/118624" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/118624/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.7" data-popularity="2.1" data-year="2012" data-anniversary="15" data-date="2027-04-11" data-title="The Scent" data-tmdb="115134">
-          <img src="https://image.tmdb.org/t/p/w342/mq5XTPbangf2dBqS2paqRa1OXSs.jpg" alt="The Scent" loading="lazy">
-          <div class="info">
-            <div class="title">The Scent</div>
-            <div class="meta">2012 &#9733; 5.7</div>
-            <div class="anniversary">15 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/115134" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/115134/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.8" data-popularity="1.5" data-year="1997" data-anniversary="30" data-date="2027-04-11" data-title="Ziddi" data-tmdb="143976">
-          <img src="https://image.tmdb.org/t/p/w342/p8OaWdlGVfpOzTbZo4F0xRzOMOR.jpg" alt="Ziddi" loading="lazy">
-          <div class="info">
-            <div class="title">Ziddi</div>
-            <div class="meta">1997 &#9733; 5.8</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/143976" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/143976/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="7.2" data-popularity="1.2" data-year="1997" data-anniversary="30" data-date="2027-04-11" data-title="The Island on Bird Street" data-tmdb="45614">
-          <img src="https://image.tmdb.org/t/p/w342/q8IXiMGnid3jSk5GAJAyjvDHL4E.jpg" alt="The Island on Bird Street" loading="lazy">
-          <div class="info">
-            <div class="title">The Island on Bird Street</div>
-            <div class="meta">1997 &#9733; 7.2</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/45614" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/45614/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="1.0" data-year="1997" data-anniversary="30" data-date="2027-04-11" data-title="Twin Town" data-tmdb="15321">
-          <img src="https://image.tmdb.org/t/p/w342/b9rf32Mq0bQ0pJ3EZ5ghY52J4tS.jpg" alt="Twin Town" loading="lazy">
-          <div class="info">
-            <div class="title">Twin Town</div>
-            <div class="meta">1997 &#9733; 6.3</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/15321" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/15321/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.9" data-popularity="0.9" data-year="1992" data-anniversary="35" data-date="2027-04-11" data-title="Basara: The Princess Goh" data-tmdb="244956">
-          <img src="https://image.tmdb.org/t/p/w342/e2NLO5V9GznZrcC9OebACWJtxUO.jpg" alt="Basara: The Princess Goh" loading="lazy">
-          <div class="info">
-            <div class="title">Basara: The Princess Goh</div>
-            <div class="meta">1992 &#9733; 6.9</div>
-            <div class="anniversary">35 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/244956" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/244956/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.8" data-popularity="0.9" data-year="1997" data-anniversary="30" data-date="2027-04-11" data-title="Keys to Tulsa" data-tmdb="118991">
-          <img src="https://image.tmdb.org/t/p/w342/g3Y1t6AXTVyRrz2DOIGsBeeA3YB.jpg" alt="Keys to Tulsa" loading="lazy">
-          <div class="info">
-            <div class="title">Keys to Tulsa</div>
-            <div class="meta">1997 &#9733; 4.8</div>
-            <div class="anniversary">30 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/118991" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/118991/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.3" data-popularity="0.9" data-year="1952" data-anniversary="75" data-date="2027-04-11" data-title="Macao" data-tmdb="26282">
-          <img src="https://image.tmdb.org/t/p/w342/eXoIIwdaaDuCthlTGMimjCjfPRD.jpg" alt="Macao" loading="lazy">
-          <div class="info">
-            <div class="title">Macao</div>
-            <div class="meta">1952 &#9733; 6.3</div>
-            <div class="anniversary">75 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/26282" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/26282/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.1" data-popularity="0.6" data-year="1962" data-anniversary="65" data-date="2027-04-11" data-title="Follow That Dream" data-tmdb="18643">
-          <img src="https://image.tmdb.org/t/p/w342/fpTkjmDyjN8rsWwmoZsba8xZzMl.jpg" alt="Follow That Dream" loading="lazy">
-          <div class="info">
-            <div class="title">Follow That Dream</div>
-            <div class="meta">1962 &#9733; 6.1</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/18643" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/18643/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.1" data-popularity="0.4" data-year="1957" data-anniversary="70" data-date="2027-04-11" data-title="The River's Edge" data-tmdb="71144">
-          <img src="https://image.tmdb.org/t/p/w342/5nRwD4kaAVy531CAdQqXZJb1m8G.jpg" alt="The River's Edge" loading="lazy">
-          <div class="info">
-            <div class="title">The River's Edge</div>
-            <div class="meta">1957 &#9733; 6.1</div>
-            <div class="anniversary">70 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/71144" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/71144/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.8" data-popularity="0.3" data-year="1957" data-anniversary="70" data-date="2027-04-11" data-title="Voodoo Woman" data-tmdb="38261">
-          <img src="https://image.tmdb.org/t/p/w342/4c0pehs24WCkhtoMrryBIIe1ZCm.jpg" alt="Voodoo Woman" loading="lazy">
-          <div class="info">
-            <div class="title">Voodoo Woman</div>
-            <div class="meta">1957 &#9733; 4.8</div>
-            <div class="anniversary">70 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/38261" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/38261/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="5.2" data-popularity="0.3" data-year="1967" data-anniversary="60" data-date="2027-04-11" data-title="Good Times" data-tmdb="154266">
-          <img src="https://image.tmdb.org/t/p/w342/38ztQs2pElyDAgemltVpS58asyH.jpg" alt="Good Times" loading="lazy">
-          <div class="info">
-            <div class="title">Good Times</div>
-            <div class="meta">1967 &#9733; 5.2</div>
-            <div class="anniversary">60 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/154266" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/154266/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="0.3" data-year="1962" data-anniversary="65" data-date="2027-04-11" data-title="Fiancés on the Bridge" data-tmdb="54464">
-          <img src="https://image.tmdb.org/t/p/w342/hxz3xHtDoV5K4UJA5x8HNnSTtN0.jpg" alt="Fiancés on the Bridge" loading="lazy">
-          <div class="info">
-            <div class="title">Fiancés on the Bridge</div>
-            <div class="meta">1962 &#9733; 6.5</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/54464" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/54464/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="6.5" data-popularity="0.2" data-year="1942" data-anniversary="85" data-date="2027-04-11" data-title="Horton Hatches the Egg" data-tmdb="29020">
-          <img src="https://image.tmdb.org/t/p/w342/gQjd7dBDZLg24cmSZ9KduwEwxAY.jpg" alt="Horton Hatches the Egg" loading="lazy">
-          <div class="info">
-            <div class="title">Horton Hatches the Egg</div>
-            <div class="meta">1942 &#9733; 6.5</div>
-            <div class="anniversary">85 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/29020" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/29020/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
-
-        <div class="movie-card" data-rating="4.8" data-popularity="0.2" data-year="1962" data-anniversary="65" data-date="2027-04-11" data-title="The Witch's Curse" data-tmdb="76833">
-          <img src="https://image.tmdb.org/t/p/w342/vF1WfNacUiovtiENFhF1YfPPxnw.jpg" alt="The Witch's Curse" loading="lazy">
-          <div class="info">
-            <div class="title">The Witch's Curse</div>
-            <div class="meta">1962 &#9733; 4.8</div>
-            <div class="anniversary">65 years</div>
-            <div class="links"><a href="https://www.themoviedb.org/movie/76833" target="_blank" rel="noopener">TMDB</a><a href="https://letterboxd.com/tmdb/76833/" target="_blank" rel="noopener">Letterboxd</a></div>
-          </div>
-        </div>
+        <h2>Sunday, April 11 <span class="badge">21</span></h2>
+        <div class="poster-row"><a href="https://www.themoviedb.org/movie/44833" target="_blank" rel="noopener" class="poster-item" data-rating="5.9" data-year="2012" data-anniversary="15">
+    <img src="https://image.tmdb.org/t/p/w92/9b0Im7SfedHiajTwzSL9zGyBI7M.jpg" alt="Battleship" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Battleship</span>
+      <span class="poster-item__meta">2012 ★ 5.9</span>
+      <span class="poster-item__anni">15y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/9360" target="_blank" rel="noopener" class="poster-item" data-rating="5.3" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/33NysOnLpLZY0ewHTcfpalzAsRG.jpg" alt="Anaconda" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Anaconda</span>
+      <span class="poster-item__meta">1997 ★ 5.3</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/7183" target="_blank" rel="noopener" class="poster-item" data-rating="5.8" data-year="2007" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/i7D5QqQ0q5EXU1UuZVY9KwIxoYR.jpg" alt="Perfect Stranger" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Perfect Stranger</span>
+      <span class="poster-item__meta">2007 ★ 5.8</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/499" target="_blank" rel="noopener" class="poster-item" data-rating="7.7" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/oelBStY4xpguaplRv15P3Za7Xsr.jpg" alt="Cléo from 5 to 7" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Cléo from 5 to 7</span>
+      <span class="poster-item__meta">1962 ★ 7.7</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/9434" target="_blank" rel="noopener" class="poster-item" data-rating="7.0" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/7lQ0MSNQqBTYpXTTZL82u1n95Z3.jpg" alt="Grosse Pointe Blank" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Grosse Pointe Blank</span>
+      <span class="poster-item__meta">1997 ★ 7.0</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/455" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="2002" data-anniversary="25">
+    <img src="https://image.tmdb.org/t/p/w92/2dzSBmFWWqt8NbnubJKIWU21Y86.jpg" alt="Bend It Like Beckham" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Bend It Like Beckham</span>
+      <span class="poster-item__meta">2002 ★ 6.3</span>
+      <span class="poster-item__anni">25y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/118624" target="_blank" rel="noopener" class="poster-item" data-rating="6.2" data-year="2012" data-anniversary="15">
+    <img src="https://image.tmdb.org/t/p/w92/1HQBqpGtsN8f65kzHoZhLKbMchr.jpg" alt="Doomsday Book" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Doomsday Book</span>
+      <span class="poster-item__meta">2012 ★ 6.2</span>
+      <span class="poster-item__anni">15y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/115134" target="_blank" rel="noopener" class="poster-item" data-rating="5.7" data-year="2012" data-anniversary="15">
+    <img src="https://image.tmdb.org/t/p/w92/mq5XTPbangf2dBqS2paqRa1OXSs.jpg" alt="The Scent" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Scent</span>
+      <span class="poster-item__meta">2012 ★ 5.7</span>
+      <span class="poster-item__anni">15y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/143976" target="_blank" rel="noopener" class="poster-item" data-rating="5.8" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/p8OaWdlGVfpOzTbZo4F0xRzOMOR.jpg" alt="Ziddi" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Ziddi</span>
+      <span class="poster-item__meta">1997 ★ 5.8</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/45614" target="_blank" rel="noopener" class="poster-item" data-rating="7.2" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/q8IXiMGnid3jSk5GAJAyjvDHL4E.jpg" alt="The Island on Bird Street" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Island on Bird Street</span>
+      <span class="poster-item__meta">1997 ★ 7.2</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/15321" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/b9rf32Mq0bQ0pJ3EZ5ghY52J4tS.jpg" alt="Twin Town" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Twin Town</span>
+      <span class="poster-item__meta">1997 ★ 6.3</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/244956" target="_blank" rel="noopener" class="poster-item" data-rating="6.9" data-year="1992" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/e2NLO5V9GznZrcC9OebACWJtxUO.jpg" alt="Basara: The Princess Goh" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Basara: The Princess Goh</span>
+      <span class="poster-item__meta">1992 ★ 6.9</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/118991" target="_blank" rel="noopener" class="poster-item" data-rating="4.8" data-year="1997" data-anniversary="30">
+    <img src="https://image.tmdb.org/t/p/w92/g3Y1t6AXTVyRrz2DOIGsBeeA3YB.jpg" alt="Keys to Tulsa" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Keys to Tulsa</span>
+      <span class="poster-item__meta">1997 ★ 4.8</span>
+      <span class="poster-item__anni">30y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/26282" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1952" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/eXoIIwdaaDuCthlTGMimjCjfPRD.jpg" alt="Macao" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Macao</span>
+      <span class="poster-item__meta">1952 ★ 6.3</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/18643" target="_blank" rel="noopener" class="poster-item" data-rating="6.1" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/fpTkjmDyjN8rsWwmoZsba8xZzMl.jpg" alt="Follow That Dream" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Follow That Dream</span>
+      <span class="poster-item__meta">1962 ★ 6.1</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/71144" target="_blank" rel="noopener" class="poster-item" data-rating="6.1" data-year="1957" data-anniversary="70">
+    <img src="https://image.tmdb.org/t/p/w92/5nRwD4kaAVy531CAdQqXZJb1m8G.jpg" alt="The River's Edge" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The River's Edge</span>
+      <span class="poster-item__meta">1957 ★ 6.1</span>
+      <span class="poster-item__anni">70y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/38261" target="_blank" rel="noopener" class="poster-item" data-rating="4.8" data-year="1957" data-anniversary="70">
+    <img src="https://image.tmdb.org/t/p/w92/4c0pehs24WCkhtoMrryBIIe1ZCm.jpg" alt="Voodoo Woman" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Voodoo Woman</span>
+      <span class="poster-item__meta">1957 ★ 4.8</span>
+      <span class="poster-item__anni">70y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/154266" target="_blank" rel="noopener" class="poster-item" data-rating="5.2" data-year="1967" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/38ztQs2pElyDAgemltVpS58asyH.jpg" alt="Good Times" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Good Times</span>
+      <span class="poster-item__meta">1967 ★ 5.2</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/54464" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/hxz3xHtDoV5K4UJA5x8HNnSTtN0.jpg" alt="Fiancés on the Bridge" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Fiancés on the Bridge</span>
+      <span class="poster-item__meta">1962 ★ 6.5</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/29020" target="_blank" rel="noopener" class="poster-item" data-rating="6.5" data-year="1942" data-anniversary="85">
+    <img src="https://image.tmdb.org/t/p/w92/gQjd7dBDZLg24cmSZ9KduwEwxAY.jpg" alt="Horton Hatches the Egg" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Horton Hatches the Egg</span>
+      <span class="poster-item__meta">1942 ★ 6.5</span>
+      <span class="poster-item__anni">85y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/76833" target="_blank" rel="noopener" class="poster-item" data-rating="4.8" data-year="1962" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/vF1WfNacUiovtiENFhF1YfPPxnw.jpg" alt="The Witch's Curse" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Witch's Curse</span>
+      <span class="poster-item__meta">1962 ★ 4.8</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
         </div>
       </section>
     </main>
@@ -1280,7 +1047,6 @@
 (function(){
   var STORAGE_KEY = 'movie-anni-filters';
   var PAGE_LABEL = '2027-W14';
-  var cards = document.querySelectorAll('.movie-card');
   var sections = document.querySelectorAll('.day-section');
   var countEl = document.getElementById('filter-count');
 
@@ -1293,6 +1059,19 @@
     var m = String(d.getMonth()+1).padStart(2,'0');
     location.href = '../month/' + d.getFullYear() + '-' + m + '.html';
   });
+
+  // Filter toggle
+  var toggle = document.getElementById('filter-toggle');
+  var wrap = document.getElementById('filter-wrap');
+  if(toggle && wrap){
+    var filterCollapsed = localStorage.getItem(STORAGE_KEY+'-collapsed') === '1';
+    if(filterCollapsed){ toggle.classList.add('collapsed'); wrap.classList.add('collapsed'); }
+    toggle.addEventListener('click', function(){
+      wrap.classList.toggle('collapsed');
+      toggle.classList.toggle('collapsed');
+      try { localStorage.setItem(STORAGE_KEY+'-collapsed', wrap.classList.contains('collapsed') ? '1' : '0'); } catch(e){}
+    });
+  }
 
   function saveState(){
     var state = {
@@ -1330,31 +1109,38 @@
     var sortBy = document.getElementById('sort-select').value;
     var visible = 0;
 
-    cards.forEach(function(card){
-      var r = parseFloat(card.getAttribute('data-rating')) || 0;
-      var y = parseInt(card.getAttribute('data-year')) || 0;
-      var a = parseInt(card.getAttribute('data-anniversary')) || 0;
-      var show = r >= ratingVal;
-      if(show && anniVals.length) show = anniVals.indexOf(a) !== -1;
-      if(show) show = y >= yearMin && y <= yearMax;
-      card.style.display = show ? '' : 'none';
-      if(show) visible++;
-    });
-
     sections.forEach(function(s){
-      var vis = Array.from(s.querySelectorAll('.movie-card')).some(function(c){ return c.style.display !== 'none'; });
-      s.style.display = vis ? '' : 'none';
-    });
-
-    sections.forEach(function(s){
-      var grid = s.querySelector('.movie-grid');
-      if(!grid) return;
-      var sorted = Array.from(grid.querySelectorAll('.movie-card')).sort(function(a,b){
-        var av = parseFloat(a.getAttribute('data-'+sortBy)) || 0;
-        var bv = parseFloat(b.getAttribute('data-'+sortBy)) || 0;
-        return bv - av;
+      var vis = 0;
+      var items = s.querySelectorAll('.poster-item');
+      items.forEach(function(item){
+        var r = parseFloat(item.getAttribute('data-rating')) || 0;
+        var y = parseInt(item.getAttribute('data-year')) || 0;
+        var a = parseInt(item.getAttribute('data-anniversary')) || 0;
+        var show = r >= ratingVal;
+        if(show && anniVals.length) show = anniVals.indexOf(a) !== -1;
+        if(show) show = y >= yearMin && y <= yearMax;
+        item.style.display = show ? '' : 'none';
+        if(show) vis++;
       });
-      sorted.forEach(function(el){ grid.appendChild(el); });
+
+      // sort poster items within this section
+      var row = s.querySelector('.poster-row');
+      if(row){
+        var sorted = Array.from(items).filter(function(el){ return el.style.display !== 'none'; }).sort(function(a,b){
+          if(sortBy === 'title'){
+            var av = (a.querySelector('.poster-item__title').textContent || '').toLowerCase();
+            var bv = (b.querySelector('.poster-item__title').textContent || '').toLowerCase();
+            return av < bv ? -1 : av > bv ? 1 : 0;
+          }
+          var attr = sortBy === 'anniversary' ? 'anniversary' : sortBy === 'year' ? 'year' : 'rating';
+          var av = parseFloat(a.getAttribute('data-' + attr)) || 0;
+          var bv = parseFloat(b.getAttribute('data-' + attr)) || 0;
+          return bv - av;
+        });
+        sorted.forEach(function(el){ row.appendChild(el); });
+      }
+
+      visible += vis;
     });
 
     if(countEl) countEl.textContent = visible + ' movie' + (visible!==1?'s':'') + ' shown';
@@ -1384,12 +1170,6 @@
   });
 
   applyFilters();
-
-  // Scroll to today if URL has hash
-  if(location.hash){
-    var el = document.getElementById(location.hash.substring(1));
-    if(el) setTimeout(function(){ el.scrollIntoView({behavior:'smooth'}); }, 200);
-  }
 })();
   </script>
 </body>

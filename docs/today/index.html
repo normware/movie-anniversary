@@ -5,32 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Today – Movie Anniversaries</title>
   <link rel="stylesheet" href="../style.css">
-  <script>
-    (function() {
-      function pad2(n){ return n < 10 ? '0' + n : '' + n; }
-      function getISOWeek(d) {
-        var t = new Date(d);
-        t.setHours(0,0,0,0);
-        var day = (t.getDay() + 6) % 7;
-        t.setDate(t.getDate() - day + 3);
-        var jan4 = new Date(t.getFullYear(), 0, 4);
-        var week = 1 + Math.round(((t - jan4) / 86400000 - 3 + (jan4.getDay() + 6) % 7) / 7);
-        return t.getFullYear() + '-W' + String(week).padStart(2, '0');
-      }
-      var d = new Date();
-      var week = getISOWeek(d);
-      var today = d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate());
-      window.location.href = '../week/' + week + '.html#' + today;
-    })();
-  </script>
 </head>
 <body>
-  <div class="container center-content">
-    <h1>Movie Anniversaries</h1>
-    <p>Redirecting to today’s movies...</p>
+  <div class="container today-page">
+    <header>
+      <h1>Movie Anniversaries</h1>
+    </header>
+    <h2>Saturday, May 23</h2>
+    <p class="today-date">May 23, 2026</p>
+    <div class="today-movies"><div class="today-grid"><a href="https://www.themoviedb.org/movie/1103" target="_blank" rel="noopener" class="poster-item" data-rating="7.0" data-year="1981" data-anniversary="45">
+    <img src="https://image.tmdb.org/t/p/w92/vH9llaphjAssRGi0k7e75tD40Ce.jpg" alt="Escape from New York" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Escape from New York</span>
+      <span class="poster-item__meta">1981 ★ 7.0</span>
+      <span class="poster-item__anni">45y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/9292" target="_blank" rel="noopener" class="poster-item" data-rating="5.7" data-year="1991" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/2AiR7HZuIOUdJp6LYOEOA8z7pF3.jpg" alt="Hudson Hawk" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Hudson Hawk</span>
+      <span class="poster-item__meta">1991 ★ 5.7</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/8997" target="_blank" rel="noopener" class="poster-item" data-rating="4.9" data-year="2006" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/c6Ga1AUGPe3GwlpX3qDYrD9y3EZ.jpg" alt="Hollow Man II" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Hollow Man II</span>
+      <span class="poster-item__meta">2006 ★ 4.9</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/347123" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="2016" data-anniversary="10">
+    <img src="https://image.tmdb.org/t/p/w92/j4AEurmnYoRsA1nHhRK9AE4j2CL.jpg" alt="All the Way" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">All the Way</span>
+      <span class="poster-item__meta">2016 ★ 6.7</span>
+      <span class="poster-item__anni">10y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/10004" target="_blank" rel="noopener" class="poster-item" data-rating="5.5" data-year="2006" data-anniversary="20">
+    <img src="https://image.tmdb.org/t/p/w92/sVVTUA9SBaGlkZcj3XIJq077dQB.jpg" alt="Desperation" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Desperation</span>
+      <span class="poster-item__meta">2006 ★ 5.5</span>
+      <span class="poster-item__anni">20y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/11133" target="_blank" rel="noopener" class="poster-item" data-rating="6.0" data-year="1986" data-anniversary="40">
+    <img src="https://image.tmdb.org/t/p/w92/tVQPv69XWIgzF5n1MRrTuhPyNr5.jpg" alt="Poltergeist II: The Other Side" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Poltergeist II: The Other Side</span>
+      <span class="poster-item__meta">1986 ★ 6.0</span>
+      <span class="poster-item__anni">40y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/24774" target="_blank" rel="noopener" class="poster-item" data-rating="7.0" data-year="1951" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/4a6zhVb9a9KEnxNevKrJLfuGhm4.jpg" alt="The Idiot" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Idiot</span>
+      <span class="poster-item__meta">1951 ★ 7.0</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/105826" target="_blank" rel="noopener" class="poster-item" data-rating="6.7" data-year="1991" data-anniversary="35">
+    <img src="https://image.tmdb.org/t/p/w92/8BWjn3v3xKHmnsLWmNK4rtm3HeZ.jpg" alt="The Blue Jean Monster" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Blue Jean Monster</span>
+      <span class="poster-item__meta">1991 ★ 6.7</span>
+      <span class="poster-item__anni">35y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/20644" target="_blank" rel="noopener" class="poster-item" data-rating="6.8" data-year="1941" data-anniversary="85">
+    <img src="https://image.tmdb.org/t/p/w92/kPsQ0CiQCEl4YItYh6t9ruyP0A6.jpg" alt="Love Crazy" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Love Crazy</span>
+      <span class="poster-item__meta">1941 ★ 6.8</span>
+      <span class="poster-item__anni">85y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/84119" target="_blank" rel="noopener" class="poster-item" data-rating="7.1" data-year="1961" data-anniversary="65">
+    <img src="https://image.tmdb.org/t/p/w92/Rs032mMTa38NhAMOd5ZvN6nEXN.jpg" alt="Goodbye Again" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Goodbye Again</span>
+      <span class="poster-item__meta">1961 ★ 7.1</span>
+      <span class="poster-item__anni">65y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/169066" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1966" data-anniversary="60">
+    <img src="https://image.tmdb.org/t/p/w92/kGTcBoJx9cwcwEacRGMp1TkynIR.jpg" alt="Blindfold" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Blindfold</span>
+      <span class="poster-item__meta">1966 ★ 6.3</span>
+      <span class="poster-item__anni">60y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/83670" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1951" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/cQwbEqCiluAyS61CBZDqw23FP3M.jpg" alt="Hard, Fast and Beautiful!" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Hard, Fast and Beautiful!</span>
+      <span class="poster-item__meta">1951 ★ 6.3</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/202282" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1936" data-anniversary="90">
+    <img src="https://image.tmdb.org/t/p/w92/ryfYGHwS1myEI8xLIjaNWEqmSeA.jpg" alt="Fish Tales" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Fish Tales</span>
+      <span class="poster-item__meta">1936 ★ 6.3</span>
+      <span class="poster-item__anni">90y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/176259" target="_blank" rel="noopener" class="poster-item" data-rating="6.3" data-year="1936" data-anniversary="90">
+    <img src="https://image.tmdb.org/t/p/w92/kLOi2qJxbLKKGPQvDaPoo22t7F7.jpg" alt="The Golden Arrow" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Golden Arrow</span>
+      <span class="poster-item__meta">1936 ★ 6.3</span>
+      <span class="poster-item__anni">90y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/28257" target="_blank" rel="noopener" class="poster-item" data-rating="6.4" data-year="1931" data-anniversary="95">
+    <img src="https://image.tmdb.org/t/p/w92/zpE6gucVjusGXSS4lcSjqIWCeAj.jpg" alt="The Maltese Falcon" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">The Maltese Falcon</span>
+      <span class="poster-item__meta">1931 ★ 6.4</span>
+      <span class="poster-item__anni">95y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/258054" target="_blank" rel="noopener" class="poster-item" data-rating="5.4" data-year="1951" data-anniversary="75">
+    <img src="https://image.tmdb.org/t/p/w92/lJfdrZfkLkjCLsRkE52NdXUWlBV.jpg" alt="Black Crown" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Black Crown</span>
+      <span class="poster-item__meta">1951 ★ 5.4</span>
+      <span class="poster-item__anni">75y</span>
+    </div>
+  </a>
+<a href="https://www.themoviedb.org/movie/184894" target="_blank" rel="noopener" class="poster-item" data-rating="7.0" data-year="1926" data-anniversary="100">
+    <img src="https://image.tmdb.org/t/p/w92/9XKRGln5MfRAFIQbrdH3i4bnFtn.jpg" alt="Spirals" loading="lazy">
+    <div class="poster-item__info">
+      <span class="poster-item__title">Spirals</span>
+      <span class="poster-item__meta">1926 ★ 7.0</span>
+      <span class="poster-item__anni">100y</span>
+    </div>
+  </a></div></div>
+    <p>17 movies with anniversaries today</p>
+    <div class="today-links">
+      <a href="../week/2026-W21.html" class="btn">View this week</a>
+      <a href="../month/2026-05.html" class="btn">View this month</a>
+      <a href="../week/index.html" class="btn">Browse all weeks</a>
+      <a href="../month/index.html" class="btn">Browse all months</a>
+    </div>
     <footer>
       
-    <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="../week/index.html">Browse all weeks</a></p>
+    <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="../week/index.html">Weeks</a> &middot; <a href="../month/index.html">Months</a></p>
     <p class="tmdb-attribution">
       <img src="../tmdb-logo.svg" alt="TMDB Logo" class="tmdb-logo" width="32" height="24">
       This product uses the TMDB API but is not endorsed or certified by TMDB.

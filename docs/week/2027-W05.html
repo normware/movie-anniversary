@@ -46,7 +46,9 @@
           <option value="anniversary">Anniv.</option>
         </select>
       </div>
-      
+      <div class="filter-group">
+        <label class="option-chk"><input type="checkbox" id="expand-rows">Expand rows</label>
+      </div>
       <div class="filter-group">
         <button class="btn" id="reset-filters" title="Reset all filters">↻ Reset</button>
       </div>
@@ -1409,13 +1411,21 @@
     });
   }
 
+  function toggleExpand(expand){
+    sections.forEach(function(s){
+      var row = s.querySelector('.poster-row');
+      if(row) row.classList.toggle('expanded', expand);
+    });
+  }
+
   function saveState(){
     var state = {
       rating: document.getElementById('rating-filter').value,
       anni: Array.from(document.querySelectorAll('.anni-cb')).map(function(cb){ return cb.checked; }),
       yearMin: document.getElementById('year-min').value,
       yearMax: document.getElementById('year-max').value,
-      sort: document.getElementById('sort-select').value
+      sort: document.getElementById('sort-select').value,
+      expandRows: document.getElementById('expand-rows').checked
     };
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
   }
@@ -1434,6 +1444,8 @@
     if(state.yearMin !== undefined) document.getElementById('year-min').value = state.yearMin;
     if(state.yearMax !== undefined) document.getElementById('year-max').value = state.yearMax;
     if(state.sort) document.getElementById('sort-select').value = state.sort;
+    if(state.expandRows !== undefined) document.getElementById('expand-rows').checked = state.expandRows;
+    toggleExpand(document.getElementById('expand-rows').checked);
   }
 
   function applyFilters(){
@@ -1496,12 +1508,18 @@
   document.getElementById('year-min').addEventListener('input', applyFilters);
   document.getElementById('year-max').addEventListener('input', applyFilters);
   document.getElementById('sort-select').addEventListener('change', applyFilters);
+  document.getElementById('expand-rows').addEventListener('change', function(){
+    toggleExpand(this.checked);
+    saveState();
+  });
   document.getElementById('reset-filters').addEventListener('click', function(){
     document.getElementById('rating-filter').value = '0';
     document.querySelectorAll('.anni-cb').forEach(function(cb){ cb.checked = true; });
     document.getElementById('year-min').value = '';
     document.getElementById('year-max').value = '';
     document.getElementById('sort-select').value = 'popularity';
+    document.getElementById('expand-rows').checked = false;
+    toggleExpand(false);
     applyFilters();
   });
 

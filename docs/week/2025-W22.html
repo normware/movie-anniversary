@@ -12,7 +12,7 @@
       <h1>Movie Anniversaries</h1>
       <span class="subtitle">2025-W22 — May 26, 2025 – Jun 1, 2025</span>
       <p class="explore-link"><a href="index.html">Browse all weeks</a> &middot; <a href="../month/index.html">Month view</a></p>
-      <nav class="week-nav"><a href="2025-W21.html" class="btn">&larr; 2025-W21</a><span class="btn btn--current">2025-W22</span><a href="2025-W23.html" class="btn">2025-W23 &rarr;</a><span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="month-btn">Month</button></nav>
+      <nav class="week-nav"><span class="btn btn--disabled">&larr; Previous</span><span class="btn btn--current">2025-W22</span><a href="2025-W23.html" class="btn">2025-W23 &rarr;</a><span class="week-nav__sep"></span><button class="btn btn--today" id="today-btn">Today</button><button class="btn" id="month-btn">Month</button></nav>
       <div class="week-summary"><a href="#2025-05-26">Mon<span class="week-summary__count">20</span></a><a href="#2025-05-27">Tue<span class="week-summary__count">19</span></a><a href="#2025-05-28">Wed<span class="week-summary__count">17</span></a><a href="#2025-05-29">Thu<span class="week-summary__count">15</span></a><a href="#2025-05-30">Fri<span class="week-summary__count">11</span></a><a href="#2025-05-31">Sat<span class="week-summary__count">14</span></a><a href="#2025-06-01">Sun<span class="week-summary__count">42</span></a></div>
     </header>
         <span class="filter-toggle" id="filter-toggle"><span class="filter-toggle__arrow">▼</span> Filters</span>
@@ -1197,7 +1197,7 @@
     </main>
     <footer>
       
-    <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All Weeks</a> &middot; <a href="../month/index.html">Month</a> &middot; <a href="../today/index.html">Today</a></p>
+    <p><a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a> &middot; <a href="../datenschutz">Datenschutz</a> &middot; <a href="../impressum">Impressum</a> &middot; <a href="index.html">All Weeks</a> &middot; <a href="../month/index.html">Month</a> &middot; <a href="../index.html">Current Week</a></p>
     <p class="tmdb-attribution">
       <img src="../tmdb-logo.svg" alt="TMDB Logo" class="tmdb-logo" width="32" height="24">
       This product uses the TMDB API but is not endorsed or certified by TMDB.
@@ -1211,9 +1211,27 @@
   var PAGE_LABEL = '2025-W22';
   var sections = document.querySelectorAll('.day-section');
   var countEl = document.getElementById('filter-count');
+  function pad2(n){ return String(n).padStart(2,'0'); }
+  function currentISOWeek(d){
+    var date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var dayNum = (date.getDay() + 6) % 7;
+    date.setDate(date.getDate() - dayNum + 3);
+    var isoYear = date.getFullYear();
+    var jan4 = new Date(isoYear, 0, 4);
+    var week = 1 + Math.round(((date - jan4) / 86400000 - 3 + ((jan4.getDay() + 6) % 7)) / 7);
+    return { year: isoYear, week: week };
+  }
+  function currentDateHash(d){
+    return d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate());
+  }
+  function currentWeekUrl(prefix){
+    var now = new Date();
+    var iso = currentISOWeek(now);
+    return prefix + iso.year + '-W' + pad2(iso.week) + '.html#' + currentDateHash(now);
+  }
 
   document.getElementById('today-btn').addEventListener('click', function(){
-    location.href = '../today/index.html';
+    location.href = currentWeekUrl('');
   });
 
   document.getElementById('month-btn').addEventListener('click', function(){

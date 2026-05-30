@@ -179,6 +179,36 @@ function footerHTML(prefix, ...extraLinks) {
     </p>`;
 }
 
+function currentWeekHelpersJS() {
+  return `function pad2(n){ return String(n).padStart(2,'0'); }
+  function currentISOWeek(d){
+    var date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var dayNum = (date.getDay() + 6) % 7;
+    date.setDate(date.getDate() - dayNum + 3);
+    var isoYear = date.getFullYear();
+    var jan4 = new Date(isoYear, 0, 4);
+    var week = 1 + Math.round(((date - jan4) / 86400000 - 3 + ((jan4.getDay() + 6) % 7)) / 7);
+    return { year: isoYear, week: week };
+  }
+  function currentDateHash(d){
+    return d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate());
+  }
+  function currentWeekUrl(prefix){
+    var now = new Date();
+    var iso = currentISOWeek(now);
+    return prefix + iso.year + '-W' + pad2(iso.week) + '.html#' + currentDateHash(now);
+  }`;
+}
+
+function removeStaleHtmlFiles(dir, keepFiles) {
+  if (!fs.existsSync(dir)) return;
+  const keep = new Set(keepFiles);
+  for (const file of fs.readdirSync(dir)) {
+    if (!file.endsWith('.html')) continue;
+    if (!keep.has(file)) fs.unlinkSync(path.join(dir, file));
+  }
+}
+
 function generateShell(title, subtitle, bodyHTML, extraHTML = '') {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -324,7 +354,7 @@ function generateWeekPage(weekYear, weekNum, dayMap, weekMonday, weekSunday, has
     <main>${daySections.join('\n')}
     </main>
     <footer>
-      ${footerHTML('../', '<a href="index.html">All Weeks</a>', '<a href="../month/index.html">Month</a>', '<a href="../today/index.html">Today</a>')}
+      ${footerHTML('../', '<a href="index.html">All Weeks</a>', '<a href="../month/index.html">Month</a>', '<a href="../index.html">Current Week</a>')}
     </footer>
   </div>
   ${filterWeekJS(label)}
@@ -340,9 +370,10 @@ function filterWeekJS(label) {
   var PAGE_LABEL = '${label}';
   var sections = document.querySelectorAll('.day-section');
   var countEl = document.getElementById('filter-count');
+  ${currentWeekHelpersJS()}
 
   document.getElementById('today-btn').addEventListener('click', function(){
-    location.href = '../today/index.html';
+    location.href = currentWeekUrl('');
   });
 
   document.getElementById('month-btn').addEventListener('click', function(){
@@ -482,64 +513,6 @@ function filterWeekJS(label) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Today page                                                         */
-/* ------------------------------------------------------------------ */
-
-function generateTodayPage(movies, monthDayIndex, today, weekLabel, weekMonday, weekSunday) {
-  const todayDate = new Date(today);
-  const todayStr = formatDateISO(todayDate);
-  const mm = String(todayDate.getMonth() + 1).padStart(2, '0');
-  const dd = String(todayDate.getDate()).padStart(2, '0');
-  const key = `${mm}-${dd}`;
-  const candidates = monthDayIndex.get(key) || [];
-  const dayEntries = [];
-  for (const movie of candidates) {
-    const years = isAnniversaryOnDate(movie, todayDate);
-    if (years) dayEntries.push({ movie, years });
-  }
-  dayEntries.sort((a, b) => b.movie.popularity - a.movie.popularity);
-
-  const headerDate = formatDayHeader(todayDate);
-  let moviesHtml;
-  if (dayEntries.length === 0) {
-    moviesHtml = '<p class="today-empty">No movie anniversaries today.</p>';
-  } else {
-    const posters = dayEntries.slice(0, 30).map(e => posterItemHtml(e)).join('\n');
-    moviesHtml = `<div class="today-grid">${posters}</div>`;
-  }
-
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Today \u2013 Movie Anniversaries</title>
-  <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-  <div class="container today-page">
-    <header>
-      <h1>Movie Anniversaries</h1>
-    </header>
-    <h2>${headerDate}</h2>
-    <p class="today-date">${formatDate(todayDate)}</p>
-    <div class="today-movies">${moviesHtml}</div>
-    <p>${dayEntries.length} movie${dayEntries.length !== 1 ? 's' : ''} with anniversaries today</p>
-    <div class="today-links">
-      <a href="../week/${weekLabel}.html" class="btn">View this week</a>
-      <a href="../month/${todayDate.getFullYear()}-${String(todayDate.getMonth()+1).padStart(2,'0')}.html" class="btn">View this month</a>
-      <a href="../week/index.html" class="btn">Browse all weeks</a>
-      <a href="../month/index.html" class="btn">Browse all months</a>
-    </div>
-    <footer>
-      ${footerHTML('../', '<a href="../week/index.html">Weeks</a>', '<a href="../month/index.html">Months</a>')}
-    </footer>
-  </div>
-</body>
-</html>`;
-}
-
-/* ------------------------------------------------------------------ */
 /*  Index page with JS redirect                                       */
 /* ------------------------------------------------------------------ */
 
@@ -552,13 +525,14 @@ function generateIndexPage() {
   <title>Movie Anniversaries</title>
   <link rel="stylesheet" href="style.css">
   <script>
-    location.href = 'today/index.html';
+  ${currentWeekHelpersJS()}
+  location.replace(currentWeekUrl('week/'));
   <\/script>
 </head>
 <body>
   <div class="container center-content">
     <h1>Movie Anniversaries</h1>
-    <p>Redirecting to today...</p>
+    <p>Redirecting to the current week...</p>
   </div>
 </body>
 </html>`;
@@ -582,7 +556,7 @@ function generateWeekIndex(allWeeks) {
       </ul>
     </main>`;
 
-  const extra = `<p class="explore-link"><a href="../month/index.html">Month view</a> &middot; <a href="../today/index.html">Today</a></p>`;
+  const extra = `<p class="explore-link"><a href="../month/index.html">Month view</a> &middot; <a href="../index.html">Current week</a></p>`;
 
   return generateShell(
     'All Weeks \u2013 Movie Anniversaries',
@@ -724,6 +698,7 @@ function filterMonthJS(dataJson) {
   var STORAGE_KEY = 'movie-anni-filters';
   var D = ${dataJson};
   var countEl = document.getElementById('filter-count');
+  ${currentWeekHelpersJS()}
 
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -796,8 +771,7 @@ function filterMonthJS(dataJson) {
   }
 
   document.getElementById('today-btn').addEventListener('click', function(){
-    var now = new Date();
-    location.href = '../month/' + now.getFullYear() + '-' + (now.getMonth()<9?'0':'') + (now.getMonth()+1) + '.html';
+    location.href = currentWeekUrl('../week/');
   });
 
   document.getElementById('week-btn').addEventListener('click', function(){
@@ -890,7 +864,7 @@ function generateMonthIndex(allMonths) {
       </ul>
     </main>`;
 
-  const extra = `<p class="explore-link"><a href="../week/index.html">Week view</a> &middot; <a href="../today/index.html">Today</a></p>`;
+  const extra = `<p class="explore-link"><a href="../week/index.html">Week view</a> &middot; <a href="../index.html">Current week</a></p>`;
 
   return generateShell(
     'All Months \u2013 Movie Anniversaries',
@@ -970,11 +944,7 @@ async function main() {
   if (!fs.existsSync(DOCS_DIR)) fs.mkdirSync(DOCS_DIR, { recursive: true });
   if (!fs.existsSync(WEEK_DIR)) fs.mkdirSync(WEEK_DIR, { recursive: true });
 
-  // Determine today/week for the today page
   const now = new Date();
-  const todayISO = getISOWeek(now);
-  const todayMonday = mondayOfISOWeek(todayISO.year, todayISO.week);
-  const todayLabel = isoWeekLabel(todayISO.year, todayISO.week);
 
   const builtWeeks = [];
   for (const w of weeksToBuild) {
@@ -1010,13 +980,7 @@ async function main() {
 
   fs.writeFileSync(path.join(WEEK_DIR, 'index.html'), generateWeekIndex(builtWeeks), 'utf8');
   console.log('  [OK]   week/index.html written');
-
-  // Build today page (uses current week's movie data)
-  const TODAY_DIR = path.join(DOCS_DIR, 'today');
-  if (!fs.existsSync(TODAY_DIR)) fs.mkdirSync(TODAY_DIR, { recursive: true });
-  const todayHtml = generateTodayPage(movies, monthDayIndex, now, todayLabel, todayMonday, new Date(todayMonday.getTime() + 6*86400000));
-  fs.writeFileSync(path.join(TODAY_DIR, 'index.html'), todayHtml, 'utf8');
-  console.log('  [OK]   today/index.html written (with today\'s movies)');
+  removeStaleHtmlFiles(WEEK_DIR, ['index.html', ...builtWeeks.map(w => `${isoWeekLabel(w.year, w.week)}.html`)]);
 
   // Build month pages
   if (!singleWeek) {
@@ -1054,6 +1018,7 @@ async function main() {
 
     fs.writeFileSync(path.join(MONTH_DIR, 'index.html'), generateMonthIndex(builtMonths), 'utf8');
     console.log('  [OK]   month/index.html written');
+    removeStaleHtmlFiles(MONTH_DIR, ['index.html', ...builtMonths.map(m => `${monthKey(m.year, m.month)}.html`)]);
   }
 
   console.log(`\n  [DONE] ${builtWeeks.length} weeks built. Open docs/index.html to view.`);

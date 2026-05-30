@@ -6,13 +6,31 @@
   <title>Movie Anniversaries</title>
   <link rel="stylesheet" href="style.css">
   <script>
-    location.href = 'today/index.html';
+  function pad2(n){ return String(n).padStart(2,'0'); }
+  function currentISOWeek(d){
+    var date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var dayNum = (date.getDay() + 6) % 7;
+    date.setDate(date.getDate() - dayNum + 3);
+    var isoYear = date.getFullYear();
+    var jan4 = new Date(isoYear, 0, 4);
+    var week = 1 + Math.round(((date - jan4) / 86400000 - 3 + ((jan4.getDay() + 6) % 7)) / 7);
+    return { year: isoYear, week: week };
+  }
+  function currentDateHash(d){
+    return d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate());
+  }
+  function currentWeekUrl(prefix){
+    var now = new Date();
+    var iso = currentISOWeek(now);
+    return prefix + iso.year + '-W' + pad2(iso.week) + '.html#' + currentDateHash(now);
+  }
+  location.replace(currentWeekUrl('week/'));
   </script>
 </head>
 <body>
   <div class="container center-content">
     <h1>Movie Anniversaries</h1>
-    <p>Redirecting to today...</p>
+    <p>Redirecting to the current week...</p>
   </div>
 </body>
 </html>

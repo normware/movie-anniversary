@@ -43,7 +43,7 @@ These IDs are resolved during `fetch-data` and merged into the encrypted cache. 
 - Week navigation: previous / next week browsing
 - All weeks index at `week/index.html`
 - IMDb IDs fetched lazily only for anniversary movies
-- "Today" button scrolls to the current day on the week page
+- "Today" button navigates to the current week and current-day anchor
 - Filter bar: filter by rating, anniversary year range, or sort by popularity/rating
 - Filter state is persisted in localStorage
 - Footer links to GitHub, Datenschutz, and Impressum on every page

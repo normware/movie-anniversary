@@ -18,15 +18,13 @@ src/
 docs/                 # GitHub Pages root (committed)
   style.css           # Single source of truth for all styling
   CNAME               # Custom domain for GitHub Pages
-  index.html          # JS redirect to current week
+  index.html          # JS redirect to current week/day anchor
   week/
     index.html        # Browse all weeks
     YYYY-Www.html     # Individual week pages
   month/
     index.html        # Browse all months
     YYYY-MM.html      # Individual month pages
-  today/
-    index.html        # JS redirect to today's day on current week page
 ```
 
 ## Key Design Decisions

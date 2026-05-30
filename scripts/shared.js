@@ -16,8 +16,7 @@ export const ROOT = path.resolve(__dirname, '..');
 export function loadEnv() {
   const envPath = path.join(ROOT, '.env');
   if (!fs.existsSync(envPath)) {
-    console.error('  [ERR]  No .env file found. Copy .env.template to .env and fill in your keys.');
-    process.exit(1);
+    return;
   }
   const lines = fs.readFileSync(envPath, 'utf8').split('\n');
   for (const line of lines) {

@@ -52,7 +52,7 @@ These IDs are resolved during `fetch-data` and merged into the encrypted cache. 
 
 The site uses no cookies, trackers, or analytics. Filter preferences are stored in `localStorage` (client-side only). The TMDB API is called server-side during builds — no API calls are made from the browser.
 
-Datenschutz and Impressum pages are linked from the footer. Create `/datenschutz/index.html` and `/impressum/index.html` in the `docs/` directory with your legal text.
+Datenschutz and Impressum pages are linked from the footer to the central normware legal pages at `https://normware.org/datenschutz` and `https://normware.org/impressum`.
 
 ## Stack
 

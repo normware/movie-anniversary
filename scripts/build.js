@@ -167,8 +167,8 @@ function generateFilterBarHTML(anniversaryValues, minYear, maxYear, pageType) {
 function footerHTML(prefix, ...extraLinks) {
   const links = [
     '<a href="https://github.com/normware/movie-anniversary" target="_blank" rel="noopener">GitHub</a>',
-    `<a href="${prefix}datenschutz">Datenschutz</a>`,
-    `<a href="${prefix}impressum">Impressum</a>`,
+    '<a href="https://normware.org/datenschutz">Datenschutz</a>',
+    '<a href="https://normware.org/impressum">Impressum</a>',
     ...extraLinks,
   ];
   return `

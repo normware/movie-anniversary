@@ -9,17 +9,18 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: 18
+          node-version: '24.22.1'
+          check-latest: true
           cache: npm
       - run: npm ci
       - run: npm run rebuild
         env:
           TMDB_TOKEN: ${{ secrets.TMDB_TOKEN }}
           DATA_ENCRYPTION_KEY: ${{ secrets.DATA_ENCRYPTION_KEY }}
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v7.2.1
         with:
           commit_message: 'chore: yearly data refresh'
           commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
